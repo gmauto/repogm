@@ -1,0 +1,152 @@
+set hive.exec.dynamic.partition.mode=nonstrict;
+insert overwrite table  kpi_total_8areas partition(mon_p,kpi)
+select mon,sum(num)*1.0/sum(den), am.group_name,mon_p,kpi
+from kpi_total_tmp_8areas s join ${pub_db}.asc_mapping am
+on s.asc_code=am.asc_code 
+where am.version='8areas' 
+group by kpi,mon,am.group_name,mon_p;
+
+
+insert overwrite table  kpi_a_level_8areas partition(mon_p,kpi)
+select primary_classification,mon,sum(num)*1.0/sum(den), am.group_name ,mon_p,kpi
+from kpi_a_level_tmp_8areas s join ${pub_db}.asc_mapping am
+on s.asc_code=am.asc_code 
+where am.version='8areas' 
+group by kpi,primary_classification,mon,am.group_name,mon_p;
+
+
+insert overwrite table  kpi_b_level_8areas partition(mon_p,kpi)
+select primary_classification,second_level_classification,mon,sum(num)*1.0/sum(den), am.group_name ,mon_p,kpi
+from kpi_b_level_tmp_8areas s join ${pub_db}.asc_mapping am
+on s.asc_code=am.asc_code 
+where am.version='8areas' 
+group by kpi,primary_classification,second_level_classification,mon,am.group_name,mon_p;
+
+
+insert overwrite table  kpi_agetype_8areas partition(mon_p,kpi)
+select age_type,mon,sum(num)*1.0/sum(den), am.group_name,mon_p,kpi 
+from kpi_agetype_tmp_8areas s join ${pub_db}.asc_mapping am
+on s.asc_code=am.asc_code 
+where am.version='8areas' 
+group by kpi,age_type,mon,am.group_name,mon_p;
+
+
+insert overwrite table  kpi_bnbw_8areas partition(mon_p,kpi)
+select bn,mon,sum(num)*1.0/sum(den), am.group_name,mon_p,kpi 
+from kpi_bnbw_tmp_8areas s join ${pub_db}.asc_mapping am
+on s.asc_code=am.asc_code 
+where am.version='8areas' 
+group by kpi,bn,mon,am.group_name,mon_p;
+
+
+insert overwrite table  kpi_a_agetype_8areas partition(mon_p,kpi)
+select primary_classification,age_type,mon,sum(num)*1.0/sum(den), am.group_name,mon_p,kpi 
+from kpi_a_agetype_tmp_8areas s join ${pub_db}.asc_mapping am
+on s.asc_code=am.asc_code 
+where am.version='8areas' 
+group by kpi,primary_classification,age_type,mon,am.group_name,mon_p;
+
+
+insert overwrite table  kpi_a_bnbw_8areas partition(mon_p,kpi)
+select primary_classification,bn,mon,sum(num)*1.0/sum(den), am.group_name,mon_p,kpi 
+from kpi_a_bnbw_tmp_8areas s join ${pub_db}.asc_mapping am
+on s.asc_code=am.asc_code 
+where am.version='8areas' 
+group by kpi,primary_classification,bn,mon,am.group_name,mon_p;
+
+
+insert overwrite table  kpi_b_agetype_8areas partition(mon_p,kpi)
+select primary_classification,second_level_classification,age_type,mon,sum(num)*1.0/sum(den), am.group_name ,mon_p,kpi
+from kpi_b_agetype_tmp_8areas s join ${pub_db}.asc_mapping am
+on s.asc_code=am.asc_code 
+where am.version='8areas' 
+group by kpi,primary_classification,second_level_classification,age_type,mon,am.group_name,mon_p;
+
+
+insert overwrite table  kpi_b_bnbw_8areas partition(mon_p,kpi)
+select primary_classification,second_level_classification,bn,mon,sum(num)*1.0/sum(den), am.group_name ,mon_p,kpi
+from kpi_b_bnbw_tmp_8areas s join ${pub_db}.asc_mapping am
+on s.asc_code=am.asc_code 
+where am.version='8areas' 
+group by kpi,primary_classification,second_level_classification,bn,mon,am.group_name,mon_p;
+
+
+
+----用于处理直接求和类
+set hive.exec.dynamic.partition.mode=nonstrict;
+insert overwrite table  kpi_total_8areas partition(mon_p,kpi)
+select mon,sum(num)*1.0/avg(den), am.group_name,mon_p,kpi
+from kpi_total_tmp_8areas_k1 s join ${pub_db}.asc_mapping am
+on s.asc_code=am.asc_code 
+where am.version='8areas' 
+group by kpi,mon,am.group_name,mon_p;
+
+
+insert overwrite table  kpi_a_level_8areas partition(mon_p,kpi)
+select primary_classification,mon,sum(num)*1.0/avg(den), am.group_name ,mon_p,kpi
+from kpi_a_level_tmp_8areas_k1 s join ${pub_db}.asc_mapping am
+on s.asc_code=am.asc_code 
+where am.version='8areas' 
+group by kpi,primary_classification,mon,am.group_name,mon_p;
+
+
+insert overwrite table  kpi_b_level_8areas partition(mon_p,kpi)
+select primary_classification,second_level_classification,mon,sum(num)*1.0/avg(den), am.group_name ,mon_p,kpi
+from kpi_b_level_tmp_8areas_k1 s join ${pub_db}.asc_mapping am
+on s.asc_code=am.asc_code 
+where am.version='8areas' 
+group by kpi,primary_classification,second_level_classification,mon,am.group_name,mon_p;
+
+
+insert overwrite table  kpi_agetype_8areas partition(mon_p,kpi)
+select age_type,mon,sum(num)*1.0/avg(den), am.group_name,mon_p,kpi 
+from kpi_agetype_tmp_8areas_k1 s join ${pub_db}.asc_mapping am
+on s.asc_code=am.asc_code 
+where am.version='8areas' 
+group by kpi,age_type,mon,am.group_name,mon_p;
+
+
+insert overwrite table  kpi_bnbw_8areas partition(mon_p,kpi)
+select bn,mon,sum(num)*1.0/avg(den), am.group_name,mon_p,kpi 
+from kpi_bnbw_tmp_8areas_k1 s join ${pub_db}.asc_mapping am
+on s.asc_code=am.asc_code 
+where am.version='8areas' 
+group by kpi,bn,mon,am.group_name,mon_p;
+
+
+insert overwrite table  kpi_a_agetype_8areas partition(mon_p,kpi)
+select primary_classification,age_type,mon,sum(num)*1.0/avg(den), am.group_name,mon_p,kpi 
+from kpi_a_agetype_tmp_8areas_k1 s join ${pub_db}.asc_mapping am
+on s.asc_code=am.asc_code 
+where am.version='8areas' 
+group by kpi,primary_classification,age_type,mon,am.group_name,mon_p;
+
+
+insert overwrite table  kpi_a_bnbw_8areas partition(mon_p,kpi)
+select primary_classification,bn,mon,sum(num)*1.0/avg(den), am.group_name,mon_p,kpi 
+from kpi_a_bnbw_tmp_8areas_k1 s join ${pub_db}.asc_mapping am
+on s.asc_code=am.asc_code 
+where am.version='8areas' 
+group by kpi,primary_classification,bn,mon,am.group_name,mon_p;
+
+
+insert overwrite table  kpi_b_agetype_8areas partition(mon_p,kpi)
+select primary_classification,second_level_classification,age_type,mon,sum(num)*1.0/avg(den), am.group_name ,mon_p,kpi
+from kpi_b_agetype_tmp_8areas_k1 s join ${pub_db}.asc_mapping am
+on s.asc_code=am.asc_code 
+where am.version='8areas' 
+group by kpi,primary_classification,second_level_classification,age_type,mon,am.group_name,mon_p;
+
+
+insert overwrite table  kpi_b_bnbw_8areas partition(mon_p,kpi)
+select primary_classification,second_level_classification,bn,mon,sum(num)*1.0/avg(den), am.group_name ,mon_p,kpi
+from kpi_b_bnbw_tmp_8areas_k1 s join ${pub_db}.asc_mapping am
+on s.asc_code=am.asc_code 
+where am.version='8areas' 
+group by kpi,primary_classification,second_level_classification,bn,mon,am.group_name,mon_p;
+
+
+
+
+
+

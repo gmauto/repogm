@@ -1,0 +1,16 @@
+
+order 要打得标签(claimAndFirstMaintenance)
+ 是否首保	是否索赔
+  需要关联claim表 索赔单号 4s
+  ！注意：order表已经在最后一列打入一列“删除”标签，字段数 +1,这一步结束后会在order中再加入两列，第一列是否首保，第二列是否索赔
+
+ 维修类别1(maintType)
+  需要关联part表  asc_code,工单号，结算日期，vin，
+  !注：打完标签后order表会有40个字段
+
+ 出库日期	车龄月数	车龄分类	一级分类	二级分类 	保内 保外	车龄分类1(others)
+  需要关联doss，customer，中的vin
+
+
+doss要打的标签
+ 一级分类	二级分类

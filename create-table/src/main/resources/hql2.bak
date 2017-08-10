@@ -1,0 +1,12 @@
+
+----kpi_1(进站台次_total)
+insert overwrite table  kpi_total
+select ----'1' as kpi,
+substr(tran_date(order_balance_date),1,7) as mon,
+count(distinct vin,tran_date(order_balance_date)) as cnt,
+asc_code
+ from label_order  
+where MAINT_TYPE1<>'删除'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(order_balance_date),1,7),asc_code;

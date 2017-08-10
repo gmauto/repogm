@@ -1,0 +1,263 @@
+----kpi_2(进站频次_total)
+insert overwrite table kpi_total_8areas
+select substr(t.mon_label,1,7) as mon,
+ count(distinct s.vin,tran_date(s.order_balance_date)) as num,count(distinct s.vin) as den,
+ s.asc_code
+ from ${pub_db}.label_order s 
+join ${pub_db}.date_label t
+on substr(tran_date(s.order_balance_date),1,7)>=substr(add_months(t.mon_label,-11),1,7)
+and substr(tran_date(s.order_balance_date),1,7)<=substr(t.mon_label,1,7)
+and s.asc_code=t.asc_code
+where substr(t.mon_label,1,7)>='${begin_date}'
+ and substr(t.mon_label,1,7)<='${end_date}'
+ and s.MAINT_TYPE1<>'删除'
+ group by substr(t.mon_label,1,7),s.asc_code;
+ 
+----kpi_2(进站频次_一级)
+insert overwrite table kpi_a_level_8areas
+select primary_classification,
+ substr(t.mon_label,1,7) as mon,
+ count(distinct s.vin,tran_date(s.order_balance_date)) as num,count(distinct s.vin) as den,
+ s.asc_code
+ from ${pub_db}.label_order s 
+join ${pub_db}.date_label t
+on substr(tran_date(s.order_balance_date),1,7)>=substr(add_months(t.mon_label,-11),1,7)
+and substr(tran_date(s.order_balance_date),1,7)<=substr(t.mon_label,1,7)
+and s.asc_code=t.asc_code
+where substr(t.mon_label,1,7)>='${begin_date}'
+ and substr(t.mon_label,1,7)<='${end_date}'
+ and s.MAINT_TYPE1<>'删除'
+ group by substr(t.mon_label,1,7),primary_classification,s.asc_code;
+
+----kpi_2(进站频次_二级)
+insert overwrite table kpi_b_level_8areas
+select primary_classification,
+ second_level_classification,
+ substr(t.mon_label,1,7) as mon,
+ count(distinct s.vin,tran_date(s.order_balance_date)) as num,count(distinct s.vin) as den,
+ s.asc_code
+ from ${pub_db}.label_order s 
+join ${pub_db}.date_label t
+on substr(tran_date(s.order_balance_date),1,7)>=substr(add_months(t.mon_label,-11),1,7)
+and substr(tran_date(s.order_balance_date),1,7)<=substr(t.mon_label,1,7)
+and s.asc_code=t.asc_code
+where substr(t.mon_label,1,7)>='${begin_date}'
+ and substr(t.mon_label,1,7)<='${end_date}'
+ and s.MAINT_TYPE1<>'删除' 
+ group by substr(t.mon_label,1,7),primary_classification,second_level_classification,s.asc_code;
+
+----kpi_2(进站频次_车龄)
+insert overwrite table kpi_agetype_8areas
+select case when s.outdate='未知' then '未知'
+ when mon_diff(t.mon_label,s.outdate)<=11 then '0-1年'
+ when mon_diff(t.mon_label,s.outdate)>=12
+ and mon_diff(t.mon_label,s.outdate)<=23 then '1-2年'
+ when mon_diff(t.mon_label,s.outdate)>=24
+ and mon_diff(t.mon_label,s.outdate)<=35 then '2-3年'
+ when mon_diff(t.mon_label,s.outdate)>=36
+ and mon_diff(t.mon_label,s.outdate)<=47 then '3-4年'
+ when mon_diff(t.mon_label,s.outdate)>=48
+ and mon_diff(t.mon_label,s.outdate)<=59 then '4-5年'
+ else '5+年' end as agetype,
+ substr(t.mon_label,1,7) as mon,
+ count(distinct s.vin,tran_date(s.order_balance_date)) as num,count(distinct s.vin) as den,
+ s.asc_code
+ from ${pub_db}.label_order s 
+join ${pub_db}.date_label t
+on substr(tran_date(s.order_balance_date),1,7)>=substr(add_months(t.mon_label,-11),1,7)
+and substr(tran_date(s.order_balance_date),1,7)<=substr(t.mon_label,1,7)
+and s.asc_code=t.asc_code
+where substr(t.mon_label,1,7)>='${begin_date}'
+ and substr(t.mon_label,1,7)<='${end_date}'
+ and s.MAINT_TYPE1<>'删除' 
+ group by substr(t.mon_label,1,7),s.asc_code,case when s.outdate='未知' then '未知'
+ when mon_diff(t.mon_label,s.outdate)<=11 then '0-1年'
+ when mon_diff(t.mon_label,s.outdate)>=12
+ and mon_diff(t.mon_label,s.outdate)<=23 then '1-2年'
+ when mon_diff(t.mon_label,s.outdate)>=24
+ and mon_diff(t.mon_label,s.outdate)<=35 then '2-3年'
+ when mon_diff(t.mon_label,s.outdate)>=36
+ and mon_diff(t.mon_label,s.outdate)<=47 then '3-4年'
+ when mon_diff(t.mon_label,s.outdate)>=48
+ and mon_diff(t.mon_label,s.outdate)<=59 then '4-5年'
+ else '5+年' end ;
+
+----kpi_2(进站频次_保内外)
+insert overwrite table kpi_bnbw_8areas
+select case when s.outdate='未知' then '未知'
+ when s.outdate<'2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)<=23 then '保内'
+ when s.outdate<'2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)>23 then '保外'
+ when s.outdate>='2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)<=35 then '保内'
+ when s.outdate>='2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)>35 then '保外'
+ else '' end as bn,
+ substr(t.mon_label,1,7) as mon,
+ count(distinct s.vin,tran_date(s.order_balance_date)) as num,count(distinct s.vin) as den,
+ s.asc_code
+ from ${pub_db}.label_order s 
+join ${pub_db}.date_label t
+on substr(tran_date(s.order_balance_date),1,7)>=substr(add_months(t.mon_label,-11),1,7)
+and substr(tran_date(s.order_balance_date),1,7)<=substr(t.mon_label,1,7)
+and s.asc_code=t.asc_code
+where substr(t.mon_label,1,7)>='${begin_date}'
+ and substr(t.mon_label,1,7)<='${end_date}'
+ and s.MAINT_TYPE1<>'删除'
+ group by substr(t.mon_label,1,7),s.asc_code,case when s.outdate='未知' then '未知'
+ when s.outdate<'2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)<=23 then '保内'
+ when s.outdate<'2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)>23 then '保外'
+ when s.outdate>='2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)<=35 then '保内'
+ when s.outdate>='2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)>35 then '保外'
+ else '' end;
+
+----kpi_2(进站频次_一级_车龄)
+insert overwrite table kpi_a_agetype_8areas
+select primary_classification,
+ case when s.outdate='未知' then '未知'
+ when mon_diff(t.mon_label,s.outdate)<=11 then '0-1年'
+ when mon_diff(t.mon_label,s.outdate)>=12
+ and mon_diff(t.mon_label,s.outdate)<=23 then '1-2年'
+ when mon_diff(t.mon_label,s.outdate)>=24
+ and mon_diff(t.mon_label,s.outdate)<=35 then '2-3年'
+ when mon_diff(t.mon_label,s.outdate)>=36
+ and mon_diff(t.mon_label,s.outdate)<=47 then '3-4年'
+ when mon_diff(t.mon_label,s.outdate)>=48
+ and mon_diff(t.mon_label,s.outdate)<=59 then '4-5年'
+ else '5+年' end as agetype,
+ substr(t.mon_label,1,7) as mon,
+ count(distinct s.vin,tran_date(s.order_balance_date)) as num,count(distinct s.vin) as den,
+ s.asc_code
+ from ${pub_db}.label_order s 
+join ${pub_db}.date_label t
+on substr(tran_date(s.order_balance_date),1,7)>=substr(add_months(t.mon_label,-11),1,7)
+and substr(tran_date(s.order_balance_date),1,7)<=substr(t.mon_label,1,7)
+and s.asc_code=t.asc_code
+where substr(t.mon_label,1,7)>='${begin_date}'
+ and substr(t.mon_label,1,7)<='${end_date}'
+ and s.MAINT_TYPE1<>'删除'
+ group by substr(t.mon_label,1,7),primary_classification,s.asc_code,case when s.outdate='未知' then '未知'
+ when mon_diff(t.mon_label,s.outdate)<=11 then '0-1年'
+ when mon_diff(t.mon_label,s.outdate)>=12
+ and mon_diff(t.mon_label,s.outdate)<=23 then '1-2年'
+ when mon_diff(t.mon_label,s.outdate)>=24
+ and mon_diff(t.mon_label,s.outdate)<=35 then '2-3年'
+ when mon_diff(t.mon_label,s.outdate)>=36
+ and mon_diff(t.mon_label,s.outdate)<=47 then '3-4年'
+ when mon_diff(t.mon_label,s.outdate)>=48
+ and mon_diff(t.mon_label,s.outdate)<=59 then '4-5年'
+ else '5+年' end ;
+
+----kpi_2(进站频次_一级_保内外)
+insert overwrite table kpi_a_bnbw_8areas
+select primary_classification,
+ case when s.outdate='未知' then '未知'
+ when s.outdate<'2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)<=23 then '保内'
+ when s.outdate<'2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)>23 then '保外'
+ when s.outdate>='2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)<=35 then '保内'
+ when s.outdate>='2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)>35 then '保外'
+ else '' end as bn,
+ substr(t.mon_label,1,7) as mon,
+ count(distinct s.vin,tran_date(s.order_balance_date)) as num,count(distinct s.vin) as den,
+ s.asc_code
+ from ${pub_db}.label_order s 
+join ${pub_db}.date_label t
+on substr(tran_date(s.order_balance_date),1,7)>=substr(add_months(t.mon_label,-11),1,7)
+and substr(tran_date(s.order_balance_date),1,7)<=substr(t.mon_label,1,7)
+and s.asc_code=t.asc_code
+where substr(t.mon_label,1,7)>='${begin_date}'
+ and substr(t.mon_label,1,7)<='${end_date}'
+ and s.MAINT_TYPE1<>'删除'
+ group by substr(t.mon_label,1,7),primary_classification,s.asc_code,case when s.outdate='未知' then '未知'
+ when s.outdate<'2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)<=23 then '保内'
+ when s.outdate<'2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)>23 then '保外'
+ when s.outdate>='2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)<=35 then '保内'
+ when s.outdate>='2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)>35 then '保外'
+ else '' end ;
+
+----kpi_2(进站频次_二级_车龄)
+insert overwrite table kpi_b_agetype_8areas
+select primary_classification,
+ second_level_classification,
+ case when s.outdate='未知' then '未知'
+ when mon_diff(t.mon_label,s.outdate)<=11 then '0-1年'
+ when mon_diff(t.mon_label,s.outdate)>=12
+ and mon_diff(t.mon_label,s.outdate)<=23 then '1-2年'
+ when mon_diff(t.mon_label,s.outdate)>=24
+ and mon_diff(t.mon_label,s.outdate)<=35 then '2-3年'
+ when mon_diff(t.mon_label,s.outdate)>=36
+ and mon_diff(t.mon_label,s.outdate)<=47 then '3-4年'
+ when mon_diff(t.mon_label,s.outdate)>=48
+ and mon_diff(t.mon_label,s.outdate)<=59 then '4-5年'
+ else '5+年' end as agetype,
+ substr(t.mon_label,1,7) as mon,
+ count(distinct s.vin,tran_date(s.order_balance_date)) as num,count(distinct s.vin) as den,
+s.asc_code
+ from ${pub_db}.label_order s 
+join ${pub_db}.date_label t
+on substr(tran_date(s.order_balance_date),1,7)>=substr(add_months(t.mon_label,-11),1,7)
+and substr(tran_date(s.order_balance_date),1,7)<=substr(t.mon_label,1,7)
+and s.asc_code=t.asc_code
+where substr(t.mon_label,1,7)>='${begin_date}'
+ and substr(t.mon_label,1,7)<='${end_date}'
+ and s.MAINT_TYPE1<>'删除'
+ group by substr(t.mon_label,1,7),primary_classification,second_level_classification,s.asc_code,case when s.outdate='未知' then '未知'
+ when mon_diff(t.mon_label,s.outdate)<=11 then '0-1年'
+ when mon_diff(t.mon_label,s.outdate)>=12
+ and mon_diff(t.mon_label,s.outdate)<=23 then '1-2年'
+ when mon_diff(t.mon_label,s.outdate)>=24
+ and mon_diff(t.mon_label,s.outdate)<=35 then '2-3年'
+ when mon_diff(t.mon_label,s.outdate)>=36
+ and mon_diff(t.mon_label,s.outdate)<=47 then '3-4年'
+ when mon_diff(t.mon_label,s.outdate)>=48
+ and mon_diff(t.mon_label,s.outdate)<=59 then '4-5年'
+ else '5+年' end ;
+
+----kpi_2(进站频次_二级_保内外)
+insert overwrite table kpi_b_bnbw_8areas
+select primary_classification,
+ second_level_classification,
+ case when s.outdate='未知' then '未知'
+ when s.outdate<'2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)<=23 then '保内'
+ when s.outdate<'2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)>23 then '保外'
+ when s.outdate>='2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)<=35 then '保内'
+ when s.outdate>='2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)>35 then '保外'
+ else '' end as bn,
+ substr(t.mon_label,1,7) as mon,
+ count(distinct s.vin,tran_date(s.order_balance_date)) as num,count(distinct s.vin) as den,
+ s.asc_code
+ from ${pub_db}.label_order s 
+join ${pub_db}.date_label t
+on substr(tran_date(s.order_balance_date),1,7)>=substr(add_months(t.mon_label,-11),1,7)
+and substr(tran_date(s.order_balance_date),1,7)<=substr(t.mon_label,1,7)
+and s.asc_code=t.asc_code
+where substr(t.mon_label,1,7)>='${begin_date}'
+ and substr(t.mon_label,1,7)<='${end_date}'
+ and s.MAINT_TYPE1<>'删除'
+ group by substr(t.mon_label,1,7),primary_classification,second_level_classification,s.asc_code,case when s.outdate='未知' then '未知'
+ when s.outdate<'2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)<=23 then '保内'
+ when s.outdate<'2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)>23 then '保外'
+ when s.outdate>='2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)<=35 then '保内'
+ when s.outdate>='2013-10-01' 
+ and mon_diff(t.mon_label,s.outdate)>35 then '保外'
+ else '' end ;

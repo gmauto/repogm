@@ -1,0 +1,172 @@
+  claim_uniq
+   mon=combine
+  customer_uniq
+    mon=combine
+  label_doss
+    mon=combine
+  label_order
+    mon=combine
+  part
+    mon=201701_201703
+    mon=final
+    mon=supplement
+
+alter table part add
+partition(mon='201701_201703') location '201701_201703'
+partition(mon='final') location 'mon=final'
+partition(mon='supplement') location 'supplement'
+
+private/auto/raw/part/201701_201703
+private/auto/raw/part/2200621
+private/auto/raw/part/chev700
+private/auto/raw/part/combine
+private/auto/raw/part/mon=70
+private/auto/raw/part/mon=final
+private/auto/raw/part/supplement
+
+
+	load data local infile '/home/ipsos/rr' replace \
+	into table region_5 \
+	character set utf8 \
+	fields terminated by '\t' \
+	lines terminated by '\n' \
+	(a_level,b_level,age_type,kpi,kpi_name,mon,asc_code,own_num,quar_own_num,year_own_num,base_num,quar_base_own_num,year_base_num);
+
+
+
+		load data local infile '/home/ipsos/general/data/13/baqu/baqu' replace \
+    	into table region_8 \
+    	character set utf8 \
+    	fields terminated by '\t' \
+    	lines terminated by '\n' \
+    	(a_level,b_level,age_type,kpi,kpi_name,mon,asc_code,own_num,quar_own_num,year_own_num,base_num,quar_base_own_num,year_base_num);
+
+
+
+
+    truncate beijing_region_2;
+    truncate chengchong_region_6;
+    truncate dongbei_region_1;
+    truncate guangshen_region_4;
+    truncate other_region_2;
+    truncate other_region_4;
+    truncate other_region_6;
+    truncate other_region_7;
+    truncate region_3;
+    truncate region_5;
+    truncate region_8;
+    truncate shandong_region_1;
+    truncate shanghai_region_7;
+
+
+
+erqubeijing	beijing_region_2
+erquqita	other_region_2
+liuquchengduchongqing	chengchong_region_6
+liuquqita	other_region_6
+qiquqita	other_region_7
+qiqushanghai	shanghai_region_7
+sanqu	region_3
+siquguangzhoushengzhen	guangshen_region_4
+siquqita	other_region_4
+wuqu	region_5
+yiqudongbei	dongbei_region_1
+yiqushandong	shandong_region_1
+
+
+
+
+
+load data local infile '/home/ipsos/general/data/13/erqubeijing/erqubeijing' replace \
+    	into table beijing_region_2 \
+    	character set utf8 \
+    	fields terminated by '\t' \
+    	lines terminated by '\n' \
+    	(a_level,b_level,age_type,kpi,kpi_name,mon,asc_code,own_num,quar_own_num,year_own_num,base_num,quar_base_own_num,year_base_num);
+
+load data local infile '/home/ipsos/general/data/13/erquqita/erquqita' replace \
+    	into table other_region_2 \
+    	character set utf8 \
+    	fields terminated by '\t' \
+    	lines terminated by '\n' \
+    	(a_level,b_level,age_type,kpi,kpi_name,mon,asc_code,own_num,quar_own_num,year_own_num,base_num,quar_base_own_num,year_base_num);
+
+
+load data local infile '/home/ipsos/general/data/13/liuquchengduchongqing/liuquchengduchongqing' replace \
+    	into table chengchong_region_6 \
+    	character set utf8 \
+    	fields terminated by '\t' \
+    	lines terminated by '\n' \
+    	(a_level,b_level,age_type,kpi,kpi_name,mon,asc_code,own_num,quar_own_num,year_own_num,base_num,quar_base_own_num,year_base_num);
+
+
+load data local infile '/home/ipsos/general/data/13/liuquqita/liuquqita' replace \
+    	into table other_region_6 \
+    	character set utf8 \
+    	fields terminated by '\t' \
+    	lines terminated by '\n' \
+    	(a_level,b_level,age_type,kpi,kpi_name,mon,asc_code,own_num,quar_own_num,year_own_num,base_num,quar_base_own_num,year_base_num);
+
+
+load data local infile '/home/ipsos/general/data/13/qiquqita/qiquqita' replace \
+    	into table other_region_7 \
+    	character set utf8 \
+    	fields terminated by '\t' \
+    	lines terminated by '\n' \
+    	(a_level,b_level,age_type,kpi,kpi_name,mon,asc_code,own_num,quar_own_num,year_own_num,base_num,quar_base_own_num,year_base_num);
+
+
+load data local infile '/home/ipsos/general/data/13/qiqushanghai/qiqushanghai' replace \
+    	into table shanghai_region_7 \
+    	character set utf8 \
+    	fields terminated by '\t' \
+    	lines terminated by '\n' \
+    	(a_level,b_level,age_type,kpi,kpi_name,mon,asc_code,own_num,quar_own_num,year_own_num,base_num,quar_base_own_num,year_base_num);
+
+
+load data local infile '/home/ipsos/general/data/13/sanqu/sanqu' replace \
+    	into table region_3 \
+    	character set utf8 \
+    	fields terminated by '\t' \
+    	lines terminated by '\n' \
+    	(a_level,b_level,age_type,kpi,kpi_name,mon,asc_code,own_num,quar_own_num,year_own_num,base_num,quar_base_own_num,year_base_num);
+
+
+load data local infile '/home/ipsos/general/data/13/siquguangzhoushengzhen/siquguangzhoushengzhen' replace \
+    	into table guangshen_region_4 \
+    	character set utf8 \
+    	fields terminated by '\t' \
+    	lines terminated by '\n' \
+    	(a_level,b_level,age_type,kpi,kpi_name,mon,asc_code,own_num,quar_own_num,year_own_num,base_num,quar_base_own_num,year_base_num);
+
+
+load data local infile '/home/ipsos/general/data/13/siquqita/siquqita' replace \
+    	into table other_region_4 \
+    	character set utf8 \
+    	fields terminated by '\t' \
+    	lines terminated by '\n' \
+    	(a_level,b_level,age_type,kpi,kpi_name,mon,asc_code,own_num,quar_own_num,year_own_num,base_num,quar_base_own_num,year_base_num);
+
+
+load data local infile '/home/ipsos/general/data/13/wuqu/wuqu' replace \
+    	into table region_5 \
+    	character set utf8 \
+    	fields terminated by '\t' \
+    	lines terminated by '\n' \
+    	(a_level,b_level,age_type,kpi,kpi_name,mon,asc_code,own_num,quar_own_num,year_own_num,base_num,quar_base_own_num,year_base_num);
+
+
+load data local infile '/home/ipsos/general/data/13/yiqudongbei/yiqudongbei' replace \
+    	into table dongbei_region_1 \
+    	character set utf8 \
+    	fields terminated by '\t' \
+    	lines terminated by '\n' \
+    	(a_level,b_level,age_type,kpi,kpi_name,mon,asc_code,own_num,quar_own_num,year_own_num,base_num,quar_base_own_num,year_base_num);
+
+
+load data local infile '/home/ipsos/general/data/13/yiqushandong/yiqushandong' replace \
+    	into shandong_region_1 \
+    	character set utf8 \
+    	fields terminated by '\t' \
+    	lines terminated by '\n' \
+    	(a_level,b_level,age_type,kpi,kpi_name,mon,asc_code,own_num,quar_own_num,year_own_num,base_num,quar_base_own_num,year_base_num);

@@ -1,0 +1,158 @@
+create external table asc_mapping(
+asc_code string,
+group_name string,
+version    string
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+Location 'hdfs://ns1/user/ipsos_test1/private/asc_mapping';
+
+
+create external table kpi_total_tmp(
+kpi  string,
+mon  string,
+num  string,
+den  string,
+asc_code  string
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+Location 'hdfs://ns1/user/ori/public/kpi_total_tmp';
+
+
+create external table kpi_a_level_tmp(
+kpi  string,
+primary_classification string,
+mon  string,
+num  string,
+den  string,
+asc_code  string
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+Location 'hdfs://ns1/user/ori/public/kpi_a_level_tmp';
+
+
+
+create external table kpi_b_level_tmp(
+kpi  string,
+primary_classification string,
+second_level_classification  string,
+mon  string,
+num  string,
+den  string,
+asc_code  string
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+Location 'hdfs://ns1/user/ori/public/kpi_b_level_tmp';
+
+
+create external table kpi_agetype_tmp(
+kpi  string,
+age_type  string,
+mon  string,
+num  string,
+den  string,
+asc_code  string
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+Location 'hdfs://ns1/user/ori/public/kpi_agetype_tmp';
+
+
+
+create external table kpi_bnbw_tmp(
+kpi  string,
+bn  string,
+mon  string,
+num  string,
+den  string,
+asc_code  string
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+Location 'hdfs://ns1/user/ori/public/kpi_bnbw_tmp';
+
+
+create external table kpi_a_agetype_tmp(
+kpi  string,
+primary_classification  string,
+age_type  string,
+mon  string,
+num  string,
+den  string,
+asc_code  string
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+Location 'hdfs://ns1/user/ori/public/kpi_a_agetype_tmp';
+
+
+create external table kpi_a_bnbw_tmp(
+kpi  string,
+primary_classification  string,
+bn  string,
+mon  string,
+num  string,
+den  string,
+asc_code  string
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+Location 'hdfs://ns1/user/ori/public/kpi_a_bnbw_tmp';
+
+
+create external table kpi_b_agetype_tmp(
+kpi  string,
+primary_classification  string,
+second_level_classification  string,
+age_type  string,
+mon  string,
+num  string,
+den  string,
+asc_code  string
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+Location 'hdfs://ns1/user/ori/public/kpi_a_agetype_tmp';
+
+
+create external table kpi_b_bnbw_tmp(
+kpi  string,
+primary_classification  string,
+second_level_classification  string,
+bn  string,
+mon  string,
+num  string,
+den  string,
+asc_code  string
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+Location 'hdfs://ns1/user/ori/public/kpi_a_bnbw_tmp';
+
+
+
+
+

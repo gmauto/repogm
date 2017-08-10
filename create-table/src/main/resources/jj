@@ -1,0 +1,38 @@
+----kpi_1(进站台次_total)
+insert overwrite table  kpi_total_tmp_8areas_k1
+select ----'1' as kpi,
+substr(tran_date(order_balance_date),1,7) as mon,
+count(distinct vin,tran_date(order_balance_date)) as num,1.0 as den,
+asc_code
+ from ${pub_db}.label_order
+where MAINT_TYPE1<>'删除'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(order_balance_date),1,7),asc_code;
+
+----kpi_1(进站台次_一级)
+insert overwrite table  kpi_a_level_tmp_8areas_k1
+select ----'1' as kpi,
+primary_classification,
+substr(tran_date(order_balance_date),1,7) as mon,
+count(distinct vin,tran_date(order_balance_date)) as num,1.0 as den,
+asc_code
+ from ${pub_db}.label_order
+where MAINT_TYPE1<>'删除'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(order_balance_date),1,7),asc_code,primary_classification;
+
+----kpi_1(进站台次_二级)
+insert overwrite table  kpi_b_level_tmp_8areas_k1
+select ----'1' as kpi,
+primary_classification,
+second_level_classification,
+substr(tran_date(order_balance_date),1,7) as mon,
+count(distinct vin,tran_date(order_balance_date)) as num,1.0 as den,
+asc_code
+ from ${pub_db}.label_order
+where MAINT_TYPE1<>'删除'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(order_balance_date),1,7),asc_code,primary_classification,second_level_classification;

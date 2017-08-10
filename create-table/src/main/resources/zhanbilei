@@ -1,0 +1,839 @@
+----kpi_1.14(保养台次占比_total)
+insert overwrite table kpi_total_tmp_8areas
+select ----'1.14' as kpi,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_total_tmp_8areas_k1
+where kpi='kpi_1_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_total_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon ;
+
+----kpi_1.14(保养台次占比_一级)
+insert overwrite table kpi_a_level_tmp_8areas
+select ----'1.14' as kpi,
+ s.primary_classification,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_level_tmp_8areas_k1
+where kpi='kpi_1_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_level_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification ;
+
+----kpi_1.14(保养台次占比_二级)
+insert overwrite table kpi_b_level_tmp_8areas
+select ----'1.14' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_level_tmp_8areas_k1
+where kpi='kpi_1_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_level_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification
+ and s.second_level_classification=t.second_level_classification;
+
+----kpi_1.14(保养台次占比_车龄)
+insert overwrite table kpi_agetype_tmp_8areas
+select ----'1.14' as kpi,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_agetype_tmp_8areas_k1
+where kpi='kpi_1_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_agetype_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.age_type=t.age_type ;
+
+----kpi_1.14(保养台次占比_保内外)
+insert overwrite table kpi_bnbw_tmp_8areas
+select ----'1.14' as kpi,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_bnbw_tmp_8areas_k1
+where kpi='kpi_1_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_bnbw_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.bn=t.bn ;
+
+----kpi_1.14(保养台次占比_一级_车龄)
+insert overwrite table kpi_a_agetype_tmp_8areas
+select ----'1.14' as kpi,
+ s.primary_classification,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_agetype_tmp_8areas_k1
+where kpi='kpi_1_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_agetype_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification
+ and s.age_type=t.age_type ;
+
+----kpi_1.14(保养台次占比_一级_保内外)
+insert overwrite table kpi_a_bnbw_tmp_8areas
+select ----'1.14' as kpi,
+ s.primary_classification,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_bnbw_tmp_8areas_k1
+where kpi='kpi_1_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_bnbw_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification
+ and s.bn=t.bn ;
+
+----kpi_1.14(保养台次占比_二级_车龄)
+insert overwrite table kpi_b_agetype_tmp_8areas
+select ----'1.14' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_agetype_tmp_8areas_k1
+where kpi='kpi_1_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_agetype_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification
+ and s.second_level_classification=t.second_level_classification
+ and s.age_type=t.age_type ;
+
+----kpi_1.14(保养台次占比_二级_保内外)
+insert overwrite table kpi_b_bnbw_tmp_8areas
+select ----'1.14' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_bnbw_tmp_8areas_k1
+where kpi='kpi_1_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_bnbw_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification
+ and s.second_level_classification=t.second_level_classification
+ and s.bn=t.bn ;
+
+----kpi_1.21(维修台次占比_total)
+insert overwrite table kpi_total_tmp_8areas
+select ----'1.21' as kpi,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_total_tmp_8areas_k1
+where kpi='kpi_1_2'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_total_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon ;
+
+----kpi_1.21(维修台次占比_一级)
+insert overwrite table kpi_a_level_tmp_8areas
+select ----'1.21' as kpi,
+ s.primary_classification,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_level_tmp_8areas_k1
+where kpi='kpi_1_2'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_level_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification ;
+
+----kpi_1.21(维修台次占比_二级)
+insert overwrite table kpi_b_level_tmp_8areas
+select ----'1.21' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_level_tmp_8areas_k1
+where kpi='kpi_1_2'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_level_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification
+ and s.second_level_classification=t.second_level_classification;
+
+----kpi_1.21(维修台次占比_车龄)
+insert overwrite table kpi_agetype_tmp_8areas
+select ----'1.21' as kpi,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_agetype_tmp_8areas_k1
+where kpi='kpi_1_2'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_agetype_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.age_type=t.age_type ;
+
+----kpi_1.21(维修台次占比_保内外)
+insert overwrite table kpi_bnbw_tmp_8areas
+select ----'1.21' as kpi,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_bnbw_tmp_8areas_k1
+where kpi='kpi_1_2'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_bnbw_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.bn=t.bn ;
+
+----kpi_1.21(维修台次占比_一级_车龄)
+insert overwrite table kpi_a_agetype_tmp_8areas
+select ----'1.21' as kpi,
+ s.primary_classification,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_agetype_tmp_8areas_k1
+where kpi='kpi_1_2'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_agetype_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification
+ and s.age_type=t.age_type ;
+
+----kpi_1.21(维修台次占比_一级_保内外)
+insert overwrite table kpi_a_bnbw_tmp_8areas
+select ----'1.21' as kpi,
+ s.primary_classification,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_bnbw_tmp_8areas_k1
+where kpi='kpi_1_2'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_bnbw_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification
+ and s.bn=t.bn ;
+
+----kpi_1.21(维修台次占比_二级_车龄)
+insert overwrite table kpi_b_agetype_tmp_8areas
+select ----'1.21' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_agetype_tmp_8areas_k1
+where kpi='kpi_1_2'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_agetype_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification
+ and s.second_level_classification=t.second_level_classification
+ and s.age_type=t.age_type ;
+
+----kpi_1.21(维修台次占比_二级_保内外)
+insert overwrite table kpi_b_bnbw_tmp_8areas
+select ----'1.21' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_bnbw_tmp_8areas_k1
+where kpi='kpi_1_2'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_bnbw_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification
+ and s.second_level_classification=t.second_level_classification
+ and s.bn=t.bn ;
+
+----kpi_1.36(事故台次占比_total)
+insert overwrite table kpi_total_tmp_8areas
+select ----'1.36' as kpi,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_total_tmp_8areas_k1
+where kpi='kpi_1_3'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_total_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon ;
+
+----kpi_1.36(事故台次占比_一级)
+insert overwrite table kpi_a_level_tmp_8areas
+select ----'1.36' as kpi,
+ s.primary_classification,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_level_tmp_8areas_k1
+where kpi='kpi_1_3'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_level_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification ;
+
+----kpi_1.36(事故台次占比_二级)
+insert overwrite table kpi_b_level_tmp_8areas
+select ----'1.36' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_level_tmp_8areas_k1
+where kpi='kpi_1_3'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_level_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification
+ and s.second_level_classification=t.second_level_classification;
+
+----kpi_1.36(事故台次占比_车龄)
+insert overwrite table kpi_agetype_tmp_8areas
+select ----'1.36' as kpi,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_agetype_tmp_8areas_k1
+where kpi='kpi_1_3'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_agetype_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.age_type=t.age_type ;
+
+----kpi_1.36(事故台次占比_保内外)
+insert overwrite table kpi_bnbw_tmp_8areas
+select ----'1.36' as kpi,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_bnbw_tmp_8areas_k1
+where kpi='kpi_1_3'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_bnbw_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.bn=t.bn ;
+
+----kpi_1.36(事故台次占比_一级_车龄)
+insert overwrite table kpi_a_agetype_tmp_8areas
+select ----'1.36' as kpi,
+ s.primary_classification,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_agetype_tmp_8areas_k1
+where kpi='kpi_1_3'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_agetype_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification
+ and s.age_type=t.age_type ;
+
+----kpi_1.36(事故台次占比_一级_保内外)
+insert overwrite table kpi_a_bnbw_tmp_8areas
+select ----'1.36' as kpi,
+ s.primary_classification,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_bnbw_tmp_8areas_k1
+where kpi='kpi_1_3'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_bnbw_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification
+ and s.bn=t.bn ;
+
+----kpi_1.36(事故台次占比_二级_车龄)
+insert overwrite table kpi_b_agetype_tmp_8areas
+select ----'1.36' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_agetype_tmp_8areas_k1
+where kpi='kpi_1_3'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_agetype_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification
+ and s.second_level_classification=t.second_level_classification
+ and s.age_type=t.age_type ;
+
+----kpi_1.36(事故台次占比_二级_保内外)
+insert overwrite table kpi_b_bnbw_tmp_8areas
+select ----'1.36' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_bnbw_tmp_8areas_k1
+where kpi='kpi_1_3'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_bnbw_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification
+ and s.second_level_classification=t.second_level_classification
+ and s.bn=t.bn ;
+
+----kpi_1.41(索赔台次占比_total)
+insert overwrite table kpi_total_tmp_8areas
+select ----'1.41' as kpi,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_total_tmp_8areas_k1
+where kpi='kpi_1_4'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_total_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon ;
+
+----kpi_1.41(索赔台次占比_一级)
+insert overwrite table kpi_a_level_tmp_8areas
+select ----'1.41' as kpi,
+ s.primary_classification,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_level_tmp_8areas_k1
+where kpi='kpi_1_4'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_level_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification ;
+
+----kpi_1.41(索赔台次占比_二级)
+insert overwrite table kpi_b_level_tmp_8areas
+select ----'1.41' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_level_tmp_8areas_k1
+where kpi='kpi_1_4'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_level_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification
+ and s.second_level_classification=t.second_level_classification;
+
+----kpi_1.41(索赔台次占比_车龄)
+insert overwrite table kpi_agetype_tmp_8areas
+select ----'1.41' as kpi,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_agetype_tmp_8areas_k1
+where kpi='kpi_1_4'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_agetype_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.age_type=t.age_type ;
+
+----kpi_1.41(索赔台次占比_保内外)
+insert overwrite table kpi_bnbw_tmp_8areas
+select ----'1.41' as kpi,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_bnbw_tmp_8areas_k1
+where kpi='kpi_1_4'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_bnbw_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.bn=t.bn ;
+
+----kpi_1.41(索赔台次占比_一级_车龄)
+insert overwrite table kpi_a_agetype_tmp_8areas
+select ----'1.41' as kpi,
+ s.primary_classification,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_agetype_tmp_8areas_k1
+where kpi='kpi_1_4'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_agetype_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification
+ and s.age_type=t.age_type ;
+
+----kpi_1.41(索赔台次占比_一级_保内外)
+insert overwrite table kpi_a_bnbw_tmp_8areas
+select ----'1.41' as kpi,
+ s.primary_classification,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_bnbw_tmp_8areas_k1
+where kpi='kpi_1_4'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_bnbw_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification
+ and s.bn=t.bn ;
+
+----kpi_1.41(索赔台次占比_二级_车龄)
+insert overwrite table kpi_b_agetype_tmp_8areas
+select ----'1.41' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_agetype_tmp_8areas_k1
+where kpi='kpi_1_4'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_agetype_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification
+ and s.second_level_classification=t.second_level_classification
+ and s.age_type=t.age_type ;
+
+----kpi_1.41(索赔台次占比_二级_保内外)
+insert overwrite table kpi_b_bnbw_tmp_8areas
+select ----'1.41' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_bnbw_tmp_8areas_k1
+where kpi='kpi_1_4'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_bnbw_tmp_8areas_k1
+where kpi='kpi_1'
+ and mon>='${begin_date}'
+ and mon<='${end_date}'
+ ) t
+where s.asc_code=t.asc_code
+ and s.mon=t.mon
+ and s.primary_classification=t.primary_classification
+ and s.second_level_classification=t.second_level_classification
+ and s.bn=t.bn ;

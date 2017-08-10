@@ -1,0 +1,10 @@
+生成建表语句
+
+辅助表路径
+[ipsos@auto-005 bin]$ hadoop fs -mkdir private/auto/assistant
+[ipsos@auto-005 bin]$ hadoop fs -mkdir private/auto/assistant/enclosure
+[ipsos@auto-005 bin]$ hadoop fs -mkdir private/auto/assistant/high_flow_parts
+[ipsos@auto-005 bin]$ hadoop fs -mkdir private/auto/assistant/filter
+[ipsos@auto-005 bin]$ hadoop fs -mkdir private/auto/assistant/engine_oil
+[ipsos@auto-005 bin]$ hadoop fs -mkdir private/auto/assistant/maintnance
+
