@@ -1,22 +1,62 @@
-select
-   substr(tran_date(s.order_balance_date),1,7) as mon,
-   count(distinct case when tasc_code is not null then s.vin else null end)/count(distinct s.vin) as num,
-   am.group_name
-from
-   (select s.*,t.asc_code as tasccode
- from ori.label_order s
-   left join (
-    select distinct t1.asc_code,t1.order_number,m1.month from ori.part t1 join ori.high_flow_parts x
-    join (select month,version from ori.mapping where fact_table='label_order' and dim_table='high_flow_parts') m1
-    on t1.part_number=x.part_num and x.version=m1.version
-    and substr(tran_date(t1.order_balance_date),1,7)=m1.month
-    ) t
-    on  s.order_number=t.order_number
-    and s.asc_code=t.asc_code
-    where substr(tran_date(s.order_balance_date),1,7)>='a'
-    and substr(tran_date(s.order_balance_date),1,7)<='b'
-    and s.MAINT_TYPE1<>'删除' )s
-    join ori.asc_mapping am
-    on s.asc_code=am.asc_code
-    where  am.version='8areas'
-    group by substr(tran_date(s.order_balance_date),1,7),am.group_name;
+insert overwrite table hebingbiao partition(region)
+select h1.a_level,h1.b_level,h1.age_type,h1.kpi,h1.kpi_name,h1.mon,
+h1.own_num,
+h2.quar_own_num,
+h3.year_own_num,
+h4.base_num,
+h5.quar_base_own_num,
+h6.year_base_num,
+h1.asc_code,
+h1.tier,
+h1.region
+from own_month h1
+
+------------------------------------------季度
+ join own_quarter h2 on h1.kpi=h2.kpi
+and h1.a_level=h2.a_level
+and h1.b_level=h2.b_level
+and h1.age_type=h2.age_type
+and h1.mon=h2.mon
+and h1.asc_code=h2.asc_code
+and h1.region=h2.region
+and h1.tier=h2.tier
+
+---------------------------年度
+join own_year h3 on h1.kpi=h2.kpi
+and h1.a_level=h3.a_level
+and h1.b_level=h3.b_level
+and h1.age_type=h3.age_type
+and h1.mon=h3.mon
+and h1.asc_code=h3.asc_code
+and h1.region=h3.region
+and h1.tier=h3.tier
+
+
+-------------标准值月
+ join base_month h4
+on h1.kpi=h4.kpi
+and h1.a_level=h4.a_level
+and h1.b_level=h4.b_level
+and h1.age_type=h4.age_type
+and h1.mon=h4.mon
+and h1.region=h4.region
+and h1.tier=h4.tier
+
+------------------------------------------标准值季度
+join base_quarter h5 on h1.kpi=h5.kpi
+and h1.a_level=h5.a_level
+and h1.b_level=h5.b_level
+and h1.age_type=h5.age_type
+and h1.mon=h5.mon
+and h1.region=h5.region
+and h1.tier=h5.tier
+
+---------------------------标准值年度
+join base_year h6 on h1.kpi=h6.kpi
+and h1.a_level=h6.a_level
+and h1.b_level=h6.b_level
+and h1.age_type=h6.age_type
+and h1.mon=h6.mon
+and h1.region=h6.region
+and h1.tier=h6.tier
+where h1.tier is not null

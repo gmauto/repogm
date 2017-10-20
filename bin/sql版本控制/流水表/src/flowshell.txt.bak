@@ -17,14 +17,14 @@ w.name,
 '' quantity,
 q.SALES_AMOUNT,
 q.age,
-case when q.age is null then 'æœªçŸ¥'
+case when q.age is null then 'Î´Öª'
  when q.age=0 then 'NA'
  when q.age=1 and e.cl0>=2 then 'YES'
  when q.age=2 and e.cl0>=2 and e.cl1>=2 then 'YES'
  when q.age>=3 and q.outdate<'2013-10-01' and e.cl0>=2 and e.cl1>=2 then 'YES'
  when q.age>=3 and q.outdate>='2013-10-01' and e.cl0>=2 and e.cl1>=2 and e.cl2>=2 then 'YES'
  ELSE 'NO' end AS BNJK,
-case when q.age is null then 'æœªçŸ¥'
+case when q.age is null then 'Î´Öª'
  when q.age<=2 then 'NA'
  when q.age=3 and q.outdate<'2013-10-01' and r.cl2>=1 then 'YES'
  when q.age=3 and q.outdate>='2013-10-01' then 'NA'
@@ -62,7 +62,7 @@ s.second_level_classification
  from (
 select s.*,p.chcode,p.asc from label_order s ,distributor p
 where s.asc_code=p.asccode
-and s.MAINT_TYPE1<>'åˆ é™¤'
+and s.MAINT_TYPE1<>'É¾³ı'
 and p.chcode <>''
 ) s
 left join part t 
@@ -73,49 +73,49 @@ and s.chcode=m.ch_code
 and s.vin = m.vin
 ) q left join 
 (
-select 'æœºæ²¹' as type,
+select '»úÓÍ' as type,
 part_num,
-concat(type,'æœºæ²¹') as name 
+concat(type,'»úÓÍ') as name 
 from engine_oil
 union all
-select 'æœºæ»¤' as type,
+select '»úÂË' as type,
 part_num,
-'æœºæ»¤' as name
+'»úÂË' as name
 from filter
 union all 
-select 'å…»æŠ¤å“' as type,
+select 'Ñø»¤Æ·' as type,
 part_num,
 type as name
 from maintnance
 union all
-select 'é™„ä»¶' as type,
+select '¸½¼ş' as type,
 part_num,
 name_chinese as name
 from  enclosure
 union all 
-select 'é«˜æµä»¶' as type,
+select '¸ßÁ÷¼ş' as type,
 part_num,
-case when type ='LunT' then 'è½®èƒ'
-when type='DianC' then 'è“„ç”µæ± '
+case when type ='LunT' then 'ÂÖÌ¥'
+when type='DianC' then 'Ğîµç³Ø'
 when type='QiT' and type1<>'' then type1
-else 'å…¶ä»–é«˜æµä»¶' END as name
+else 'ÆäËû¸ßÁ÷¼ş' END as name
 from high_flow_parts
 ) w on q.part_number=w.part_num
 left join 
 (
 select   s.asc_code,
 s.vin,
-sum(case when age_type2='0å¹´' then cnt else 0 end) as cl0,
-sum(case when age_type2='1å¹´' then cnt else 0 end) as cl1,
-sum(case when age_type2='2å¹´' then cnt else 0 end) as cl2
+sum(case when age_type2='0Äê' then cnt else 0 end) as cl0,
+sum(case when age_type2='1Äê' then cnt else 0 end) as cl1,
+sum(case when age_type2='2Äê' then cnt else 0 end) as cl2
  from (
 select s.asc_code,
 s.vin,
 age_type2,
 count(distinct tran_date(s.order_balance_date)) as cnt
 from label_order s
-where MAINT_TYPE1='ä¿å…»'
-and bn='ä¿å†…'
+where MAINT_TYPE1='±£Ñø'
+and bn='±£ÄÚ'
 group by s.asc_code,
 s.vin,
 age_type2
@@ -128,10 +128,10 @@ left join
 (
 select   s.asc_code,
 s.vin,
-sum(case when age_type2='2å¹´' then cnt else 0 end) as cl2,
-sum(case when age_type2='3å¹´' then cnt else 0 end) as cl3,
-sum(case when age_type2='4å¹´' then cnt else 0 end) as cl4,
-sum(case when age_type2='5å¹´' then cnt else 0 end) as cl5
+sum(case when age_type2='2Äê' then cnt else 0 end) as cl2,
+sum(case when age_type2='3Äê' then cnt else 0 end) as cl3,
+sum(case when age_type2='4Äê' then cnt else 0 end) as cl4,
+sum(case when age_type2='5Äê' then cnt else 0 end) as cl5
  from (
 select s.asc_code,
 s.vin,
@@ -139,7 +139,7 @@ age_type2,
 count(distinct tran_date(s.order_balance_date)) as cnt
 from label_order s
 where 1=1
-and bn='ä¿å¤–'
+and bn='±£Íâ'
 group by s.asc_code,
 s.vin,
 age_type2
