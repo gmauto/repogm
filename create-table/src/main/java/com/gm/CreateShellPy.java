@@ -150,7 +150,8 @@ public class CreateShellPy {
 //        System.out.println("hcdshcbdhcbhdsbc");
         InputStream in = CreateShell.class.getClassLoader().getResourceAsStream(filename);
         BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
-        PrintWriter writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\fx\\Desktop\\" + outname), "utf-8")), true);
+        String path = "C:\\Users\\Administrator\\Desktop\\";
+        PrintWriter writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path + outname), "utf-8")), true);
         String line;
         boolean flag = false;
         List<String> list = null;
@@ -186,7 +187,7 @@ public class CreateShellPy {
 
     public static void main(String[] args) throws IOException {
 //        createShell("kpi2new.txt", "kpi2new.py");
-        //createShell("zjxj","zjxj.py");
+        /*createShell("zjxj","zjxj.py");*/
 //        createShellnewFJP("jieguo.txt","jieguo.py");
         createShellnewJPL("fyjp.txt", "fyjp.py");
         //createShellFJP("fjp", "fjp.py");
