@@ -149,6 +149,8 @@ public class PyUtil {
                         "def " + funcName + "():\n" +
                         "\tline = \"\"\"" + hqlCore + "\"\"\"\n" +
                 /*"\tmon_p = begin_day + '_' + end_day\n" +*/
+                        "\tline = line.replace('${begin_date}', begin_day)\n"+
+                        "\tline = line.replace('${end_date}', end_day)\n"+
                         "\tline = line.replace('${pub_db}',pub_db)\n" +
                         "\tline = line.replace('${district}', district)\n" +
                         "\tline = line.replace('${everymonth}',everymonth)\n" +
@@ -251,7 +253,7 @@ public class PyUtil {
                         "\tend_day = sys.argv[2]\n" +
                         "\tpub_db=sys.argv[3]\n"+
                         "\ttime_rfile=sys.argv[4]\n"+
-                        "\ttime_record = open(basepath + \"/log/\"+time_rfile, \"w\")\n" +
+                        "\ttime_record = open(basepath + \"/log/\"+time_rfile+\"_\"+begin_day+\"_\"+end_day, \"w\")\n" +
                         "\t" + StringUtils.join(list, "\n\t") +
                         "\n\ttime_record.close()"
         );
@@ -277,13 +279,15 @@ public class PyUtil {
             list.add(flushfile);
         }
         writer.println("if __name__ == \"__main__\":\n" +
-                        "\tif sys.argv.__len__() != 4:\n" +
+                        "\tif sys.argv.__len__() != 6:\n" +
                         "\t\tprint(\"需要两个参数 <region> <pub_db>\")\n" +
                         "\t\tsys.exit(-1)\n" +
-                        "\tpub_db = sys.argv[1]\n"+
-                        "\tdistrict=sys.argv[2]\n"+
-                        "\teverymonth = sys.argv[3]\n"+
-                        "\ttime_record = open(basepath + \"/log/time_record_fjp\", \"w\")\n" +
+                        "\tbegin_day = sys.argv[1]\n" +
+                        "\tend_day = sys.argv[2]\n" +
+                        "\tpub_db = sys.argv[3]\n"+
+                        "\tdistrict=sys.argv[4]\n"+
+                        "\teverymonth = sys.argv[5]\n"+
+                        "\ttime_record = open(basepath + \"/log/time_record_fjp\"+\"_\"+begin_day+\"_\"+end_day, \"w\")\n" +
                         "\t" + StringUtils.join(list, "\n\t") +
                         "\n\ttime_record.close()"
         );
@@ -325,7 +329,7 @@ public class PyUtil {
 						"\tdistrict=sys.argv[4]\n"+
 						"\teverymonth = sys.argv[5]\n"+
 						"\tregion =everymonth+'_'+ district\n"+
-                        "\ttime_record = open(basepath + \"/log/time_record_jpl\", \"w\")\n" +
+                        "\ttime_record = open(basepath + \"/log/time_record_jpl\"+\"_\"+begin_day+\"_\"+end_day, \"w\")\n" +
                         "\t" + StringUtils.join(list, "\n\t") +
                         "\n\ttime_record.close()"
         );
