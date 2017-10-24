@@ -1,0 +1,175 @@
+----flow_tmp
+create external table flow_tmp(
+order_number string,
+vin  string,
+number  string,
+owner_code  string,
+birthdate  string,
+sexual  string,
+province  string,
+city  string,
+asc_code  string,
+asc  string,
+outdate  string,
+deal_year  string,
+deal_date  string,
+part_number  string,
+name  string,
+quantity  string,
+sales_amount  string,
+age  string,
+bnjk  string,
+bwjk  string,
+mileage  string,
+maint_type  string,
+primary_classification  string,
+second_level_classification  string
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+Location 'hdfs://ns1/user/ipsos/private/test/flow_tmp';
+  
+----sexual
+create external table sexual(
+sexual  string,
+id  string
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '|'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+Location 'hdfs://ns1/user/ipsos/private/test/sexual';
+
+load data local inpath '/home/ipsos/general/tmp/sexual' overwrite into table sexual;
+
+----province
+create external table province(
+province  string,
+id  string
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '|'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+Location 'hdfs://ns1/user/ipsos/private/test/province';
+
+load data local inpath '/home/ipsos/general/tmp/province' overwrite into table province;
+
+----city
+create external table city(
+city  string,
+id  string
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '|'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+Location 'hdfs://ns1/user/ipsos/private/test/city';
+
+load data local inpath '/home/ipsos/general/tmp/city' overwrite into table city;
+
+----name
+create external table name(
+name  string,
+id  string
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '|'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+Location 'hdfs://ns1/user/ipsos/private/test/name';
+
+load data local inpath '/home/ipsos/general/tmp/name' overwrite into table name;
+
+----primary_classification
+create external table primary_classification(
+primary_classification  string,
+id  string
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '|'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+Location 'hdfs://ns1/user/ipsos/private/test/primary_classification';
+
+load data local inpath '/home/ipsos/general/tmp/primary_classification' overwrite into table primary_classification;
+
+----second_level_classification
+create external table second_level_classification(
+second_level_classification  string,
+id  string
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '|'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+Location 'hdfs://ns1/user/ipsos/private/test/second_level_classification';
+
+load data local inpath '/home/ipsos/general/tmp/second_level_classification' overwrite into table second_level_classification;
+
+----flow_0628_pre
+create external table flow_0628_pre(
+order_number string,
+vin  string,
+number  string,
+owner_code  string,
+birthdate  string,
+sexual  string,
+province  string,
+city  string,
+asc_code  string,
+asc  string,
+outdate  string,
+deal_year  string,
+deal_date  string,
+part_number  string,
+name  string,
+quantity  string,
+sales_amount  string,
+age  string,
+bnjk  string,
+bwjk  string,
+mileage  string,
+primary_classification  string,
+second_level_classification  string
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+Location 'hdfs://ns1/user/ipsos/private/test/flow_0628_pre';
+
+
+----flow_0628
+create external table flow_0628(
+order_number string,
+vin  string,
+number  string,
+owner_code  string,
+birthdate  string,
+sexual  string,
+province  string,
+city  string,
+asc_code  string,
+asc  string,
+outdate  string,
+deal_year  string,
+deal_date  string,
+part_number  string,
+name  string,
+quantity  string,
+sales_amount  string,
+age  string,
+bnjk  string,
+bwjk  string,
+mileage  string,
+primary_classification  string,
+second_level_classification  string
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+Location 'hdfs://ns1/user/ipsos/private/test/flow_0628';

@@ -1,0 +1,377 @@
+----kpi_1.15(不含首保保养台次_total)
+insert overwrite table  kpi_total_2200621 
+  select----'1.15' as kpi,
+  substr(tran_date(order_balance_date),1,7) as mon,
+  count(distinct vin,tran_date(order_balance_date)) as cnt,
+  asc_code
+   from label_order  
+  where MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and first_maintnance=''
+  group by substr(tran_date(order_balance_date),1,7),asc_code;
+  
+----kpi_1.15(不含首保保养台次_一级)
+  insert overwrite table kpi_a_level_2200621 
+  select----'1.15' as kpi,
+  primary_classification,
+  substr(tran_date(order_balance_date),1,7) as mon,
+  count(distinct vin,tran_date(order_balance_date)) as cnt,
+  asc_code
+   from label_order  
+  where MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and first_maintnance=''
+  group by substr(tran_date(order_balance_date),1,7),asc_code,primary_classification;
+  
+  
+----kpi_1.15(不含首保保养台次_二级)
+  insert overwrite table  kpi_b_level_2200621 
+  select----'1.15' as kpi,
+  primary_classification,
+  second_level_classification,
+  substr(tran_date(order_balance_date),1,7) as mon,
+  count(distinct vin,tran_date(order_balance_date)) as cnt,
+  asc_code
+   from label_order  
+  where MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and first_maintnance=''
+  group by substr(tran_date(order_balance_date),1,7),asc_code,primary_classification,second_level_classification;
+  
+  
+----kpi_1.15(不含首保保养台次_车龄)  
+  insert overwrite table  kpi_agetype_2200621 
+  select----'1.15' as kpi,
+  age_type,
+  substr(tran_date(order_balance_date),1,7) as mon,
+  count(distinct vin,tran_date(order_balance_date)) as cnt,
+  asc_code
+   from label_order  
+  where MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and first_maintnance=''
+  group by substr(tran_date(order_balance_date),1,7),asc_code,age_type;
+  
+  
+----kpi_1.15(不含首保保养台次_保内外)
+  insert overwrite table  kpi_bnbw_2200621 
+  select----'1.15' as kpi,
+  bn,
+  substr(tran_date(order_balance_date),1,7) as mon,
+  count(distinct vin,tran_date(order_balance_date)) as cnt,
+  asc_code
+   from label_order  
+  where MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and first_maintnance=''
+  group by substr(tran_date(order_balance_date),1,7),asc_code,bn;
+  
+  
+----kpi_1.15(不含首保保养台次_一级_车龄)  
+  insert overwrite table  kpi_a_agetype_2200621 
+  select----'1.15' as kpi,
+  primary_classification,
+  age_type,
+  substr(tran_date(order_balance_date),1,7) as mon,
+  count(distinct vin,tran_date(order_balance_date)) as cnt,
+  asc_code
+   from label_order  
+  where MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and first_maintnance=''
+  group by substr(tran_date(order_balance_date),1,7),asc_code,primary_classification,age_type;
+  
+  
+----kpi_1.15(不含首保保养台次_一级_保内外)
+  insert overwrite table  kpi_a_bnbw_2200621 
+  select----'1.15' as kpi,
+  primary_classification,
+  bn,
+  substr(tran_date(order_balance_date),1,7) as mon,
+  count(distinct vin,tran_date(order_balance_date)) as cnt,
+  asc_code
+   from label_order  
+  where MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and first_maintnance=''
+  group by substr(tran_date(order_balance_date),1,7),asc_code,primary_classification,bn;
+  
+  
+----kpi_1.15(不含首保保养台次_二级_车龄)
+  insert overwrite table  kpi_b_agetype_2200621 
+  select----'1.15' as kpi,
+  primary_classification,
+  second_level_classification,
+  age_type,
+  substr(tran_date(order_balance_date),1,7) as mon,
+  count(distinct vin,tran_date(order_balance_date)) as cnt,
+  asc_code
+   from label_order  
+  where MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and first_maintnance=''
+  group by substr(tran_date(order_balance_date),1,7),asc_code,primary_classification,second_level_classification,age_type;
+  
+  
+----kpi_1.15(不含首保保养台次_二级_保内外)
+  insert overwrite table  kpi_b_bnbw_2200621 
+  select----'1.15' as kpi,
+  primary_classification,
+  second_level_classification,
+  bn,
+  substr(tran_date(order_balance_date),1,7) as mon,
+  count(distinct vin,tran_date(order_balance_date)) as cnt,
+  asc_code
+   from label_order  
+  where MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and first_maintnance=''
+  group by substr(tran_date(order_balance_date),1,7),asc_code,primary_classification,second_level_classification,bn;
+
+ 
+----kpi_0.6(售后配件总产值_total)
+  insert overwrite table  kpi_total_2200621 
+  select----'0.6' as kpi,
+  t1.mon,
+  case when t2.sumclaim is null then t1.sumpart
+  else (t1.sumpart-t2.sumclaim) end as sumpart,t1.asc_code
+  from (select substr(tran_date(t.order_balance_date),1,7) as mon,
+  sum(t.sales_amount) as sumpart,t.asc_code from part t
+   join label_order s on s.asc_code=t.asc_code and s.order_number=t.order_number
+  where s.MAINT_TYPE1<>'删除' 
+  and substr(tran_date(t.order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(t.order_balance_date),1,7)<='${end_date}'
+  group by substr(tran_date(t.order_balance_date),1,7),t.asc_code)t1
+  left join 
+  (select substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(t.claim_accepted_amount)+sum(t.claim_accepted_amount_tax) as sumclaim,
+  s.asc_code
+   from  label_order s join claim_uniq t 
+   on s.asc_code=t.asc_code and s.claim_order_number=t.claim_order_number
+  where s.MAINT_TYPE1<>'删除'
+  and s.claim='1' 
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code)t2
+  on t1.asc_code=t2.asc_code and t1.mon=t2.mon;
+  
+----kpi_0.6(售后配件总产值_一级)
+  insert overwrite table  kpi_a_level_2200621 
+  select----'0.6' as kpi,
+  t1.primary_classification,t1.mon,
+  case when t2.sumclaim is null then t1.sumpart
+  else (t1.sumpart-t2.sumclaim) end as sumpart,t1.asc_code
+  from (select substr(tran_date(t.order_balance_date),1,7) as mon,primary_classification,
+  sum(t.sales_amount) as sumpart,t.asc_code from part t
+   join label_order s on s.asc_code=t.asc_code and s.order_number=t.order_number
+  where s.MAINT_TYPE1<>'删除' 
+  and substr(tran_date(t.order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(t.order_balance_date),1,7)<='${end_date}'
+  group by substr(tran_date(t.order_balance_date),1,7),t.asc_code,primary_classification)t1
+  left join 
+  (select substr(tran_date(s.order_balance_date),1,7) as mon,primary_classification,
+  sum(t.claim_accepted_amount)+sum(t.claim_accepted_amount_tax) as sumclaim,
+  s.asc_code
+   from  label_order s join claim_uniq t 
+   on s.asc_code=t.asc_code and s.claim_order_number=t.claim_order_number
+  where s.MAINT_TYPE1<>'删除'
+  and s.claim='1' 
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,primary_classification)t2
+  on t1.asc_code=t2.asc_code and t1.mon=t2.mon and t1.primary_classification=t2.primary_classification;
+  
+----kpi_0.6(售后配件总产值_二级)  
+  insert overwrite table  kpi_b_level_2200621 
+   select----'0.6' as kpi,
+   t1.primary_classification,t1.second_level_classification,t1.mon,
+  case when t2.sumclaim is null then t1.sumpart
+  else (t1.sumpart-t2.sumclaim) end as sumpart,t1.asc_code
+  from (select substr(tran_date(t.order_balance_date),1,7) as mon,second_level_classification,primary_classification,
+  sum(t.sales_amount) as sumpart,t.asc_code from part t
+   join label_order s on s.asc_code=t.asc_code and s.order_number=t.order_number
+  where s.MAINT_TYPE1<>'删除' 
+  and substr(tran_date(t.order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(t.order_balance_date),1,7)<='${end_date}'
+  group by substr(tran_date(t.order_balance_date),1,7),t.asc_code,primary_classification,second_level_classification)t1
+  left join 
+  (select substr(tran_date(s.order_balance_date),1,7) as mon,primary_classification,second_level_classification,
+  sum(t.claim_accepted_amount)+sum(t.claim_accepted_amount_tax) as sumclaim,
+  s.asc_code
+   from  label_order s join claim_uniq t 
+   on s.asc_code=t.asc_code and s.claim_order_number=t.claim_order_number
+  where s.MAINT_TYPE1<>'删除'
+  and s.claim='1' 
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,primary_classification,second_level_classification) t2
+  on t1.asc_code=t2.asc_code and t1.mon=t2.mon and t1.primary_classification=t2.primary_classification and 
+  t1.second_level_classification=t2.second_level_classification;
+  
+----kpi_0.6(售后配件总产值_车龄)
+  insert overwrite table  kpi_agetype_2200621 
+   select----'0.6' as kpi,
+   t1.age_type,t1.mon,
+   case when t2.sumclaim is null then t1.sumpart
+  else (t1.sumpart-t2.sumclaim) end as sumpart,t1.asc_code
+  from (select substr(tran_date(t.order_balance_date),1,7) as mon,age_type,
+  sum(t.sales_amount) as sumpart,t.asc_code from part t
+   join label_order s on s.asc_code=t.asc_code and s.order_number=t.order_number
+  where s.MAINT_TYPE1<>'删除' 
+  and substr(tran_date(t.order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(t.order_balance_date),1,7)<='${end_date}'
+  group by substr(tran_date(t.order_balance_date),1,7),t.asc_code,age_type)t1
+  left join 
+  (select substr(tran_date(s.order_balance_date),1,7) as mon,age_type,
+  sum(t.claim_accepted_amount)+sum(t.claim_accepted_amount_tax) as sumclaim,
+  s.asc_code
+   from  label_order s join claim_uniq t 
+   on s.asc_code=t.asc_code and s.claim_order_number=t.claim_order_number
+  where s.MAINT_TYPE1<>'删除'
+  and s.claim='1' 
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,age_type)t2
+  on t1.asc_code=t2.asc_code and t1.mon=t2.mon and t1.age_type=t2.age_type;
+  
+  
+----kpi_0.6(售后配件总产值_保内外)
+  insert overwrite table  kpi_bnbw_2200621 
+   select----'0.6' as kpi,
+   t1.bn,t1.mon,
+   case when t2.sumclaim is null then t1.sumpart
+  else (t1.sumpart-t2.sumclaim) end as sumpart,t1.asc_code
+  from (select substr(tran_date(t.order_balance_date),1,7) as mon,bn,
+  sum(t.sales_amount) as sumpart,t.asc_code from part t
+   join label_order s on s.asc_code=t.asc_code and s.order_number=t.order_number
+  where s.MAINT_TYPE1<>'删除' 
+  and substr(tran_date(t.order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(t.order_balance_date),1,7)<='${end_date}'
+  group by substr(tran_date(t.order_balance_date),1,7),t.asc_code,bn)t1
+  left join 
+  (select substr(tran_date(s.order_balance_date),1,7) as mon,bn,
+  sum(t.claim_accepted_amount)+sum(t.claim_accepted_amount_tax) as sumclaim,
+  s.asc_code
+   from  label_order s join claim_uniq t 
+   on s.asc_code=t.asc_code and s.claim_order_number=t.claim_order_number
+  where s.MAINT_TYPE1<>'删除'
+  and s.claim='1' 
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,bn)t2
+  on t1.asc_code=t2.asc_code and t1.mon=t2.mon and t1.bn=t2.bn;
+  
+  
+----kpi_0.6(售后配件总产值_一级_车龄)
+  insert overwrite table  kpi_a_agetype_2200621 
+   select----'0.6' as kpi,
+   t1.primary_classification,t1.age_type,t1.mon,
+  case when t2.sumclaim is null then t1.sumpart
+  else (t1.sumpart-t2.sumclaim) end as sumpart,t1.asc_code
+  from (select substr(tran_date(t.order_balance_date),1,7) as mon,primary_classification,age_type,
+  sum(t.sales_amount) as sumpart,t.asc_code from part t
+   join label_order s on s.asc_code=t.asc_code and s.order_number=t.order_number
+  where s.MAINT_TYPE1<>'删除' 
+  and substr(tran_date(t.order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(t.order_balance_date),1,7)<='${end_date}'
+  group by substr(tran_date(t.order_balance_date),1,7),t.asc_code,primary_classification,age_type)t1
+  left join 
+  (select substr(tran_date(s.order_balance_date),1,7) as mon,primary_classification,age_type,
+  sum(t.claim_accepted_amount)+sum(t.claim_accepted_amount_tax) as sumclaim,
+  s.asc_code
+   from  label_order s join claim_uniq t 
+   on s.asc_code=t.asc_code and s.claim_order_number=t.claim_order_number
+  where s.MAINT_TYPE1<>'删除'
+  and s.claim='1' 
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,primary_classification,age_type)t2
+  on t1.asc_code=t2.asc_code and t1.mon=t2.mon and t1.primary_classification=t2.primary_classification and t1.age_type=t2.age_type;
+  
+----kpi_0.6(售后配件总产值_一级_保内外)
+  insert overwrite table  kpi_a_bnbw_2200621 
+   select----'0.6' as kpi,
+   t1.primary_classification,t1.bn,t1.mon,
+  case when t2.sumclaim is null then t1.sumpart
+  else (t1.sumpart-t2.sumclaim) end as sumpart,t1.asc_code
+  from (select substr(tran_date(t.order_balance_date),1,7) as mon,primary_classification,bn,
+  sum(t.sales_amount) as sumpart,t.asc_code from part t
+   join label_order s on s.asc_code=t.asc_code and s.order_number=t.order_number
+  where s.MAINT_TYPE1<>'删除' 
+  and substr(tran_date(t.order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(t.order_balance_date),1,7)<='${end_date}'
+  group by substr(tran_date(t.order_balance_date),1,7),t.asc_code,primary_classification,bn)t1
+  left join 
+  (select substr(tran_date(s.order_balance_date),1,7) as mon,primary_classification,bn,
+  sum(t.claim_accepted_amount)+sum(t.claim_accepted_amount_tax) as sumclaim,
+  s.asc_code
+   from  label_order s join claim_uniq t 
+   on s.asc_code=t.asc_code and s.claim_order_number=t.claim_order_number
+  where s.MAINT_TYPE1<>'删除'
+  and s.claim='1' 
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,primary_classification,bn)t2
+  on t1.asc_code=t2.asc_code and t1.mon=t2.mon and t1.primary_classification=t2.primary_classification and t1.bn=t2.bn;
+  
+  
+----kpi_0.6(售后配件总产值_二级_车龄)  
+  insert overwrite table  kpi_b_agetype_2200621 
+   select----'0.6' as kpi,
+   t1.primary_classification,t1.second_level_classification,t1.age_type,t1.mon,
+  case when t2.sumclaim is null then t1.sumpart
+  else (t1.sumpart-t2.sumclaim) end as sumpart,t1.asc_code
+  from (select substr(tran_date(t.order_balance_date),1,7) as mon,primary_classification,second_level_classification,age_type,
+  sum(t.sales_amount) as sumpart,t.asc_code from part t
+   join label_order s on s.asc_code=t.asc_code and s.order_number=t.order_number
+  where s.MAINT_TYPE1<>'删除' 
+  and substr(tran_date(t.order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(t.order_balance_date),1,7)<='${end_date}'
+  group by substr(tran_date(t.order_balance_date),1,7),t.asc_code,primary_classification,second_level_classification,age_type)t1
+  left join 
+  (select substr(tran_date(s.order_balance_date),1,7) as mon,primary_classification,second_level_classification,age_type,
+  sum(t.claim_accepted_amount)+sum(t.claim_accepted_amount_tax) as sumclaim,
+  s.asc_code
+   from  label_order s join claim_uniq t 
+   on s.asc_code=t.asc_code and s.claim_order_number=t.claim_order_number
+  where s.MAINT_TYPE1<>'删除'
+  and s.claim='1' 
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,primary_classification,second_level_classification,age_type)t2
+  on t1.asc_code=t2.asc_code and t1.mon=t2.mon and t1.primary_classification=t2.primary_classification and t1.second_level_classification=t2.second_level_classification and t1.age_type=t2.age_type;
+  
+----kpi_0.6(售后配件总产值_二级_保内外)
+  insert overwrite table  kpi_b_bnbw_2200621 
+   select----'0.6' as kpi,
+   t1.primary_classification,t1.second_level_classification,t1.bn,t1.mon,
+  case when t2.sumclaim is null then t1.sumpart
+  else (t1.sumpart-t2.sumclaim) end as sumpart,t1.asc_code
+  from (select substr(tran_date(t.order_balance_date),1,7) as mon,primary_classification,second_level_classification,bn,
+  sum(t.sales_amount) as sumpart,t.asc_code from part t
+   join label_order s on s.asc_code=t.asc_code and s.order_number=t.order_number
+  where s.MAINT_TYPE1<>'删除' 
+  and substr(tran_date(t.order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(t.order_balance_date),1,7)<='${end_date}'
+  group by substr(tran_date(t.order_balance_date),1,7),t.asc_code,primary_classification,second_level_classification,bn)t1
+  left join 
+  (select substr(tran_date(s.order_balance_date),1,7) as mon,primary_classification,second_level_classification,bn,
+  sum(t.claim_accepted_amount)+sum(t.claim_accepted_amount_tax) as sumclaim,
+  s.asc_code
+   from  label_order s join claim_uniq t 
+   on s.asc_code=t.asc_code and s.claim_order_number=t.claim_order_number
+  where s.MAINT_TYPE1<>'删除'
+  and s.claim='1' 
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,primary_classification,second_level_classification,bn)t2
+  on t1.asc_code=t2.asc_code and t1.mon=t2.mon and t1.primary_classification=t2.primary_classification and t1.second_level_classification=t2.second_level_classification and t1.bn=t2.bn;

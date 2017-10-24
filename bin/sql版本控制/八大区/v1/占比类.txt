@@ -1,0 +1,3251 @@
+----kpi_1.14(保养台次占比_total)
+insert overwrite table  kpi_total_tmp_8areas
+select ----'1.14' as kpi,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_total_tmp_8areas 
+where kpi='kpi_1_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_total_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon ;
+
+----kpi_1.14(保养台次占比_一级)
+insert overwrite table  kpi_a_level_tmp_8areas
+select ----'1.14' as kpi,
+ s.primary_classification,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_level_tmp_8areas 
+where kpi='kpi_1_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_level_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification ;
+
+----kpi_1.14(保养台次占比_二级)
+insert overwrite table  kpi_b_level_tmp_8areas
+select ----'1.14' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_level_tmp_8areas 
+where kpi='kpi_1_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_level_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification 
+  and s.second_level_classification=t.second_level_classification;
+
+----kpi_1.14(保养台次占比_车龄)
+insert overwrite table  kpi_agetype_tmp_8areas
+select ----'1.14' as kpi,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_agetype_tmp_8areas 
+where kpi='kpi_1_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_agetype_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.age_type=t.age_type ;
+
+----kpi_1.14(保养台次占比_保内外)
+insert overwrite table  kpi_bnbw_tmp_8areas
+select ----'1.14' as kpi,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_bnbw_tmp_8areas 
+where kpi='kpi_1_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_bnbw_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.bn=t.bn ;
+
+----kpi_1.14(保养台次占比_一级_车龄)
+insert overwrite table  kpi_a_agetype_tmp_8areas
+select ----'1.14' as kpi,
+ s.primary_classification,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_agetype_tmp_8areas 
+where kpi='kpi_1_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_agetype_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification
+  and s.age_type=t.age_type ;
+
+----kpi_1.14(保养台次占比_一级_保内外)
+insert overwrite table  kpi_a_bnbw_tmp_8areas
+select ----'1.14' as kpi,
+ s.primary_classification,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_bnbw_tmp_8areas 
+where kpi='kpi_1_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_bnbw_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification
+  and s.bn=t.bn ;
+
+----kpi_1.14(保养台次占比_二级_车龄)
+insert overwrite table  kpi_b_agetype_tmp_8areas
+select ----'1.14' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_agetype_tmp_8areas 
+where kpi='kpi_1_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_agetype_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification
+  and s.second_level_classification=t.second_level_classification
+  and s.age_type=t.age_type ;
+
+----kpi_1.14(保养台次占比_二级_保内外)
+insert overwrite table  kpi_b_bnbw_tmp_8areas
+select ----'1.14' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_bnbw_tmp_8areas 
+where kpi='kpi_1_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_bnbw_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification
+  and s.second_level_classification=t.second_level_classification
+  and s.bn=t.bn ;
+  
+----kpi_1.21(维修台次占比_total)
+insert overwrite table  kpi_total_tmp_8areas
+select ----'1.21' as kpi,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_total_tmp_8areas 
+where kpi='kpi_1_2'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_total_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon ;
+
+----kpi_1.21(维修台次占比_一级)
+insert overwrite table  kpi_a_level_tmp_8areas
+select ----'1.21' as kpi,
+ s.primary_classification,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_level_tmp_8areas 
+where kpi='kpi_1_2'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_level_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification ;
+
+----kpi_1.21(维修台次占比_二级)
+insert overwrite table  kpi_b_level_tmp_8areas
+select ----'1.21' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_level_tmp_8areas 
+where kpi='kpi_1_2'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_level_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification 
+  and s.second_level_classification=t.second_level_classification;
+
+----kpi_1.21(维修台次占比_车龄)
+insert overwrite table  kpi_agetype_tmp_8areas
+select ----'1.21' as kpi,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_agetype_tmp_8areas 
+where kpi='kpi_1_2'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_agetype_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.age_type=t.age_type ;
+
+----kpi_1.21(维修台次占比_保内外)
+insert overwrite table  kpi_bnbw_tmp_8areas
+select ----'1.21' as kpi,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_bnbw_tmp_8areas 
+where kpi='kpi_1_2'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_bnbw_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.bn=t.bn ;
+
+----kpi_1.21(维修台次占比_一级_车龄)
+insert overwrite table  kpi_a_agetype_tmp_8areas
+select ----'1.21' as kpi,
+ s.primary_classification,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_agetype_tmp_8areas 
+where kpi='kpi_1_2'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_agetype_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification
+  and s.age_type=t.age_type ;
+
+----kpi_1.21(维修台次占比_一级_保内外)
+insert overwrite table  kpi_a_bnbw_tmp_8areas
+select ----'1.21' as kpi,
+ s.primary_classification,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_bnbw_tmp_8areas 
+where kpi='kpi_1_2'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_bnbw_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification
+  and s.bn=t.bn ;
+
+----kpi_1.21(维修台次占比_二级_车龄)
+insert overwrite table  kpi_b_agetype_tmp_8areas
+select ----'1.21' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_agetype_tmp_8areas 
+where kpi='kpi_1_2'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_agetype_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification
+  and s.second_level_classification=t.second_level_classification
+  and s.age_type=t.age_type ;
+
+----kpi_1.21(维修台次占比_二级_保内外)
+insert overwrite table  kpi_b_bnbw_tmp_8areas
+select ----'1.21' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_bnbw_tmp_8areas 
+where kpi='kpi_1_2'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_bnbw_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification
+  and s.second_level_classification=t.second_level_classification
+  and s.bn=t.bn ;  
+
+----kpi_1.36(事故台次占比_total)
+insert overwrite table  kpi_total_tmp_8areas
+select ----'1.36' as kpi,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_total_tmp_8areas 
+where kpi='kpi_1_3'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_total_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon ;
+
+----kpi_1.36(事故台次占比_一级)
+insert overwrite table  kpi_a_level_tmp_8areas
+select ----'1.36' as kpi,
+ s.primary_classification,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_level_tmp_8areas 
+where kpi='kpi_1_3'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_level_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification ;
+
+----kpi_1.36(事故台次占比_二级)
+insert overwrite table  kpi_b_level_tmp_8areas
+select ----'1.36' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_level_tmp_8areas 
+where kpi='kpi_1_3'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_level_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification 
+  and s.second_level_classification=t.second_level_classification;
+
+----kpi_1.36(事故台次占比_车龄)
+insert overwrite table  kpi_agetype_tmp_8areas
+select ----'1.36' as kpi,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_agetype_tmp_8areas 
+where kpi='kpi_1_3'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_agetype_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.age_type=t.age_type ;
+
+----kpi_1.36(事故台次占比_保内外)
+insert overwrite table  kpi_bnbw_tmp_8areas
+select ----'1.36' as kpi,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_bnbw_tmp_8areas 
+where kpi='kpi_1_3'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_bnbw_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.bn=t.bn ;
+
+----kpi_1.36(事故台次占比_一级_车龄)
+insert overwrite table  kpi_a_agetype_tmp_8areas
+select ----'1.36' as kpi,
+ s.primary_classification,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_agetype_tmp_8areas 
+where kpi='kpi_1_3'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_agetype_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification
+  and s.age_type=t.age_type ;
+
+----kpi_1.36(事故台次占比_一级_保内外)
+insert overwrite table  kpi_a_bnbw_tmp_8areas
+select ----'1.36' as kpi,
+ s.primary_classification,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_bnbw_tmp_8areas 
+where kpi='kpi_1_3'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_bnbw_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification
+  and s.bn=t.bn ;
+
+----kpi_1.36(事故台次占比_二级_车龄)
+insert overwrite table  kpi_b_agetype_tmp_8areas
+select ----'1.36' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_agetype_tmp_8areas 
+where kpi='kpi_1_3'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_agetype_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification
+  and s.second_level_classification=t.second_level_classification
+  and s.age_type=t.age_type ;
+
+----kpi_1.36(事故台次占比_二级_保内外)
+insert overwrite table  kpi_b_bnbw_tmp_8areas
+select ----'1.36' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_bnbw_tmp_8areas 
+where kpi='kpi_1_3'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_bnbw_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification
+  and s.second_level_classification=t.second_level_classification
+  and s.bn=t.bn ;
+  
+----kpi_1.41(索赔台次占比_total)
+insert overwrite table  kpi_total_tmp_8areas
+select ----'1.41' as kpi,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_total_tmp_8areas 
+where kpi='kpi_1_4'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_total_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon ;
+
+----kpi_1.41(索赔台次占比_一级)
+insert overwrite table  kpi_a_level_tmp_8areas
+select ----'1.41' as kpi,
+ s.primary_classification,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_level_tmp_8areas 
+where kpi='kpi_1_4'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_level_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification ;
+
+----kpi_1.41(索赔台次占比_二级)
+insert overwrite table  kpi_b_level_tmp_8areas
+select ----'1.41' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_level_tmp_8areas 
+where kpi='kpi_1_4'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_level_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification 
+  and s.second_level_classification=t.second_level_classification;
+
+----kpi_1.41(索赔台次占比_车龄)
+insert overwrite table  kpi_agetype_tmp_8areas
+select ----'1.41' as kpi,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_agetype_tmp_8areas 
+where kpi='kpi_1_4'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_agetype_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.age_type=t.age_type ;
+
+----kpi_1.41(索赔台次占比_保内外)
+insert overwrite table  kpi_bnbw_tmp_8areas
+select ----'1.41' as kpi,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_bnbw_tmp_8areas 
+where kpi='kpi_1_4'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_bnbw_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.bn=t.bn ;
+
+----kpi_1.41(索赔台次占比_一级_车龄)
+insert overwrite table  kpi_a_agetype_tmp_8areas
+select ----'1.41' as kpi,
+ s.primary_classification,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_agetype_tmp_8areas 
+where kpi='kpi_1_4'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_agetype_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification
+  and s.age_type=t.age_type ;
+
+----kpi_1.41(索赔台次占比_一级_保内外)
+insert overwrite table  kpi_a_bnbw_tmp_8areas
+select ----'1.41' as kpi,
+ s.primary_classification,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_a_bnbw_tmp_8areas 
+where kpi='kpi_1_4'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_a_bnbw_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification
+  and s.bn=t.bn ;
+
+----kpi_1.41(索赔台次占比_二级_车龄)
+insert overwrite table  kpi_b_agetype_tmp_8areas
+select ----'1.41' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.age_type,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_agetype_tmp_8areas 
+where kpi='kpi_1_4'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_agetype_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification
+  and s.second_level_classification=t.second_level_classification
+  and s.age_type=t.age_type ;
+
+----kpi_1.41(索赔台次占比_二级_保内外)
+insert overwrite table  kpi_b_bnbw_tmp_8areas
+select ----'1.41' as kpi,
+ s.primary_classification,
+ s.second_level_classification,
+ s.bn,
+ s.mon,
+ s.num as num,t.num as den,
+ s.asc_code
+from (
+select * from kpi_b_bnbw_tmp_8areas 
+where kpi='kpi_1_4'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) s,(
+select * from kpi_b_bnbw_tmp_8areas 
+where kpi='kpi_1'
+  and mon>='${begin_date}'
+  and mon<='${end_date}'
+ ) t 
+where s.asc_code=t.asc_code
+  and s.mon=t.mon 
+  and s.primary_classification=t.primary_classification
+  and s.second_level_classification=t.second_level_classification
+  and s.bn=t.bn ;
+  
+
+----kpi_4(客单价_total)
+insert overwrite table  kpi_total_tmp_8areas
+select substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1<>'删除'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+and s.claim=''
+and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code;
+  
+  
+
+----kpi_4(客单价_一级)
+insert overwrite table  kpi_a_level_tmp_8areas
+select s.primary_classification,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1<>'删除'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+and s.claim=''
+and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.primary_classification;
+  
+  
+----kpi_4(客单价_二级)
+insert overwrite table  kpi_b_level_tmp_8areas
+select s.primary_classification,
+s.second_level_classification,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1<>'删除'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+and s.claim=''
+and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.primary_classification,
+s.second_level_classification;
+  
+  
+
+----kpi_4(客单价_车龄)
+insert overwrite table  kpi_agetype_tmp_8areas
+select s.age_type,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1<>'删除'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+and s.claim=''
+and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type;
+
+
+----kpi_4(客单价_保内外)
+insert overwrite table  kpi_bnbw_tmp_8areas
+select s.bn,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1<>'删除'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+and s.claim=''
+and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn;
+
+
+----kpi_4(客单价_一级_车龄)
+insert overwrite table  kpi_a_agetype_tmp_8areas
+select s.primary_classification,
+s.age_type,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1<>'删除'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+and s.claim=''
+and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type,s.primary_classification;
+
+
+
+----kpi_4(客单价_一级_保内外)
+insert overwrite table  kpi_a_bnbw_tmp_8areas
+select s.primary_classification,
+s.bn,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1<>'删除'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+and s.claim=''
+and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn,s.primary_classification;
+
+----kpi_4(客单价_二级_车龄)
+insert overwrite table  kpi_b_agetype_tmp_8areas
+select s.primary_classification,
+s.second_level_classification,
+s.age_type,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1<>'删除'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+and s.claim=''
+and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type,s.primary_classification,
+s.second_level_classification;
+
+
+----kpi_4(客单价_二级_保内外)
+insert overwrite table  kpi_b_bnbw_tmp_8areas
+select s.primary_classification,
+s.second_level_classification,
+s.bn,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1<>'删除'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+and s.claim=''
+and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn,s.primary_classification,
+s.second_level_classification;
+
+
+
+----kpi_4.1(保养客单价_total)
+insert overwrite table  kpi_total_tmp_8areas
+select substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='保养'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code;
+  
+  
+
+----kpi_4.1(保养客单价_一级)
+insert overwrite table  kpi_a_level_tmp_8areas
+select s.primary_classification,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='保养'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.primary_classification;
+  
+  
+----kpi_4.1(保养客单价_二级)
+insert overwrite table  kpi_b_level_tmp_8areas
+select s.primary_classification,
+s.second_level_classification,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='保养'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.primary_classification,
+s.second_level_classification;
+  
+  
+
+----kpi_4.1(保养客单价_车龄)
+insert overwrite table  kpi_agetype_tmp_8areas
+select s.age_type,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='保养'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type;
+
+
+----kpi_4.1(保养客单价_保内外)
+insert overwrite table  kpi_bnbw_tmp_8areas
+select s.bn,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='保养'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn;
+
+
+----kpi_4.1(保养客单价_一级_车龄)
+insert overwrite table  kpi_a_agetype_tmp_8areas
+select s.primary_classification,
+s.age_type,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='保养'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type,s.primary_classification;
+
+
+
+----kpi_4.1(保养客单价_一级_保内外)
+insert overwrite table  kpi_a_bnbw_tmp_8areas
+select s.primary_classification,
+s.bn,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='保养'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn,s.primary_classification;
+
+----kpi_4.1(保养客单价_二级_车龄)
+insert overwrite table  kpi_b_agetype_tmp_8areas
+select s.primary_classification,
+s.second_level_classification,
+s.age_type,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='保养'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type,s.primary_classification,
+s.second_level_classification;
+
+
+----kpi_4.1(保养客单价_二级_保内外)
+insert overwrite table  kpi_b_bnbw_tmp_8areas
+select s.primary_classification,
+s.second_level_classification,
+s.bn,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='保养'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn,s.primary_classification,
+s.second_level_classification;
+
+
+----kpi_4.2(维修客单价_total)
+insert overwrite table  kpi_total_tmp_8areas
+select substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='维修'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code;
+ 
+
+----kpi_4.2(维修客单价_一级)
+insert overwrite table  kpi_a_level_tmp_8areas
+select s.primary_classification,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='维修'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.primary_classification;
+  
+  
+----kpi_4.2(维修客单价_二级)
+insert overwrite table  kpi_b_level_tmp_8areas
+select s.primary_classification,
+s.second_level_classification,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='维修'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.primary_classification,
+s.second_level_classification;
+  
+  
+
+----kpi_4.2(维修客单价_车龄)
+insert overwrite table  kpi_agetype_tmp_8areas
+select s.age_type,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='维修'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type;
+
+
+----kpi_4.2(维修客单价_保内外)
+insert overwrite table  kpi_bnbw_tmp_8areas
+select s.bn,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='维修'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn;
+
+
+----kpi_4.2(维修客单价_一级_车龄)
+insert overwrite table  kpi_a_agetype_tmp_8areas
+select s.primary_classification,
+s.age_type,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='维修'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type,s.primary_classification;
+
+
+
+----kpi_4.2(维修客单价_一级_保内外)
+insert overwrite table  kpi_a_bnbw_tmp_8areas
+select s.primary_classification,
+s.bn,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='维修'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn,s.primary_classification;
+
+----kpi_4.2(维修客单价_二级_车龄)
+insert overwrite table  kpi_b_agetype_tmp_8areas
+select s.primary_classification,
+s.second_level_classification,
+s.age_type,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='维修'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type,s.primary_classification,
+s.second_level_classification;
+
+
+----kpi_4.2(维修客单价_二级_保内外)
+insert overwrite table  kpi_b_bnbw_tmp_8areas
+select s.primary_classification,
+s.second_level_classification,
+s.bn,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='维修'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn,s.primary_classification,
+s.second_level_classification;
+
+
+----kpi_4.3(事故客单价_total)
+insert overwrite table  kpi_total_tmp_8areas
+select substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code;
+  
+  
+
+----kpi_4.3(事故客单价_一级)
+insert overwrite table  kpi_a_level_tmp_8areas
+select s.primary_classification,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.primary_classification;
+  
+  
+----kpi_4.3(事故客单价_二级)
+insert overwrite table  kpi_b_level_tmp_8areas
+select s.primary_classification,
+s.second_level_classification,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.primary_classification,
+s.second_level_classification;
+  
+  
+
+----kpi_4.3(事故客单价_车龄)
+insert overwrite table  kpi_agetype_tmp_8areas
+select s.age_type,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type;
+
+
+----kpi_4.3(事故客单价_保内外)
+insert overwrite table  kpi_bnbw_tmp_8areas
+select s.bn,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn;
+
+
+----kpi_4.3(事故客单价_一级_车龄)
+insert overwrite table  kpi_a_agetype_tmp_8areas
+select s.primary_classification,
+s.age_type,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type,s.primary_classification;
+
+
+
+----kpi_4.3(事故客单价_一级_保内外)
+insert overwrite table  kpi_a_bnbw_tmp_8areas
+select s.primary_classification,
+s.bn,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn,s.primary_classification;
+
+----kpi_4.3(事故客单价_二级_车龄)
+insert overwrite table  kpi_b_agetype_tmp_8areas
+select s.primary_classification,
+s.second_level_classification,
+s.age_type,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type,s.primary_classification,
+s.second_level_classification;
+
+
+----kpi_4.3(事故客单价_二级_保内外)
+insert overwrite table  kpi_b_bnbw_tmp_8areas
+select s.primary_classification,
+s.second_level_classification,
+s.bn,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(order_balance_amount) as num,count(distinct vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+from ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn,s.primary_classification,
+s.second_level_classification;
+
+
+----kpi_4.31(799元以下事故客单价_total)
+insert overwrite table  kpi_total_tmp_8areas
+select substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date)
+) s where sumamount<800
+group by substr(order_balance_date,1,7),asc_code;
+  
+  
+
+----kpi_4.31(799元以下事故客单价_一级)
+insert overwrite table  kpi_a_level_tmp_8areas
+select primary_classification,substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,primary_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),primary_classification
+) s where sumamount<800
+group by substr(order_balance_date,1,7),asc_code,primary_classification;
+  
+  
+----kpi_4.31(799元以下事故客单价_二级)
+insert overwrite table  kpi_b_level_tmp_8areas
+select primary_classification,
+second_level_classification,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,primary_classification,second_level_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),primary_classification,
+second_level_classification
+) s where sumamount<800
+group by substr(order_balance_date,1,7),asc_code,primary_classification,
+second_level_classification;
+  
+  
+
+----kpi_4.31(799元以下事故客单价_车龄)
+insert overwrite table  kpi_agetype_tmp_8areas
+select age_type,substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,age_type,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),age_type
+) s where sumamount<800
+group by substr(order_balance_date,1,7),asc_code,age_type;
+
+
+----kpi_4.31(799元以下事故客单价_保内外)
+insert overwrite table  kpi_bnbw_tmp_8areas
+select bn,substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,bn,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),bn
+) s where sumamount<800
+group by substr(order_balance_date,1,7),asc_code,bn;
+
+
+----kpi_4.31(799元以下事故客单价_一级_车龄)
+insert overwrite table  kpi_a_agetype_tmp_8areas
+select primary_classification,
+age_type,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,age_type,primary_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),age_type,primary_classification
+) s where sumamount<800
+group by substr(order_balance_date,1,7),asc_code,age_type,primary_classification;
+
+
+
+----kpi_4.31(799元以下事故客单价_一级_保内外)
+insert overwrite table  kpi_a_bnbw_tmp_8areas
+select primary_classification,
+bn,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,bn,primary_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),bn,primary_classification
+) s where sumamount<800
+group by substr(order_balance_date,1,7),asc_code,bn,primary_classification;
+
+----kpi_4.31(799元以下事故客单价_二级_车龄)
+insert overwrite table  kpi_b_agetype_tmp_8areas
+select primary_classification,
+second_level_classification,
+age_type,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,age_type,primary_classification,
+second_level_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),age_type,
+primary_classification,second_level_classification
+) s where sumamount<800
+group by substr(order_balance_date,1,7),asc_code,age_type,
+primary_classification,second_level_classification;
+
+
+----kpi_4.31(799元以下事故客单价_二级_保内外)
+insert overwrite table  kpi_b_bnbw_tmp_8areas
+select primary_classification,
+second_level_classification,
+bn,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,bn,primary_classification,
+second_level_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),bn,
+primary_classification,second_level_classification
+) s where sumamount<800
+group by substr(order_balance_date,1,7),asc_code,bn,
+primary_classification,second_level_classification;
+
+
+
+----kpi_4.32(800-1999元事故客单价_total)
+insert overwrite table  kpi_total_tmp_8areas
+select substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date)
+) s where sumamount>=800 and sumamount<2000
+group by substr(order_balance_date,1,7),asc_code;
+  
+  
+
+----kpi_4.32(800-1999元事故客单价_一级)
+insert overwrite table  kpi_a_level_tmp_8areas
+select primary_classification,substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,primary_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),primary_classification
+) s where sumamount>=800 and sumamount<2000
+group by substr(order_balance_date,1,7),asc_code,primary_classification;
+  
+  
+----kpi_4.32(800-1999元事故客单价_二级)
+insert overwrite table  kpi_b_level_tmp_8areas
+select primary_classification,
+second_level_classification,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,primary_classification,second_level_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),primary_classification,
+second_level_classification
+) s where sumamount>=800 and sumamount<2000
+group by substr(order_balance_date,1,7),asc_code,primary_classification,
+second_level_classification;
+  
+  
+
+----kpi_4.32(800-1999元事故客单价_车龄)
+insert overwrite table  kpi_agetype_tmp_8areas
+select age_type,substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,age_type,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),age_type
+) s where sumamount>=800 and sumamount<2000
+group by substr(order_balance_date,1,7),asc_code,age_type;
+
+
+----kpi_4.32(800-1999元事故客单价_保内外)
+insert overwrite table  kpi_bnbw_tmp_8areas
+select bn,substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,bn,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),bn
+) s where sumamount>=800 and sumamount<2000
+group by substr(order_balance_date,1,7),asc_code,bn;
+
+
+----kpi_4.32(800-1999元事故客单价_一级_车龄)
+insert overwrite table  kpi_a_agetype_tmp_8areas
+select primary_classification,
+age_type,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,age_type,primary_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),age_type,primary_classification
+) s where sumamount>=800 and sumamount<2000
+group by substr(order_balance_date,1,7),asc_code,age_type,primary_classification;
+
+
+
+----kpi_4.32(800-1999元事故客单价_一级_保内外)
+insert overwrite table  kpi_a_bnbw_tmp_8areas
+select primary_classification,
+bn,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,bn,primary_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),bn,primary_classification
+) s where sumamount>=800 and sumamount<2000
+group by substr(order_balance_date,1,7),asc_code,bn,primary_classification;
+
+----kpi_4.32(800-1999元事故客单价_二级_车龄)
+insert overwrite table  kpi_b_agetype_tmp_8areas
+select primary_classification,
+second_level_classification,
+age_type,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,age_type,primary_classification,
+second_level_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),age_type,
+primary_classification,second_level_classification
+) s where sumamount>=800 and sumamount<2000
+group by substr(order_balance_date,1,7),asc_code,age_type,
+primary_classification,second_level_classification;
+
+
+----kpi_4.32(800-1999元事故客单价_二级_保内外)
+insert overwrite table  kpi_b_bnbw_tmp_8areas
+select primary_classification,
+second_level_classification,
+bn,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,bn,primary_classification,
+second_level_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),bn,
+primary_classification,second_level_classification
+) s where sumamount>=800 and sumamount<2000
+group by substr(order_balance_date,1,7),asc_code,bn,
+primary_classification,second_level_classification;
+
+
+----kpi_4.33(2000-4999元事故客单价_total)
+insert overwrite table  kpi_total_tmp_8areas
+select substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date)
+) s where sumamount>=2000 and sumamount<5000
+group by substr(order_balance_date,1,7),asc_code;
+  
+  
+
+----kpi_4.33(2000-4999元事故客单价_一级)
+insert overwrite table  kpi_a_level_tmp_8areas
+select primary_classification,substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,primary_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),primary_classification
+) s where sumamount>=2000 and sumamount<5000
+group by substr(order_balance_date,1,7),asc_code,primary_classification;
+  
+  
+----kpi_4.33(2000-4999元事故客单价_二级)
+insert overwrite table  kpi_b_level_tmp_8areas
+select primary_classification,
+second_level_classification,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,primary_classification,second_level_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),primary_classification,
+second_level_classification
+) s where sumamount>=2000 and sumamount<5000
+group by substr(order_balance_date,1,7),asc_code,primary_classification,
+second_level_classification;
+  
+  
+
+----kpi_4.33(2000-4999元事故客单价_车龄)
+insert overwrite table  kpi_agetype_tmp_8areas
+select age_type,substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,age_type,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),age_type
+) s where sumamount>=2000 and sumamount<5000
+group by substr(order_balance_date,1,7),asc_code,age_type;
+
+
+----kpi_4.33(2000-4999元事故客单价_保内外)
+insert overwrite table  kpi_bnbw_tmp_8areas
+select bn,substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,bn,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),bn
+) s where sumamount>=2000 and sumamount<5000
+group by substr(order_balance_date,1,7),asc_code,bn;
+
+
+----kpi_4.33(2000-4999元事故客单价_一级_车龄)
+insert overwrite table  kpi_a_agetype_tmp_8areas
+select primary_classification,
+age_type,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,age_type,primary_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),age_type,primary_classification
+) s where sumamount>=2000 and sumamount<5000
+group by substr(order_balance_date,1,7),asc_code,age_type,primary_classification;
+
+
+
+----kpi_4.33(2000-4999元事故客单价_一级_保内外)
+insert overwrite table  kpi_a_bnbw_tmp_8areas
+select primary_classification,
+bn,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,bn,primary_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),bn,primary_classification
+) s where sumamount>=2000 and sumamount<5000
+group by substr(order_balance_date,1,7),asc_code,bn,primary_classification;
+
+----kpi_4.33(2000-4999元事故客单价_二级_车龄)
+insert overwrite table  kpi_b_agetype_tmp_8areas
+select primary_classification,
+second_level_classification,
+age_type,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,age_type,primary_classification,
+second_level_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),age_type,
+primary_classification,second_level_classification
+) s where sumamount>=2000 and sumamount<5000
+group by substr(order_balance_date,1,7),asc_code,age_type,
+primary_classification,second_level_classification;
+
+
+----kpi_4.33(2000-4999元事故客单价_二级_保内外)
+insert overwrite table  kpi_b_bnbw_tmp_8areas
+select primary_classification,
+second_level_classification,
+bn,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,bn,primary_classification,
+second_level_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),bn,
+primary_classification,second_level_classification
+) s where sumamount>=2000 and sumamount<5000
+group by substr(order_balance_date,1,7),asc_code,bn,
+primary_classification,second_level_classification;  
+
+
+----kpi_4.34(5000-9999元事故客单价_total)
+insert overwrite table  kpi_total_tmp_8areas
+select substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date)
+) s where sumamount>=5000 and sumamount<10000
+group by substr(order_balance_date,1,7),asc_code;
+  
+  
+
+----kpi_4.34(5000-9999元事故客单价_一级)
+insert overwrite table  kpi_a_level_tmp_8areas
+select primary_classification,substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,primary_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),primary_classification
+) s where sumamount>=5000 and sumamount<10000
+group by substr(order_balance_date,1,7),asc_code,primary_classification;
+  
+  
+----kpi_4.34(5000-9999元事故客单价_二级)
+insert overwrite table  kpi_b_level_tmp_8areas
+select primary_classification,
+second_level_classification,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,primary_classification,second_level_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),primary_classification,
+second_level_classification
+) s where sumamount>=5000 and sumamount<10000
+group by substr(order_balance_date,1,7),asc_code,primary_classification,
+second_level_classification;
+  
+  
+
+----kpi_4.34(5000-9999元事故客单价_车龄)
+insert overwrite table  kpi_agetype_tmp_8areas
+select age_type,substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,age_type,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),age_type
+) s where sumamount>=5000 and sumamount<10000
+group by substr(order_balance_date,1,7),asc_code,age_type;
+
+
+----kpi_4.34(5000-9999元事故客单价_保内外)
+insert overwrite table  kpi_bnbw_tmp_8areas
+select bn,substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,bn,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),bn
+) s where sumamount>=5000 and sumamount<10000
+group by substr(order_balance_date,1,7),asc_code,bn;
+
+
+----kpi_4.34(5000-9999元事故客单价_一级_车龄)
+insert overwrite table  kpi_a_agetype_tmp_8areas
+select primary_classification,
+age_type,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,age_type,primary_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),age_type,primary_classification
+) s where sumamount>=5000 and sumamount<10000
+group by substr(order_balance_date,1,7),asc_code,age_type,primary_classification;
+
+
+
+----kpi_4.34(5000-9999元事故客单价_一级_保内外)
+insert overwrite table  kpi_a_bnbw_tmp_8areas
+select primary_classification,
+bn,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,bn,primary_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),bn,primary_classification
+) s where sumamount>=5000 and sumamount<10000
+group by substr(order_balance_date,1,7),asc_code,bn,primary_classification;
+
+----kpi_4.34(5000-9999元事故客单价_二级_车龄)
+insert overwrite table  kpi_b_agetype_tmp_8areas
+select primary_classification,
+second_level_classification,
+age_type,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,age_type,primary_classification,
+second_level_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),age_type,
+primary_classification,second_level_classification
+) s where sumamount>=5000 and sumamount<10000
+group by substr(order_balance_date,1,7),asc_code,age_type,
+primary_classification,second_level_classification;
+
+
+----kpi_4.34(5000-9999元事故客单价_二级_保内外)
+insert overwrite table  kpi_b_bnbw_tmp_8areas
+select primary_classification,
+second_level_classification,
+bn,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,bn,primary_classification,
+second_level_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),bn,
+primary_classification,second_level_classification
+) s where sumamount>=5000 and sumamount<10000
+group by substr(order_balance_date,1,7),asc_code,bn,
+primary_classification,second_level_classification;
+
+
+----kpi_4.35(10000元以上事故客单价_total)
+insert overwrite table  kpi_total_tmp_8areas
+select substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date)
+) s where sumamount>=10000
+group by substr(order_balance_date,1,7),asc_code;
+  
+  
+
+----kpi_4.35(10000元以上事故客单价_一级)
+insert overwrite table  kpi_a_level_tmp_8areas
+select primary_classification,substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,primary_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),primary_classification
+) s where sumamount>=10000
+group by substr(order_balance_date,1,7),asc_code,primary_classification;
+  
+  
+----kpi_4.35(10000元以上事故客单价_二级)
+insert overwrite table  kpi_b_level_tmp_8areas
+select primary_classification,
+second_level_classification,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,primary_classification,second_level_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),primary_classification,
+second_level_classification
+) s where sumamount>=10000
+group by substr(order_balance_date,1,7),asc_code,primary_classification,
+second_level_classification;
+  
+  
+
+----kpi_4.35(10000元以上事故客单价_车龄)
+insert overwrite table  kpi_agetype_tmp_8areas
+select age_type,substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,age_type,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),age_type
+) s where sumamount>=10000
+group by substr(order_balance_date,1,7),asc_code,age_type;
+
+
+----kpi_4.35(10000元以上事故客单价_保内外)
+insert overwrite table  kpi_bnbw_tmp_8areas
+select bn,substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,bn,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),bn
+) s where sumamount>=10000
+group by substr(order_balance_date,1,7),asc_code,bn;
+
+
+----kpi_4.35(10000元以上事故客单价_一级_车龄)
+insert overwrite table  kpi_a_agetype_tmp_8areas
+select primary_classification,
+age_type,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,age_type,primary_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),age_type,primary_classification
+) s where sumamount>=10000
+group by substr(order_balance_date,1,7),asc_code,age_type,primary_classification;
+
+
+
+----kpi_4.35(10000元以上事故客单价_一级_保内外)
+insert overwrite table  kpi_a_bnbw_tmp_8areas
+select primary_classification,
+bn,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,bn,primary_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),bn,primary_classification
+) s where sumamount>=10000
+group by substr(order_balance_date,1,7),asc_code,bn,primary_classification;
+
+----kpi_4.35(10000元以上事故客单价_二级_车龄)
+insert overwrite table  kpi_b_agetype_tmp_8areas
+select primary_classification,
+second_level_classification,
+age_type,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,age_type,primary_classification,
+second_level_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),age_type,
+primary_classification,second_level_classification
+) s where sumamount>=10000
+group by substr(order_balance_date,1,7),asc_code,age_type,
+primary_classification,second_level_classification;
+
+
+----kpi_4.35(10000元以上事故客单价_二级_保内外)
+insert overwrite table  kpi_b_bnbw_tmp_8areas
+select primary_classification,
+second_level_classification,
+bn,
+substr(order_balance_date,1,7) as mon,
+sum(sumamount) as num,count(distinct vin,order_balance_date) as den,
+asc_code
+from (
+select s.asc_code,bn,primary_classification,
+second_level_classification,
+s.vin,
+tran_date(order_balance_date) as order_balance_date,
+sum(order_balance_amount) as sumamount 
+from 
+ori.label_order s
+where s.MAINT_TYPE1='事故'
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by s.asc_code,s.vin,tran_date(order_balance_date),bn,
+primary_classification,second_level_classification
+) s where sumamount>=10000
+group by substr(order_balance_date,1,7),asc_code,bn,
+primary_classification,second_level_classification;
+
+
+
+----kpi_4.4(索赔客单价_total)
+insert overwrite table  kpi_total_tmp_8areas
+select substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(t.claim_accepted_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+ from  ori.label_order s,ori.claim_uniq t 
+where s.MAINT_TYPE1<>'删除'
+and s.asc_code=t.asc_code
+and s.claim_order_number=t.claim_order_number
+and s.claim='1' and t.claim_result in('审核同意','33')
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code;
+  
+  
+
+----kpi_4.4(索赔客单价_一级)
+insert overwrite table  kpi_a_level_tmp_8areas
+select s.primary_classification,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(t.claim_accepted_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+ from  ori.label_order s,ori.claim_uniq t 
+where s.MAINT_TYPE1<>'删除'
+and s.asc_code=t.asc_code
+and s.claim_order_number=t.claim_order_number
+and s.claim='1' and t.claim_result in('审核同意','33')
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.primary_classification;
+  
+  
+----kpi_4.4(索赔客单价_二级)
+insert overwrite table  kpi_b_level_tmp_8areas
+select s.primary_classification,
+s.second_level_classification,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(t.claim_accepted_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+ from  ori.label_order s,ori.claim_uniq t 
+where s.MAINT_TYPE1<>'删除'
+and s.asc_code=t.asc_code
+and s.claim_order_number=t.claim_order_number
+and s.claim='1' and t.claim_result in('审核同意','33')
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.primary_classification,s.second_level_classification;
+  
+  
+
+----kpi_4.4(索赔客单价_车龄)
+insert overwrite table  kpi_agetype_tmp_8areas
+select s.age_type,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(t.claim_accepted_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+ from  ori.label_order s,ori.claim_uniq t 
+where s.MAINT_TYPE1<>'删除'
+and s.asc_code=t.asc_code
+and s.claim_order_number=t.claim_order_number
+and s.claim='1' and t.claim_result in('审核同意','33')
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type;
+
+
+----kpi_4.4(索赔客单价_保内外)
+insert overwrite table  kpi_bnbw_tmp_8areas
+select s.bn,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(t.claim_accepted_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+ from  ori.label_order s,ori.claim_uniq t 
+where s.MAINT_TYPE1<>'删除'
+and s.asc_code=t.asc_code
+and s.claim_order_number=t.claim_order_number
+and s.claim='1' and t.claim_result in('审核同意','33')
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn;
+
+
+----kpi_4.4(索赔客单价_一级_车龄)
+insert overwrite table  kpi_a_agetype_tmp_8areas
+select s.primary_classification,
+s.age_type,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(t.claim_accepted_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+ from  ori.label_order s,ori.claim_uniq t 
+where s.MAINT_TYPE1<>'删除'
+and s.asc_code=t.asc_code
+and s.claim_order_number=t.claim_order_number
+and s.claim='1' and t.claim_result in('审核同意','33')
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type,s.primary_classification;
+
+
+
+----kpi_4.4(索赔客单价_一级_保内外)
+insert overwrite table  kpi_a_bnbw_tmp_8areas
+select s.primary_classification,
+s.bn,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(t.claim_accepted_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+ from  ori.label_order s,ori.claim_uniq t 
+where s.MAINT_TYPE1<>'删除'
+and s.asc_code=t.asc_code
+and s.claim_order_number=t.claim_order_number
+and s.claim='1' and t.claim_result in('审核同意','33')
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn,s.primary_classification;
+
+----kpi_4.4(索赔客单价_二级_车龄)
+insert overwrite table  kpi_b_agetype_tmp_8areas
+select s.primary_classification,
+s.second_level_classification,
+s.age_type,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(t.claim_accepted_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+ from  ori.label_order s,ori.claim_uniq t 
+where s.MAINT_TYPE1<>'删除'
+and s.asc_code=t.asc_code
+and s.claim_order_number=t.claim_order_number
+and s.claim='1' and t.claim_result in('审核同意','33')
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type,s.primary_classification,
+s.second_level_classification;
+
+
+----kpi_4.4(索赔客单价_二级_保内外)
+insert overwrite table  kpi_b_bnbw_tmp_8areas
+select s.primary_classification,
+s.second_level_classification,
+s.bn,
+substr(tran_date(s.order_balance_date),1,7) as mon,
+sum(t.claim_accepted_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+s.asc_code
+ from  ori.label_order s,ori.claim_uniq t 
+where s.MAINT_TYPE1<>'删除'
+and s.asc_code=t.asc_code
+and s.claim_order_number=t.claim_order_number
+and s.claim='1' and t.claim_result in('审核同意','33')
+and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn,s.primary_classification,
+s.second_level_classification;
+
+----kpi_4.11(平价机油_total)
+insert overwrite table  kpi_total_tmp_8areas 
+  select substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='低端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code; 
+  
+
+
+----kpi_4.11(平价机油_一级)
+insert overwrite table  kpi_a_level_tmp_8areas 
+  select s.primary_classification,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='低端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.primary_classification; 
+  
+
+
+----kpi_4.11(平价机油_二级)
+insert overwrite table  kpi_b_level_tmp_8areas 
+  select s.primary_classification,
+  s.second_level_classification,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='低端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.primary_classification,
+  s.second_level_classification; 
+  
+
+
+----kpi_4.11(平价机油_车龄)
+insert overwrite table  kpi_agetype_tmp_8areas 
+  select s.age_type,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='低端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type; 
+  
+
+
+----kpi_4.11(平价机油_保内外)
+insert overwrite table  kpi_bnbw_tmp_8areas 
+  select s.bn,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='低端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn; 
+  
+
+
+----kpi_4.11(平价机油_一级_车龄)
+insert overwrite table  kpi_a_agetype_tmp_8areas 
+  select s.primary_classification,
+  s.age_type,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='低端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type,s.primary_classification; 
+  
+
+
+----kpi_4.11(平价机油_一级_保内外)
+insert overwrite table  kpi_a_bnbw_tmp_8areas 
+  select s.primary_classification,
+  s.bn,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='低端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn,s.primary_classification; 
+  
+
+
+----kpi_4.11(平价机油_二级_车龄)
+insert overwrite table  kpi_b_agetype_tmp_8areas 
+  select s.primary_classification,
+  s.second_level_classification,
+  s.age_type,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='低端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type,s.primary_classification,
+  s.second_level_classification; 
+  
+
+
+----kpi_4.11(平价机油_二级_保内外)
+insert overwrite table  kpi_b_bnbw_tmp_8areas 
+  select s.primary_classification,
+  s.second_level_classification,
+  s.bn,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='低端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn,s.primary_classification,
+  s.second_level_classification; 
+  
+
+
+----kpi_4.12(中端机油_total)
+insert overwrite table  kpi_total_tmp_8areas 
+  select substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='中端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code; 
+  
+
+
+----kpi_4.12(中端机油_一级)
+insert overwrite table  kpi_a_level_tmp_8areas 
+  select s.primary_classification,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='中端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.primary_classification; 
+  
+
+
+----kpi_4.12(中端机油_二级)
+insert overwrite table  kpi_b_level_tmp_8areas 
+  select s.primary_classification,
+  s.second_level_classification,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='中端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.primary_classification,
+  s.second_level_classification; 
+  
+
+
+----kpi_4.12(中端机油_车龄)
+insert overwrite table  kpi_agetype_tmp_8areas 
+  select s.age_type,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='中端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type; 
+  
+
+
+----kpi_4.12(中端机油_保内外)
+insert overwrite table  kpi_bnbw_tmp_8areas 
+  select s.bn,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='中端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn; 
+  
+
+
+----kpi_4.12(中端机油_一级_车龄)
+insert overwrite table  kpi_a_agetype_tmp_8areas 
+  select s.primary_classification,
+  s.age_type,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='中端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type,s.primary_classification; 
+  
+
+
+----kpi_4.12(中端机油_一级_保内外)
+insert overwrite table  kpi_a_bnbw_tmp_8areas 
+  select s.primary_classification,
+  s.bn,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='中端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn,s.primary_classification; 
+  
+
+
+----kpi_4.12(中端机油_二级_车龄)
+insert overwrite table  kpi_b_agetype_tmp_8areas 
+  select s.primary_classification,
+  s.second_level_classification,
+  s.age_type,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='中端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type,s.primary_classification,
+  s.second_level_classification; 
+  
+
+
+----kpi_4.12(中端机油_二级_保内外)
+ insert overwrite table  kpi_b_bnbw_tmp_8areas 
+  select s.primary_classification,
+  s.second_level_classification,
+  s.bn,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='中端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn,s.primary_classification,
+  s.second_level_classification; 
+  
+
+
+----kpi_4.13(高端机油_total)
+insert overwrite table  kpi_total_tmp_8areas 
+  select substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='高端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code; 
+  
+
+
+----kpi_4.13(高端机油_一级)
+insert overwrite table  kpi_a_level_tmp_8areas 
+  select s.primary_classification,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='高端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.primary_classification; 
+  
+
+
+----kpi_4.13(高端机油_二级)
+insert overwrite table  kpi_b_level_tmp_8areas 
+  select s.primary_classification,
+  s.second_level_classification,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='高端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.primary_classification,
+  s.second_level_classification; 
+  
+
+
+----kpi_4.13(高端机油_车龄)
+insert overwrite table  kpi_agetype_tmp_8areas 
+  select s.age_type,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='高端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type; 
+  
+
+
+----kpi_4.13(高端机油_保内外)
+insert overwrite table  kpi_bnbw_tmp_8areas 
+  select s.bn,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='高端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn; 
+  
+
+
+----kpi_4.13(高端机油_一级_车龄)
+insert overwrite table  kpi_a_agetype_tmp_8areas 
+  select s.primary_classification,
+  s.age_type,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='高端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type,s.primary_classification; 
+  
+
+
+----kpi_4.13(高端机油_一级_保内外)
+insert overwrite table  kpi_a_bnbw_tmp_8areas 
+  select s.primary_classification,
+  s.bn,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='高端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn,s.primary_classification; 
+  
+
+
+----kpi_4.13(高端机油_二级_车龄)
+insert overwrite table  kpi_b_agetype_tmp_8areas 
+  select s.primary_classification,
+  s.second_level_classification,
+  s.age_type,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='高端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.age_type,s.primary_classification,
+  s.second_level_classification; 
+  
+
+
+----kpi_4.13(高端机油_二级_保内外)
+insert overwrite table  kpi_b_bnbw_tmp_8areas 
+  select s.primary_classification,
+  s.second_level_classification,
+  s.bn,
+  substr(tran_date(s.order_balance_date),1,7) as mon,
+  sum(order_balance_amount) as num,count(distinct s.vin,tran_date(s.order_balance_date)) as den,
+  s.asc_code
+  from ori.label_order s join 
+  (
+  select distinct t1.asc_code,t1.order_number,m.month from ori.part t1
+  join (select * from ori.engine_oil where  type='高端') p
+  join (select month,version from ori.mapping where fact_table='label_order' and dim_table='engine_oil') m
+  on t1.part_number=p.part_num
+  and p.version=m.version
+  ) t
+  on s.asc_code=t.asc_code
+  and s.order_number=t.order_number
+  and substr(tran_date(s.order_balance_date),1,7)=t.month
+  where s.MAINT_TYPE1='保养'
+  and substr(tran_date(order_balance_date),1,7)>='${begin_date}'
+  and substr(tran_date(order_balance_date),1,7)<='${end_date}'
+  and (s.first_maintnance='' or (s.first_maintnance='1' and s.order_balance_amount<>0))
+  group by substr(tran_date(s.order_balance_date),1,7),s.asc_code,s.bn,s.primary_classification,
+  s.second_level_classification; 
+
+ 
+
+
+  
+
+

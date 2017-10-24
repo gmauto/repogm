@@ -1,0 +1,170 @@
+
+----kpi_zb()
+insert overwrite table  kpi_total_8areas
+partition(region,mon_p,kpi)
+select mm.time,sum(num)*1.0/sum(den), am.group_name,mm.version,mon_p,kpi
+from kpi_total_tmp_8areas s join ${pub_db}.asc_mapping am join ${pub_db}.mon_mapping mm 
+on s.asc_code=am.asc_code and s.mon=mm.mon 
+where am.version='8areas' and mm.version='everymonth' 
+group by kpi,mm.time,am.group_name,mon_p ,mm.version;
+
+----kpi_zb()
+insert overwrite table  kpi_a_level_8areas
+partition(region,mon_p,kpi)
+select primary_classification,mm.time,sum(num)*1.0/sum(den), am.group_name ,mm.version,mon_p,kpi
+from kpi_a_level_tmp_8areas s join ${pub_db}.asc_mapping am join ${pub_db}.mon_mapping mm
+on s.asc_code=am.asc_code and s.mon=mm.mon 
+where am.version='8areas' and mm.version='everymonth' 
+group by kpi,primary_classification,mm.time,am.group_name,mm.version,mon_p;
+
+----kpi_zb()
+insert overwrite table  kpi_b_level_8areas
+partition(region,mon_p,kpi)
+select primary_classification,second_level_classification,mm.time,sum(num)*1.0/sum(den), am.group_name ,mm.version,mon_p,kpi
+from kpi_b_level_tmp_8areas s join ${pub_db}.asc_mapping am join ${pub_db}.mon_mapping mm
+on s.asc_code=am.asc_code and s.mon=mm.mon 
+where am.version='8areas' and mm.version='everymonth' 
+group by kpi,primary_classification,second_level_classification,mm.time,am.group_name,mm.version,mon_p;
+
+----kpi_zb()
+insert overwrite table  kpi_agetype_8areas
+partition(region,mon_p,kpi)
+select age_type,mm.time,sum(num)*1.0/sum(den), am.group_name,mm.version,mon_p,kpi 
+from kpi_agetype_tmp_8areas s join ${pub_db}.asc_mapping am join ${pub_db}.mon_mapping mm
+on s.asc_code=am.asc_code and s.mon=mm.mon 
+where am.version='8areas' and mm.version='everymonth' 
+group by kpi,age_type,mm.time,am.group_name,mon_p,mm.version;
+
+----kpi_zb()
+insert overwrite table  kpi_bnbw_8areas
+partition(region,mon_p,kpi)
+select bn,mm.time,sum(num)*1.0/sum(den), am.group_name,mm.version,mon_p,kpi
+from kpi_bnbw_tmp_8areas s join ${pub_db}.asc_mapping am join ${pub_db}.mon_mapping mm
+on s.asc_code=am.asc_code and s.mon=mm.mon 
+where am.version='8areas' and mm.version='everymonth' 
+group by kpi,bn,mm.time,am.group_name,mm.version,mon_p;
+
+----kpi_zb()
+insert overwrite table  kpi_a_agetype_8areas
+partition(region,mon_p,kpi)
+select primary_classification,age_type,mm.time,sum(num)*1.0/sum(den), am.group_name,mm.version,mon_p,kpi 
+from kpi_a_agetype_tmp_8areas s join ${pub_db}.asc_mapping am join ${pub_db}.mon_mapping mm
+on s.asc_code=am.asc_code and s.mon=mm.mon 
+where am.version='8areas' and mm.version='everymonth' 
+group by kpi,primary_classification,age_type,mm.time,am.group_name,mm.version,mon_p;
+
+----kpi_zb()
+insert overwrite table  kpi_a_bnbw_8areas
+ partition(region,mon_p,kpi)
+select primary_classification,bn,mm.time,sum(num)*1.0/sum(den), am.group_name,mm.version,mon_p,kpi 
+from kpi_a_bnbw_tmp_8areas s join ${pub_db}.asc_mapping am join ${pub_db}.mon_mapping mm
+on s.asc_code=am.asc_code and s.mon=mm.mon 
+where am.version='8areas' and mm.version='everymonth' 
+group by kpi,primary_classification,bn,mm.time,am.group_name,mm.version,mon_p;
+
+----kpi_zb()
+insert overwrite table  kpi_b_agetype_8areas
+partition(region,mon_p,kpi)
+select primary_classification,second_level_classification,age_type,mm.time,sum(num)*1.0/sum(den), am.group_name ,mm.version,mon_p,kpi
+from kpi_b_agetype_tmp_8areas s join ${pub_db}.asc_mapping am join ${pub_db}.mon_mapping mm
+on s.asc_code=am.asc_code and s.mon=mm.mon 
+where am.version='8areas' and mm.version='everymonth' 
+group by kpi,primary_classification,second_level_classification,age_type,mm.time,am.group_name,mm.version,mon_p;
+
+----kpi_zb()
+insert overwrite table  kpi_b_bnbw_8areas
+partition(region,mon_p,kpi)
+select primary_classification,second_level_classification,bn,mm.time,sum(num)*1.0/sum(den), am.group_name ,mm.version,mon_p,kpi
+from kpi_b_bnbw_tmp_8areas s join ${pub_db}.asc_mapping am join ${pub_db}.mon_mapping mm
+on s.asc_code=am.asc_code and s.mon=mm.mon 
+where am.version='8areas' and mm.version='everymonth' 
+group by kpi,primary_classification,second_level_classification,bn,mm.time,am.group_name,mm.version,mon_p;
+
+
+
+----kpi_xj()
+insert overwrite table  kpi_total_8areas
+partition(region,mon_p,kpi)
+select mm.time,sum(num)*1.0/avg(den), am.group_name,mm.version,mon_p,kpi
+from kpi_total_tmp_8areas_k1 s join ${pub_db}.asc_mapping am join ${pub_db}.mon_mapping mm
+on s.asc_code=am.asc_code and s.mon=mm.mon 
+where am.version='8areas' and mm.version='everymonth' 
+group by kpi,mm.time,am.group_name,mm.version,mon_p;
+
+----kpi_xj()
+insert overwrite table  kpi_a_level_8areas
+partition(region,mon_p,kpi)
+select primary_classification,mm.time,sum(num)*1.0/avg(den), am.group_name ,mm.version,mon_p,kpi
+from kpi_a_level_tmp_8areas_k1 s join ${pub_db}.asc_mapping am join ${pub_db}.mon_mapping mm
+on s.asc_code=am.asc_code and s.mon=mm.mon 
+where am.version='8areas' and mm.version='everymonth' 
+group by kpi,primary_classification,mm.time,am.group_name,mm.version,mon_p;
+
+----kpi_xj()
+insert overwrite table  kpi_b_level_8areas
+partition(region,mon_p,kpi)
+select primary_classification,second_level_classification,mm.time,sum(num)*1.0/avg(den), am.group_name ,mm.version,mon_p,kpi
+from kpi_b_level_tmp_8areas_k1 s join ${pub_db}.asc_mapping am join ${pub_db}.mon_mapping mm
+on s.asc_code=am.asc_code and s.mon=mm.mon 
+where am.version='8areas' and mm.version='everymonth' 
+group by kpi,primary_classification,second_level_classification,mm.time,am.group_name,mm.version,mon_p;
+
+----kpi_xj()
+insert overwrite table  kpi_agetype_8areas
+partition(region,mon_p,kpi)
+select age_type,mm.time,sum(num)*1.0/avg(den), am.group_name,mm.version,mon_p,kpi 
+from kpi_agetype_tmp_8areas_k1 s join ${pub_db}.asc_mapping am join ${pub_db}.mon_mapping mm
+on s.asc_code=am.asc_code and s.mon=mm.mon 
+where am.version='8areas' and mm.version='everymonth' 
+group by kpi,age_type,mm.time,am.group_name,mm.version,mon_p;
+
+----kpi_xj()
+insert overwrite table  kpi_bnbw_8areas
+partition(region,mon_p,kpi)
+select bn,mm.time,sum(num)*1.0/avg(den), am.group_name,mm.version,mon_p,kpi 
+from kpi_bnbw_tmp_8areas_k1 s join ${pub_db}.asc_mapping am join ${pub_db}.mon_mapping mm
+on s.asc_code=am.asc_code and s.mon=mm.mon 
+where am.version='8areas' and mm.version='everymonth' 
+group by kpi,bn,mm.time,am.group_name,mm.version,mon_p;
+
+----kpi_xj()
+insert overwrite table  kpi_a_agetype_8areas
+partition(region,mon_p,kpi)
+select primary_classification,age_type,mm.time,sum(num)*1.0/avg(den), am.group_name,mm.version,mon_p,kpi 
+from kpi_a_agetype_tmp_8areas_k1 s join ${pub_db}.asc_mapping am join ${pub_db}.mon_mapping mm
+on s.asc_code=am.asc_code and s.mon=mm.mon 
+where am.version='8areas' and mm.version='everymonth' 
+group by kpi,primary_classification,age_type,mm.time,am.group_name,mm.version,mon_p;
+
+----kpi_xj()
+insert overwrite table  kpi_a_bnbw_8areas
+partition(region,mon_p,kpi)
+select primary_classification,bn,mm.time,sum(num)*1.0/avg(den), am.group_name,mm.version,mon_p,kpi 
+from kpi_a_bnbw_tmp_8areas_k1 s join ${pub_db}.asc_mapping am join ${pub_db}.mon_mapping mm
+on s.asc_code=am.asc_code and s.mon=mm.mon 
+where am.version='8areas' and mm.version='everymonth' 
+group by kpi,primary_classification,bn,mm.time,am.group_name,mm.version,mon_p;
+
+----kpi_xj()
+insert overwrite table  kpi_b_agetype_8areas
+partition(region,mon_p,kpi)
+select primary_classification,second_level_classification,age_type,mm.time,sum(num)*1.0/avg(den), am.group_name ,mm.version,mon_p,kpi
+from kpi_b_agetype_tmp_8areas_k1 s join ${pub_db}.asc_mapping am join ${pub_db}.mon_mapping mm
+on s.asc_code=am.asc_code and s.mon=mm.mon 
+where am.version='8areas' and mm.version='everymonth' 
+group by kpi,primary_classification,second_level_classification,age_type,mm.time,am.group_name,mm.version,mon_p;
+
+----kpi_xj()
+insert overwrite table  kpi_b_bnbw_8areas
+partition(region,mon_p,kpi)
+select primary_classification,second_level_classification,bn,mm.time,sum(num)*1.0/avg(den), am.group_name ,mm.version,mon_p,kpi
+from kpi_b_bnbw_tmp_8areas_k1 s join ${pub_db}.asc_mapping am join ${pub_db}.mon_mapping mm
+on s.asc_code=am.asc_code and s.mon=mm.mon 
+where am.version='8areas' and mm.version='everymonth' 
+group by kpi,primary_classification,second_level_classification,bn,mm.time,am.group_name,mm.version,mon_p;
+
+
+
+
+
+

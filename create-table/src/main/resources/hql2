@@ -1,0 +1,100 @@
+----kpi_3.1(首保进站率_二级_保内外)
+insert overwrite table  kpi_b_bnbw
+select s.primary_classification,s.second_level_classification,s.bn,s.mon,
+  sum(case when t.vin is not null then 1 else 0 end)/count(s.vin) as num,
+  s.asc_code
+  from (
+  select s.primary_classification,s.second_level_classification,
+    s.asc_code,case when tran_date(s.invoice_date)='未知' then '未知'
+    when tran_date(s.invoice_date)<'2013-10-01' 
+	and mon_diff(t.mon_label,tran_date(s.invoice_date))<=23 then '保内'
+	when tran_date(s.invoice_date)<'2013-10-01' 
+	and mon_diff(t.mon_label,tran_date(s.invoice_date))>23 then '保外'
+	when tran_date(s.invoice_date)>='2013-10-01' 
+	and mon_diff(t.mon_label,tran_date(s.invoice_date))<=35 then '保内'
+	when tran_date(s.invoice_date)>='2013-10-01' 
+	and mon_diff(t.mon_label,tran_date(s.invoice_date))>35 then '保外'
+	else '' end as bn,
+  s.vin,
+  substr(t.mon_label,1,7) as mon 
+  from date_label t,label_doss s
+  where substr(t.mon_label,1,7)>='${begin_date}'
+  and substr(t.mon_label,1,7)<='${end_date}'
+  and substr(tran_date(s.report_date),1,7)=substr(add_months(t.mon_label,-7),1,7)
+  and s.primary_classification<>''
+  ) s left join(  
+  select distinct s.primary_classification,s.second_level_classification,
+    s.asc_code,case when s.outdate='未知' then '未知'
+    when s.outdate<'2013-10-01' 
+	and mon_diff(t.mon_label,s.outdate)<=23 then '保内'
+	when s.outdate<'2013-10-01' 
+	and mon_diff(t.mon_label,s.outdate)>23 then '保外'
+	when s.outdate>='2013-10-01' 
+	and mon_diff(t.mon_label,s.outdate)<=35 then '保内'
+	when s.outdate>='2013-10-01' 
+	and mon_diff(t.mon_label,s.outdate)>35 then '保外'
+	else '' end as bn,
+  s.vin,
+  substr(t.mon_label,1,7) as mon 
+  from date_label t,label_order s 
+where substr(t.mon_label,1,7)>='${begin_date}'
+  and substr(t.mon_label,1,7)<='${end_date}'
+  and substr(tran_date(s.order_balance_date),1,7)>=substr(add_months(t.mon_label,-6),1,7)
+  and substr(tran_date(s.order_balance_date),1,7)<=substr(t.mon_label,1,7)
+  and s.MAINT_TYPE1<>'删除'
+  and first_maintnance=1
+  ) t on s.asc_code=t.asc_code and s.vin=t.vin and s.mon=t.mon 
+  and s.bn=t.bn and s.primary_classification=t.primary_classification
+  and s.second_level_classification=t.second_level_classification
+  group by s.mon,s.asc_code,s.bn,s.primary_classification,s.second_level_classification;
+
+----kpi_3.12(本店销售车辆首保回站率_二级_保内外)
+  insert overwrite table  kpi_b_bnbw
+  select s.primary_classification,s.second_level_classification,s.bn,s.mon,
+    sum(case when t.vin is not null then 1 else 0 end)/count(s.vin) as num,
+    s.asc_code
+    from (
+    select s.primary_classification,s.second_level_classification,
+      s.asc_code,case when tran_date(s.invoice_date)='未知' then '未知'
+      when tran_date(s.invoice_date)<'2013-10-01'
+  	and mon_diff(t.mon_label,tran_date(s.invoice_date))<=23 then '保内'
+  	when tran_date(s.invoice_date)<'2013-10-01'
+  	and mon_diff(t.mon_label,tran_date(s.invoice_date))>23 then '保外'
+  	when tran_date(s.invoice_date)>='2013-10-01'
+  	and mon_diff(t.mon_label,tran_date(s.invoice_date))<=35 then '保内'
+  	when tran_date(s.invoice_date)>='2013-10-01'
+  	and mon_diff(t.mon_label,tran_date(s.invoice_date))>35 then '保外'
+  	else '' end as bn,
+    s.vin,
+    substr(t.mon_label,1,7) as mon
+    from date_label t,label_doss s
+    where substr(t.mon_label,1,7)>='${begin_date}'
+    and substr(t.mon_label,1,7)<='${end_date}'
+    and substr(tran_date(s.report_date),1,7)>=substr(add_months(t.mon_label,-17),1,7)
+    and substr(tran_date(s.report_date),1,7)<=substr(t.mon_label,1,7)
+    and s.primary_classification<>''
+    ) s left join(
+    select distinct s.primary_classification,s.second_level_classification,
+      s.asc_code,case when s.outdate='未知' then '未知'
+      when s.outdate<'2013-10-01'
+  	and mon_diff(t.mon_label,s.outdate)<=23 then '保内'
+  	when s.outdate<'2013-10-01'
+  	and mon_diff(t.mon_label,s.outdate)>23 then '保外'
+  	when s.outdate>='2013-10-01'
+  	and mon_diff(t.mon_label,s.outdate)<=35 then '保内'
+  	when s.outdate>='2013-10-01'
+  	and mon_diff(t.mon_label,s.outdate)>35 then '保外'
+  	else '' end as bn,
+    s.vin,
+    substr(t.mon_label,1,7) as mon
+    from date_label t,label_order s
+  where substr(t.mon_label,1,7)>='${begin_date}'
+    and substr(t.mon_label,1,7)<='${end_date}'
+    and substr(tran_date(s.order_balance_date),1,7)>=substr(add_months(t.mon_label,-17),1,7)
+    and substr(tran_date(s.order_balance_date),1,7)<=substr(t.mon_label,1,7)
+    and s.MAINT_TYPE1<>'删除'
+    and first_maintnance=1
+    ) t on s.asc_code=t.asc_code and s.vin=t.vin and s.mon=t.mon
+    and s.bn=t.bn and s.primary_classification=t.primary_classification
+    and s.second_level_classification=t.second_level_classification
+    group by s.mon,s.asc_code,s.bn,s.primary_classification,s.second_level_classification;
