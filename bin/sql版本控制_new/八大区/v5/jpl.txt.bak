@@ -1085,9 +1085,11 @@ insert overwrite table kpi_total_8areas
  (s.num-t.num)/s.num as num,
  s.asc_code
  from 
- (select * from kpi_total_8areas where kpi='kpi_2_1' and region='${region}' and mon_p='${mon_p}') s 
+ (select * from kpi_total_8areas where kpi='kpi_2_1' and mon>='${begin_date}'
+ and mon<='${end_date}') s 
  left join 
- (select * from kpi_total_8areas where kpi='kpi_2_2' and region='${region}' and mon_p='${mon_p}') t
+ (select * from kpi_total_8areas where kpi='kpi_2_2' and mon>='${begin_date}'
+ and mon<='${end_date}') t
  on s.mon=t.mon and s.asc_code=t.asc_code;
  
 
@@ -1099,9 +1101,11 @@ insert overwrite table kpi_a_level_8areas
  (s.num-t.num)/s.num as num,
  s.asc_code
  from 
- (select * from kpi_a_level_8areas where kpi='kpi_2_1' and region='${region}' and mon_p='${mon_p}') s 
+ (select * from kpi_a_level_8areas where kpi='kpi_2_1' and mon>='${begin_date}'
+ and mon<='${end_date}') s 
  left join 
- (select * from kpi_a_level_8areas where kpi='kpi_2_2' and region='${region}' and mon_p='${mon_p}') t
+ (select * from kpi_a_level_8areas where kpi='kpi_2_2' and mon>='${begin_date}'
+ and mon<='${end_date}') t
  on s.mon=t.mon and s.asc_code=t.asc_code and s.a_level=t.a_level;
 
 ----kpi_3.6(客户流失率_二级)
@@ -1113,9 +1117,11 @@ insert overwrite table kpi_b_level_8areas
  (s.num-t.num)/s.num as num,
  s.asc_code
  from 
- (select * from kpi_b_level_8areas where kpi='kpi_2_1' and region='${region}' and mon_p='${mon_p}') s 
+ (select * from kpi_b_level_8areas where kpi='kpi_2_1' and mon>='${begin_date}'
+ and mon<='${end_date}') s 
  left join 
- (select * from kpi_b_level_8areas where kpi='kpi_2_2' and region='${region}' and mon_p='${mon_p}') t
+ (select * from kpi_b_level_8areas where kpi='kpi_2_2' and mon>='${begin_date}'
+ and mon<='${end_date}') t
  on s.mon=t.mon and s.asc_code=t.asc_code and s.a_level=t.a_level and s.b_level=t.b_level;
 
 ----kpi_3.6(客户流失率_车龄)
@@ -1126,9 +1132,11 @@ insert overwrite table kpi_agetype_8areas
  (s.num-t.num)/s.num as num,
  s.asc_code
  from 
- (select * from kpi_agetype_8areas where kpi='kpi_2_1' and region='${region}' and mon_p='${mon_p}') s 
+ (select * from kpi_agetype_8areas where kpi='kpi_2_1' and mon>='${begin_date}'
+ and mon<='${end_date}') s 
  left join 
- (select * from kpi_agetype_8areas where kpi='kpi_2_2' and region='${region}' and mon_p='${mon_p}') t
+ (select * from kpi_agetype_8areas where kpi='kpi_2_2' and mon>='${begin_date}'
+ and mon<='${end_date}') t
  on s.mon=t.mon and s.asc_code=t.asc_code and s.age_type=t.age_type;
 
 ----kpi_3.6(客户流失率_保内外)
@@ -1139,9 +1147,11 @@ select
  (s.num-t.num)/s.num as num,
  s.asc_code
  from 
- (select * from kpi_bnbw_8areas where kpi='kpi_2_1' and region='${region}' and mon_p='${mon_p}') s 
+ (select * from kpi_bnbw_8areas where kpi='kpi_2_1' and mon>='${begin_date}'
+ and mon<='${end_date}') s 
  left join 
- (select * from kpi_bnbw_8areas where kpi='kpi_2_2' and region='${region}' and mon_p='${mon_p}') t
+ (select * from kpi_bnbw_8areas where kpi='kpi_2_2' and mon>='${begin_date}'
+ and mon<='${end_date}') t
  on s.mon=t.mon and s.asc_code=t.asc_code and s.bnbw=t.bnbw;
 
 ----kpi_3.6(客户流失率_一级_车龄)
@@ -1153,9 +1163,11 @@ select
  (s.num-t.num)/s.num as num,
  s.asc_code
  from 
- (select * from kpi_a_agetype_8areas where kpi='kpi_2_1' and region='${region}' and mon_p='${mon_p}') s 
+ (select * from kpi_a_agetype_8areas where kpi='kpi_2_1' and mon>='${begin_date}'
+ and mon<='${end_date}') s 
  left join 
- (select * from kpi_a_agetype_8areas where kpi='kpi_2_2' and and region='${region}' and mon_p='${mon_p}') t
+ (select * from kpi_a_agetype_8areas where kpi='kpi_2_2' and mon>='${begin_date}'
+ and mon<='${end_date}') t
  on s.mon=t.mon and s.asc_code=t.asc_code and s.age_type=t.age_type and s.a_level=t.a_level;
 
 ----kpi_3.6(客户流失率_一级_保内外)
@@ -1167,9 +1179,11 @@ select
  (s.num-t.num)/s.num as num,
  s.asc_code
  from 
- (select * from kpi_a_bnbw_8areas where kpi='kpi_2_1' and region='${region}' and mon_p='${mon_p}') s 
+ (select * from kpi_a_bnbw_8areas where kpi='kpi_2_1' and mon>='${begin_date}'
+ and mon<='${end_date}') s 
  left join 
- (select * from kpi_a_bnbw_8areas where kpi='kpi_2_2' and region='${region}' and mon_p='${mon_p}') t
+ (select * from kpi_a_bnbw_8areas where kpi='kpi_2_2' and mon>='${begin_date}'
+ and mon<='${end_date}') t
  on s.mon=t.mon and s.asc_code=t.asc_code and s.bnbw=t.bnbw and s.a_level=t.a_level;
 
 ----kpi_3.6(客户流失率_二级_车龄)
@@ -1182,9 +1196,11 @@ select
  (s.num-t.num)/s.num as num,
  s.asc_code
  from 
- (select * from kpi_b_agetype_8areas where kpi='kpi_2_1' and region='${region}' and mon_p='${mon_p}') s 
+ (select * from kpi_b_agetype_8areas where kpi='kpi_2_1' and mon>='${begin_date}'
+ and mon<='${end_date}') s 
  left join 
- (select * from kpi_b_agetype_8areas where kpi='kpi_2_2' and region='${region}' and mon_p='${mon_p}') t
+ (select * from kpi_b_agetype_8areas where kpi='kpi_2_2' and mon>='${begin_date}'
+ and mon<='${end_date}') t
  on s.mon=t.mon and s.asc_code=t.asc_code and s.age_type=t.age_type and s.a_level=t.a_level and s.b_level=t.b_level;
 
 ----kpi_3.6(客户流失率_二级_保内外)
@@ -1197,9 +1213,11 @@ select
  (s.num-t.num)/s.num as num,
  s.asc_code
  from 
- (select * from kpi_b_bnbw_8areas where kpi='kpi_2_1' and region='${region}' and mon_p='${mon_p}') s 
+ (select * from kpi_b_bnbw_8areas where kpi='kpi_2_1' and mon>='${begin_date}'
+ and mon<='${end_date}') s 
  left join 
- (select * from kpi_b_bnbw_8areas where kpi='kpi_2_2' and region='${region}' and mon_p='${mon_p}') t
+ (select * from kpi_b_bnbw_8areas where kpi='kpi_2_2' and mon>='${begin_date}'
+ and mon<='${end_date}') t
  on s.mon=t.mon and s.asc_code=t.asc_code and s.bnbw=t.bnbw and s.a_level=t.a_level and s.b_level=t.b_level;
  
 
