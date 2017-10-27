@@ -148,10 +148,11 @@ public class PyUtil {
         writer.println("#" + line0 + "\n" +
                         "def " + funcName + "():\n" +
                         "\tline = \"\"\"" + hqlCore + "\"\"\"\n" +
-                /*"\tmon_p = begin_day + '_' + end_day\n" +*/
+                        "\tmon_p = begin_day + '_' + end_day\n" +
                         "\tline = line.replace('${begin_date}', begin_day)\n"+
                         "\tline = line.replace('${end_date}', end_day)\n"+
                         "\tline = line.replace('${pub_db}',pub_db)\n" +
+                        "\tline = line.replace('${mon_p}',mon_p)\n" +
                         "\tline = line.replace('${district}', district)\n" +
                         "\tline = line.replace('${everymonth}',everymonth)\n" +
                         "\ttry:\n" +

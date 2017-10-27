@@ -190,9 +190,9 @@ public class CreateShellPy {
 
     public static void main(String[] args) throws IOException {
 //        createShell("kpi2new.txt", "kpi2new.py");
-        createShell("zjxj","zjxj.py");
+//        createShell("zjxj","zjxj.py");
 //    	createShell("zhanbi", "zhanbi.py");
-//        createShellnewFJP("fjp.txt","fjp.py");
+        createShellnewFJP("fjp.txt","fjp.py");
 //        createShellnewJPL("jpl.txt", "jpl.py");
 //        createShellFJP("fjp", "fjp.py");
 //        createShellJPL("jpl","jpl.py");
