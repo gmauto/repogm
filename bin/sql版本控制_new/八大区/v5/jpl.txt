@@ -1155,7 +1155,7 @@ select
  from 
  (select * from kpi_a_agetype_8areas where kpi='kpi_2_1' and region='${region}' and mon_p='${mon_p}') s 
  left join 
- (select * from kpi_a_agetype_8areas where kpi='kpi_2_2' and and region='${region}' and mon_p='${mon_p}') t
+ (select * from kpi_a_agetype_8areas where kpi='kpi_2_2' and region='${region}' and mon_p='${mon_p}') t
  on s.mon=t.mon and s.asc_code=t.asc_code and s.age_type=t.age_type and s.a_level=t.a_level;
 
 ----kpi_3.6(客户流失率_一级_保内外)
@@ -1228,5 +1228,4 @@ select
 
 
 
- 
  
