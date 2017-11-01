@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) throws IOException, BiffException {
-        String filename = "";
+        String filename = "DDS数据计算辅助表_1026.xls";
         String version = "3";
         AMUtil.mkEncl(filename,"enclosure",version);
         AMUtil.mkEgO(filename,"engine_oil",version);

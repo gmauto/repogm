@@ -73,7 +73,7 @@ public class DimAbs {
     }
 
     public Map<String, String> makeDim(Map<String, String> map) throws IOException, BiffException {
-        File xlsFile = new File("DDS数据计算辅助表_1026.xls");
+        File xlsFile = new File(this.filename);
         // 获得工作簿对象
         Workbook workbook = Workbook.getWorkbook(xlsFile);
         // 获得所需要的sheet
