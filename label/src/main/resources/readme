@@ -1,6 +1,6 @@
 order 要打得标签(claimAndFirstMaintenance)
  是否首保	是否索赔
-  需要关联claim表 索赔单号 4s
+  需要关联claim表 索赔单号 asc_code
   ！注意：order表已经在最后一列打入一列“删除”标签，字段数 +1,这一步结束后会在order中再加入两列，第一列是否首保，第二列是否索赔
 
  维修类别1(maintType)

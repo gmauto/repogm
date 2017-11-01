@@ -288,7 +288,7 @@ public class PyUtil {
                         "\tpub_db = sys.argv[3]\n"+
                         "\tdistrict=sys.argv[4]\n"+
                         "\teverymonth = sys.argv[5]\n"+
-                        "\ttime_record = open(basepath + \"/log/time_record_fjp\"+\"_\"+begin_day+\"_\"+end_day, \"w\")\n" +
+                        "\ttime_record = open(basepath + \"/log/time_record_fjp\"+\"_\"+begin_day+\"_\"+end_day+\"_\"+everymonth+\"_\"+district, \"w\")\n" +
                         "\t" + StringUtils.join(list, "\n\t") +
                         "\n\ttime_record.close()"
         );
@@ -330,7 +330,7 @@ public class PyUtil {
 						"\tdistrict=sys.argv[4]\n"+
 						"\teverymonth = sys.argv[5]\n"+
 						"\tregion =everymonth+'_'+ district\n"+
-                        "\ttime_record = open(basepath + \"/log/time_record_jpl\"+\"_\"+begin_day+\"_\"+end_day, \"w\")\n" +
+                        "\ttime_record = open(basepath + \"/log/time_record_jpl\"+\"_\"+begin_day+\"_\"+end_day+\"_\"+region, \"w\")\n" +
                         "\t" + StringUtils.join(list, "\n\t") +
                         "\n\ttime_record.close()"
         );
