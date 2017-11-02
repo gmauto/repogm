@@ -17,7 +17,8 @@ public class AMUtil {
     public static void write(Map<String, String> map, String filename, String version) throws FileNotFoundException, UnsupportedEncodingException {
         PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(filename), "utf-8"), true);
         for (Map.Entry<String, String> entry : map.entrySet()) {
-            writer.println(entry.getKey() + "\t" + entry.getValue() + "\t" + version);
+            //writer.println(entry.getKey() + "\t" + entry.getValue() + "\t" + version);
+            writer.println(entry.getKey() + "\t" + entry.getValue());
         }
         writer.close();
     }
