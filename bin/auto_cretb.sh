@@ -1792,9 +1792,6 @@ load data local inpath '/home/ipsos_test3/general/data/dim/mapping/*' overwrite 
 "
 }
 
-
-
-
 function add_par(){
 
 if [ $# -lt 1 ]
