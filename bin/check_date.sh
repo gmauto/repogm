@@ -1,4 +1,5 @@
 #!/bin/bash
+#本脚本要求在 ori用户下执行
 #零件编号新增查询
 function part_check() {
 spark-sql --master yarn --driver-memory 6g --executor-memory 6g --num-executors 20 --executor-cores 1 -e "
