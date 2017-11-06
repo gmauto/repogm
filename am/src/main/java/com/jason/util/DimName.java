@@ -50,10 +50,42 @@ public class DimName {
     public static final int[] KEY_FILTER = {0};
     public static final int[] VAL_FILTER = {1, 2, 3};
 
-    //city
+    //city flow表用到的辅助表
     public static final String SHEET_CITY = "city";
     public static final String[] INDEX_CITY = {"0", "1"};
     public static final int[] KEY_CITY = {0};
     public static final int[] VAL_CITY = {1};
+
+    //PROVINCE flow表用到的辅助表
+    public static final String SHEET_PROVINCE = "province";
+    public static final String[] INDEX_PROVINCE = {"0", "1"};
+    public static final int[] KEY_PROVINCE = {0};
+    public static final int[] VAL_PROVINCE = {1};
+
+    //primary_classification flow表用到的辅助表
+    public static final String SHEET_PRIMARY_CLASSIFICATION = "primary_classification";
+    public static final String[] INDEX_PRIMARY_CLASSIFICATION = {"0", "1"};
+    public static final int[] KEY_PRIMARY_CLASSIFICATION = {0};
+    public static final int[] VAL_PRIMARY_CLASSIFICATION = {1};
+    //name flow表用到的辅助表
+    public static final String SHEET_NAME = "name";
+    public static final String[] INDEX_NAME = {"0", "1"};
+    public static final int[] KEY_NAME = {0};
+    public static final int[] VAL_NAME = {1};
+    //distributor flow表用到的辅助表
+    public static final String SHEET_DISTRIBUTOR = "distributor";
+    public static final String[] INDEX_DISTRIBUTOR = {"0", "1","2"};
+    public static final int[] KEY_DISTRIBUTOR = {0};
+    public static final int[] VAL_DISTRIBUTOR = {1,2};
+    //sexual flow表用到的辅助表
+    public static final String SHEET_SEXUAL = "sexual";
+    public static final String[] INDEX_SEXUAL = {"0", "1"};
+    public static final int[] KEY_SEXUAL = {0};
+    public static final int[] VAL_SEXUAL = {1};
+    //second_level_classification flow表用到的辅助表
+    public static final String SHEET_SECOND_LEVEL_CLASSIFICATION = "second_level_classification";
+    public static final String[] INDEX_SECOND_LEVEL_CLASSIFICATION = {"0", "1"};
+    public static final int[] KEY_SECOND_LEVEL_CLASSIFICATION = {0};
+    public static final int[] VAL_SECOND_LEVEL_CLASSIFICATION = {1};
 
 }

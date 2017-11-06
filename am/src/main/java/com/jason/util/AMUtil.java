@@ -14,7 +14,8 @@ public class AMUtil {
 
     //将结果写出到文件
     public static void write(Map<String, String> map, String filename, String version) throws FileNotFoundException, UnsupportedEncodingException {
-        String path="C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\";
+        //String path="C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\";
+        String path = "C:\\Users\\Administrator\\Desktop\\file\\";
         PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(path+filename), "utf-8"), true);
         for (Map.Entry<String, String> entry : map.entrySet()) {
             //writer.println(entry.getKey() + "\t" + entry.getValue() + "\t" + version);
@@ -109,8 +110,47 @@ public class AMUtil {
         AMUtil.write(map, outName+"_"+version,version);
     }
 
-    public static void main(String[] args) {
+    //primary_classification flow辅助表
+    public static void mkPrimaryClassification(String xlsName, String outName, String version) throws IOException, BiffException {
+        DimAbs da = new DimAbs(xlsName, DimName.SHEET_PRIMARY_CLASSIFICATION, DimName.INDEX_PRIMARY_CLASSIFICATION, DimName.KEY_PRIMARY_CLASSIFICATION, DimName.VAL_PRIMARY_CLASSIFICATION);
+        Map<String, String> map = new HashMap<>();
+        da.makeDim(map);
+        AMUtil.write(map, outName+"_"+version,version);
+    }
 
-
+    //name flow辅助表
+    public static void mkName(String xlsName, String outName, String version) throws IOException, BiffException {
+        DimAbs da = new DimAbs(xlsName, DimName.SHEET_NAME, DimName.INDEX_NAME, DimName.KEY_NAME, DimName.VAL_NAME);
+        Map<String, String> map = new HashMap<>();
+        da.makeDim(map);
+        AMUtil.write(map, outName+"_"+version,version);
+    }
+    //distributor flow辅助表
+    public static void mkDistributor(String xlsName, String outName, String version) throws IOException, BiffException {
+        DimAbs da = new DimAbs(xlsName, DimName.SHEET_DISTRIBUTOR, DimName.INDEX_DISTRIBUTOR, DimName.KEY_DISTRIBUTOR, DimName.VAL_DISTRIBUTOR);
+        Map<String, String> map = new HashMap<>();
+        da.makeDim(map);
+        AMUtil.write(map, outName+"_"+version,version);
+    }
+    //sexual flow辅助表
+    public static void mkSexual(String xlsName, String outName, String version) throws IOException, BiffException {
+        DimAbs da = new DimAbs(xlsName, DimName.SHEET_SEXUAL, DimName.INDEX_SEXUAL, DimName.KEY_SEXUAL, DimName.VAL_SEXUAL);
+        Map<String, String> map = new HashMap<>();
+        da.makeDim(map);
+        AMUtil.write(map, outName+"_"+version,version);
+    }
+    //province flow辅助表
+    public static void mkProvince(String xlsName, String outName, String version) throws IOException, BiffException {
+        DimAbs da = new DimAbs(xlsName, DimName.SHEET_PROVINCE, DimName.INDEX_PROVINCE, DimName.KEY_PROVINCE, DimName.VAL_PROVINCE);
+        Map<String, String> map = new HashMap<>();
+        da.makeDim(map);
+        AMUtil.write(map, outName+"_"+version,version);
+    }
+    //second_level_classification flow辅助表
+    public static void mkSecondLevelClassification(String xlsName, String outName, String version) throws IOException, BiffException {
+        DimAbs da = new DimAbs(xlsName, DimName.SHEET_SECOND_LEVEL_CLASSIFICATION, DimName.INDEX_SECOND_LEVEL_CLASSIFICATION, DimName.KEY_SECOND_LEVEL_CLASSIFICATION, DimName.VAL_SECOND_LEVEL_CLASSIFICATION);
+        Map<String, String> map = new HashMap<>();
+        da.makeDim(map);
+        AMUtil.write(map, outName+"_"+version,version);
     }
 }
