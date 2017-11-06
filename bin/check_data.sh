@@ -133,5 +133,3 @@ on t1.asccode=t2.asccode and t1.chcode=t2.chcode and t1.asc=t2.asc
 where t2.chcode is null or t2.asccode is null or t2.asc is null;
 " | grep -v '\t' | grep -v java >distributor_new
 }
-
-
