@@ -1,7 +1,5 @@
 package com.jason.util;
 
-import com.jason.model.DimAbs;
-
 /**
  * Created by jason on 2017-10-31.
  */
@@ -51,5 +49,11 @@ public class DimName {
     public static final String[] INDEX_FILTER = {"0", "2", "1", "3"};
     public static final int[] KEY_FILTER = {0};
     public static final int[] VAL_FILTER = {1, 2, 3};
+
+    //city
+    public static final String SHEET_CITY = "city";
+    public static final String[] INDEX_CITY = {"0", "1"};
+    public static final int[] KEY_CITY = {0};
+    public static final int[] VAL_CITY = {1};
 
 }

@@ -10,14 +10,15 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) throws IOException, BiffException {
-        String filename = "DDS数据计算辅助表_1026.xls";
+        String filename = "DDS数据计算辅助表_1104.xls";
         String version = "3";
-        AMUtil.mkEncl(filename,"enclosure",version);
-        AMUtil.mkEgO(filename,"engine_oil",version);
-        AMUtil.mkHFP(filename,"high_flow_parts",version);
-        AMUtil.mkMtc(filename,"maintnance",version);
-        AMUtil.mkFilter(filename,"filter",version);
-        AMUtil.mkMarkOrder(filename,"mark",version);
-        AMUtil.mkMarkDoss(filename,"mark_doss",version);
+//        AMUtil.mkEncl(filename,"enclosure",version);
+//        AMUtil.mkEgO(filename,"engine_oil",version);
+//        AMUtil.mkHFP(filename,"high_flow_parts",version);
+//        AMUtil.mkMtc(filename,"maintnance",version);
+//        AMUtil.mkFilter(filename,"filter",version);
+//        AMUtil.mkMarkOrder(filename,"mark",version);
+//        AMUtil.mkMarkDoss(filename,"mark_doss",version);
+        AMUtil.mkCity(filename,"city",version);
     }
 }

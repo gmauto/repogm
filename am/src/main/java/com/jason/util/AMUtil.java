@@ -4,7 +4,6 @@ import com.jason.model.DimAbs;
 import jxl.read.biff.BiffException;
 
 import java.io.*;
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +14,8 @@ public class AMUtil {
 
     //将结果写出到文件
     public static void write(Map<String, String> map, String filename, String version) throws FileNotFoundException, UnsupportedEncodingException {
-        PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(filename), "utf-8"), true);
+        String path="C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\";
+        PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(path+filename), "utf-8"), true);
         for (Map.Entry<String, String> entry : map.entrySet()) {
             //writer.println(entry.getKey() + "\t" + entry.getValue() + "\t" + version);
             writer.println(entry.getKey() + "\t" + entry.getValue());
@@ -96,6 +96,14 @@ public class AMUtil {
     //mark_doss
     public static void mkMarkDoss(String xlsName, String outName, String version) throws IOException, BiffException {
         DimAbs da = new DimAbs(xlsName, DimName.MARK_DOSS, DimName.INDEX_MARK_DOSS, DimName.KEY_MARK_DOSS, DimName.VAL_MARK_DOSS);
+        Map<String, String> map = new HashMap<>();
+        da.makeDim(map);
+        AMUtil.write(map, outName+"_"+version,version);
+    }
+
+    //city flow辅助表
+    public static void mkCity(String xlsName, String outName, String version) throws IOException, BiffException {
+        DimAbs da = new DimAbs(xlsName, DimName.SHEET_CITY, DimName.INDEX_CITY, DimName.KEY_CITY, DimName.VAL_CITY);
         Map<String, String> map = new HashMap<>();
         da.makeDim(map);
         AMUtil.write(map, outName+"_"+version,version);
