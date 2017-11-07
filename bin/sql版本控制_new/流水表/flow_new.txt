@@ -195,13 +195,15 @@ and t1.city=t4.city;
 insert overwrite table flow
 select order_number,vin,number,owner_code,birthdate,sexual,province,city,asc_code,
 asc,outdate,deal_year,deal_date,part_number,t5.id,quantity,sales_amount,age,bnjk,
-bwjk,mileage,t6.id,t7.id,maint_type1,type2 from
+bwjk,mileage,t6.id,t7.id,t8.id,t9.id from
 flow_pre t1
 join ${pub_db}.name t5
 join ${pub_db}.primary_classification t6
 join ${pub_db}.second_level_classification t7
+join ${pub_db}.maint_type1 t8
+join ${pub_db}.type2 t9
 on t1.name=t5.name
 and t1.primary_classification=t6.primary_classification
-and t1.second_level_classification=t7.second_level_classification;
-
-
+and t1.second_level_classification=t7.second_level_classification
+and t1.maint_type1=t8.maint_type1
+and t1.type2=t9.type2;
