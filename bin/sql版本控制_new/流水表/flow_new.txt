@@ -180,8 +180,9 @@ from
 (select order_number,vin,number,owner_code,birthdate,sexual,province,city,asc_code,asc,outdate,deal_year,deal_date,part_number,
 case when name='' or name is null then maint_type
 else name end as name
-,quantity,sales_amount,age,bnjk,bwjk,mileage,primary_classification,second_level_classification,maint_type maint_type1,type2
-from flow_tmp)t1
+,quantity,sales_amount,age,bnjk,bwjk,mileage,primary_classification,second_level_classification,maint_type maint_type1,
+case when type2='' or type2 is null then name
+else type2 end as type2
 join ${pub_db}.sexual t2
 join ${pub_db}.province t3
 join ${pub_db}.city t4
