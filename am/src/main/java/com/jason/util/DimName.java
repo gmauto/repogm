@@ -35,10 +35,34 @@ public class DimName {
     public static final int[] KEY_MAINTNANCE = {0};
     public static final int[] VAL_MAINTNANCE = {1, 2};
     //车型对照-order表
-    public static final String MARK_ORDER = "车型对照-order表";
+//    public static final String MARK_ORDER = "车型对照-order表";
     public static final String[] INDEX_MARK_ORDER = {"0", "1", "2", "3", "4"};
     public static final int[] KEY_MARK_ORDER = {0, 1, 2};
     public static final int[] VAL_MARK_ORDER = {3, 4};
+
+    //CHE文件
+    public static final String MARK_ORDER = "车型对照-order表";
+    public static final String[] INDEX_MARK_CHE = {"0", "1", "2"};
+    public static final int[] KEY_MARK_CHE = {0, 1, 2};
+    public static final int[] VAL_MARK_CHE = {0, 1, 2};
+
+    //asc_mapping文件
+    public static final String MARK_ASCMAPPING = "asc_info";
+    public static final String[] INDEX_ASCMAPPING = {"1", "7"};
+    public static final int[] KEY_ASCMAPPING = {0};
+    public static final int[] VAL_ASCMAPPING = {1};
+
+    //doss_asc文件
+    public static final String MARK_DOSS_ASC = "asc_info";
+    public static final String[] INDEX_DOSS_ASC = {"1", "2"};
+    public static final int[] KEY_DOSS_ASC = {0};
+    public static final int[] VAL_DOSS_ASC = {1};
+
+    //mapping文件
+    public static final String MARK_MAPPING = "mapping";
+    public static final String[] INDEX_MAPPING = {"0", "1","2","3"};
+    public static final int[] KEY_MAPPING = {0,1};
+    public static final int[] VAL_MAPPING = {2,3};
     //车型对照-doss表
     public static final String MARK_DOSS = "车型对照-doss表";
     public static final String[] INDEX_MARK_DOSS = {"0", "1", "2", "3"};

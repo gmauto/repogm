@@ -1,8 +1,9 @@
 #!/bin/bash
 #本脚本要求在 ori用户下执行
 #零件编号新增查询
-database="ori"
-conf_dir="/home/ori/general/bin/conf"
+database="ipsos_test4"
+conf_dir="/home/${database}/general/bin/conf"
+log_path=/home/${database}/general/log
 function part_check() {
 spark-sql --master yarn --driver-memory 6g --executor-memory 6g --num-executors 20 --executor-cores 1 -e "
 use ${database};
@@ -25,7 +26,8 @@ select part_num
 from maintnance)) t2
 on t1.part_number=t2.part_num) t3
 where pn2 is null;
-" > part_no_new
+" | awk -F "\t" '{print $1"\t"$2"\t"$3}' | sort -u >> part_no_new
+cat part_no_new | awk -F "\t"  '{print $1}'|grep -v '\t'|grep -v java | sort -u > part_no_new_new
 }
 
 #品牌车型车型 label_order check
@@ -133,3 +135,11 @@ on t1.asccode=t2.asccode and t1.chcode=t2.chcode and t1.asc=t2.asc
 where t2.chcode is null or t2.asccode is null or t2.asc is null;
 " | grep -v '\t' | grep -v java >distributor_new
 }
+
+function fun_all(){
+part_check
+car_order_check
+car_doss_check
+flow_dim
+}
+$1
