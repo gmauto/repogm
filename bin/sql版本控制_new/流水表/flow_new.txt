@@ -181,7 +181,7 @@ from
 case when name='' or name is null then maint_type
 else name end as name
 ,quantity,sales_amount,age,bnjk,bwjk,mileage,primary_classification,second_level_classification,maint_type maint_type1,
-case when type2='' or type2 is null then name
+case when type2='' or type2 is null then maint_type
 else type2 end as type2
 from flow_tmp)t1
 join ${pub_db}.sexual t2
