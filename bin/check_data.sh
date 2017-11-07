@@ -33,7 +33,7 @@ function car_order_check() {
 spark-sql --master yarn --driver-memory 6g --executor-memory 6g --num-executors 20 --executor-cores 1 -e "
 use ${database};
 select distinct makes,series,model
-from label_order
+from order_table;
 " > mark_tmp
 cat ${conf_dir}/CHE | awk -F "\t" '{print $1"\t"$2"\t"$3}' | sort -u >> mark_tmp
 cat mark_tmp |grep -v '\t'|grep -v java | sort |uniq -u > mark_new
