@@ -233,6 +233,7 @@ function format_delimiter(){
 }
 
 
+
 #uniq 0,1,10,46 private/auto/raw/customer/chev700/ private/auto/uniq/customer/chev700 > ../log/uniq_cus.log 2>&1
 #uniq 7,12 private/auto/raw/doss/chev700/ private/auto/uniq/doss/chev700 > ../log/uniq_doss.log 2>&1
 #uniq 3,27 private/auto/raw/order/chev700/ private/auto/uniq/order/chev700 > ../log/uniq_order.log 2>&1

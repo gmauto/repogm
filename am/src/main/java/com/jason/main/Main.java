@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) throws IOException, BiffException {
-        String filename = "DDS数据计算辅助表_1026.xls";
+        String filename = "DDS数据计算辅助表_1104.xls";
         String version = "3";
         AMUtil.mkEncl(filename,"enclosure",version);
         AMUtil.mkEgO(filename,"engine_oil",version);
@@ -19,5 +19,13 @@ public class Main {
         AMUtil.mkFilter(filename,"filter",version);
         AMUtil.mkMarkOrder(filename,"mark",version);
         AMUtil.mkMarkDoss(filename,"mark_doss",version);
+        AMUtil.mkCity(filename,"city",version);
+        AMUtil.mkProvince(filename,"province",version);
+        AMUtil.mkPrimaryClassification(filename,"primary_classification",version);
+        AMUtil.mkName(filename,"name",version);
+        AMUtil.mkDistributor(filename,"distributor",version);
+        AMUtil.mkSexual(filename,"sexual",version);
+        AMUtil.mkSecondLevelClassification(filename,"second_level_classification",version);
+
     }
 }

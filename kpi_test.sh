@@ -39,5 +39,4 @@ explain  insert overwrite table  kpi_total partition(mon_p='${mon_p}',kpi='kpi_5
 
 function run_all() {
  kpi_total_kpi_5_52 $1 $2
- 
 }
