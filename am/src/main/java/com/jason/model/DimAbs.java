@@ -103,7 +103,7 @@ public class DimAbs {
         Sheet sheet = workbook.getSheet(sheetName);
 
         // 遍历工作表
-        if (sheet != null) {
+        //if (sheet != null) {
             // 获得行数
             int rows = sheet.getRows();
             // 获得列数
@@ -113,7 +113,7 @@ public class DimAbs {
                 ArrayList<String> list = (ArrayList<String>) getRow(sheet, row);
                 map.put(getKey(list), getVal(list));
             }
-        }
+        //}
         workbook.close();
         return map;
     }
