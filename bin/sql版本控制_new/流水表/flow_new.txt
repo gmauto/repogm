@@ -81,33 +81,48 @@ and s.chcode=m.ch_code
 and s.vin = m.vin
 ) q left join 
 (
+select type,part_num,name,max(version) version from(
 select distinct '机油' as type,
 part_num,
-concat(type,'机油') as name 
-from ${pub_db}.engine_oil 
+concat(type,'机油') as name ,
+version
+from ${pub_db}.engine_oil)s
+group by s.type,s.part_num,s.name
 union all
+select type,part_num,name,max(version) version from(
 select distinct '机滤' as type,
 part_num,
-'机滤' as name
-from ${pub_db}.filter
-union all 
+'机滤' as name,
+version
+from ${pub_db}.filter)s
+group by s.type,s.part_num,s.name
+union all
+select type,part_num,name,max(version) version from(
 select distinct '养护品' as type,
 part_num,
-type as name
-from ${pub_db}.maintnance 
+type as name,
+version
+from ${pub_db}.maintnance )s
+group by s.type,s.part_num,s.name
 union all
+select type,part_num,name,max(version) version from(
 select distinct '附件' as type,
 part_num,
-name_chinese as name
-from  ${pub_db}.enclosure 
-union all 
-select distinct '高流件' as type,
+name_chinese as name,
+version
+from  ${pub_db}.enclosure)s
+group by s.type,s.part_num,s.name
+union all
+select type,part_num,name,max(version) version from
+(select distinct '高流件' as type,
 part_num,
 case when type ='LunT' then '轮胎'
 when type='DianC' then '蓄电池'
 when type='QiT' and type1<>'' then type1
-else '其他高流件' END as name
-from ${pub_db}.high_flow_parts 
+else '其他高流件' END as name,
+version
+from ${pub_db}.high_flow_parts) s
+group by s.type,s.part_num,s.name
 ) w on q.part_number=w.part_num
 left join 
 (
