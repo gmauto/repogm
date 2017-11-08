@@ -46,6 +46,12 @@ public class DimName {
     public static final int[] KEY_MARK_CHE = {0, 1, 2};
     public static final int[] VAL_MARK_CHE = {0, 1, 2};
 
+    //Local Mark文件
+    public static final String LocalMark = "车型对照-order表";
+    public static final String[] INDEX_LocalMark = {"0", "1", "2", "3", "4"};
+    public static final int[] KEY_LocalMark = {0, 1, 2, 3, 4};
+    public static final int[] VAL_LocalMark = {0, 1, 2, 3, 4};
+
     //asc_mapping文件
     public static final String MARK_ASCMAPPING = "asc_info";
     public static final String[] INDEX_ASCMAPPING = {"1", "7"};
@@ -57,6 +63,18 @@ public class DimName {
     public static final String[] INDEX_DOSS_ASC = {"1", "2"};
     public static final int[] KEY_DOSS_ASC = {0};
     public static final int[] VAL_DOSS_ASC = {1};
+
+    //LOCAL ENGINEOIL文件
+    public static final String LOCAL_ENGINEOIL = "机油清单";
+    public static final String[] INDEX_LOCAL_ENGINEOIL = {"0"};
+    public static final int[] KEY_LOCAL_ENGINEOIL = {0};
+    public static final int[] VAL_LOCAL_ENGINEOIL = {0};
+
+    //LOCAL FILTER文件
+    public static final String LOCAL_FILTER = "机滤清单";
+    public static final String[] INDEX_LOCAL_FILTER = {"0"};
+    public static final int[] KEY_LOCAL_FILTER = {0};
+    public static final int[] VAL_LOCAL_FILTER = {0};
 
     //mapping文件
     public static final String MARK_MAPPING = "mapping";
