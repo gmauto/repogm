@@ -283,6 +283,22 @@ public class AMUtil {
         da.makeDim(map);
         AMUtil.DIMwrite(map, outName ,version);
     }
+    //Maint_Type1 flow辅助表
+    public static void mkMaint_Type1(String xlsName, String outName, String version) throws IOException, BiffException {
+        DimAbs da = new DimAbs(xlsName, DimName.MAINT_TYPE1, DimName.INDEX_NAME, DimName.KEY_NAME, DimName.VAL_NAME);
+        Map<String, String> map = new HashMap<>();
+        da.makeDim(map);
+        AMUtil.write(map, outName ,version);
+    }
+
+    //Maint_Type1 flow辅助表
+    public static void mkType2(String xlsName, String outName, String version) throws IOException, BiffException {
+        DimAbs da = new DimAbs(xlsName, DimName.TYPE2, DimName.INDEX_NAME, DimName.KEY_NAME, DimName.VAL_NAME);
+        Map<String, String> map = new HashMap<>();
+        da.makeDim(map);
+        AMUtil.write(map, outName ,version);
+    }
+
     //distributor flow辅助表
     public static void mkDistributor(String xlsName, String outName, String version) throws IOException, BiffException {
         DimAbs da = new DimAbs(xlsName, DimName.SHEET_DISTRIBUTOR, DimName.INDEX_DISTRIBUTOR, DimName.KEY_DISTRIBUTOR, DimName.VAL_DISTRIBUTOR);
