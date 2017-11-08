@@ -184,6 +184,14 @@ public class AMUtil {
         AMUtil.write(map, outName ,version);
     }
 
+    //local mark
+    public static void mkLocalMark(String xlsName, String outName, String version) throws IOException, BiffException {
+        DimAbs da = new DimAbs(xlsName, DimName.LocalMark, DimName.INDEX_LocalMark, DimName.KEY_LocalMark, DimName.VAL_LocalMark);
+        Map<String, String> map = new HashMap<>();
+        da.makeDim(map);
+        AMUtil.CHEwrite(map, outName ,version);
+    }
+
     //CHE
     public static void mkCHE(String xlsName, String outName, String version) throws IOException, BiffException {
         DimAbs da = new DimAbs(xlsName, DimName.MARK_ORDER, DimName.INDEX_MARK_CHE, DimName.KEY_MARK_CHE, DimName.VAL_MARK_CHE);
@@ -221,12 +229,35 @@ public class AMUtil {
         AMUtil.write(map, outName,version);
     }
 
+    //local mark_doss
+    public static void mkLocal_MarkDoss(String xlsName, String outName, String version) throws IOException, BiffException {
+        DimAbs da = new DimAbs(xlsName, DimName.MARK_DOSS, DimName.INDEX_MARK_DOSS, DimName.KEY_MARK_DOSS, DimName.VAL_MARK_DOSS);
+        Map<String, String> map = new HashMap<>();
+        da.makeDim(map);
+        AMUtil.DOSS_ASCwrite(map, outName,version);
+    }
+
     //doss_asc
     public static void mk_doss_asc(String xlsName, String outName, String version) throws IOException, BiffException {
         DimAbs da = new DimAbs(xlsName, DimName.MARK_DOSS_ASC, DimName.INDEX_DOSS_ASC, DimName.KEY_DOSS_ASC, DimName.VAL_DOSS_ASC);
         Map<String, String> map = new HashMap<>();
         da.makeDim(map);
         AMUtil.DOSS_ASCwrite(map, outName,version);
+    }
+
+    //local filter
+    public static void mk_LocalFilter(String xlsName, String outName, String version) throws IOException, BiffException {
+        DimAbs da = new DimAbs(xlsName, DimName.LOCAL_FILTER, DimName.INDEX_LOCAL_FILTER, DimName.KEY_LOCAL_FILTER, DimName.VAL_LOCAL_FILTER);
+        Map<String, String> map = new HashMap<>();
+        da.makeDim(map);
+        AMUtil.CHEwrite(map, outName,version);
+    }
+    //local filter
+    public static void mk_LocalEngineoil(String xlsName, String outName, String version) throws IOException, BiffException {
+        DimAbs da = new DimAbs(xlsName, DimName.LOCAL_FILTER, DimName.INDEX_LOCAL_FILTER, DimName.KEY_LOCAL_FILTER, DimName.VAL_LOCAL_FILTER);
+        Map<String, String> map = new HashMap<>();
+        da.makeDim(map);
+        AMUtil.CHEwrite(map, outName,version);
     }
 
     //city flow辅助表
