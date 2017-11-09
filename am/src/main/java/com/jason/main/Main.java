@@ -33,6 +33,6 @@ public class Main {
 //        AMUtil.mk_LocalFilter(filename,"local_filter",version);
 //        AMUtil.mk_LocalEngineoil(filename,"local_engineoil",version);
 //        AMUtil.mkLocalMark(filename,"local_mark",version);
-        AMUtil.mkLocal_MarkDoss(filename,"local_mark_doss",version);
+        AMUtil.mkLocal_MarkDoss(filename, "local_mark_doss", version);
     }
 }
