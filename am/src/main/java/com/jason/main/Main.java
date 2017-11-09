@@ -29,12 +29,12 @@ public class Main {
 //        AMUtil.mkCHE(filename,"CHE",version);
 //        AMUtil.mkASC_MAPPING(filename,"asc_mapping",version);
         AMUtil.mkMAPPING(filename,"mapping",version);
-//        AMUtil.mk_doss_asc(filename,"doss_asc",version);
-//        AMUtil.mk_LocalFilter(filename,"local_filter",version);
-//        AMUtil.mk_LocalEngineoil(filename,"local_engineoil",version);
-//        AMUtil.mkLocalMark(filename,"local_mark",version);
-//        AMUtil.mkLocal_MarkDoss(filename,"local_mark_doss",version);
-//        AMUtil.mkMaint_Type1(filename,"maint_type1",version);
-//        AMUtil.mkType2(filename,"type2",version);
+        AMUtil.mk_doss_asc(filename,"doss_asc",version);
+        AMUtil.mk_LocalFilter(filename,"local_filter",version);
+        AMUtil.mk_LocalEngineoil(filename,"local_engineoil",version);
+        AMUtil.mkLocalMark(filename,"local_mark",version);
+        AMUtil.mkLocal_MarkDoss(filename,"local_mark_doss",version);
+        AMUtil.mkMaint_Type1(filename,"maint_type1",version);
+        AMUtil.mkType2(filename,"type2",version);
     }
 }
