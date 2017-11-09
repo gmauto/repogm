@@ -10,11 +10,12 @@ from pyspark.sql import *
 
 warehouseLocationHDFS = "hdfs://nameservice1/user/hive/warehouse_ext/DL/ipsos/raw5/tmp"  # need to change it to a hdfs dir
 dstPath = "hdfs://nameservice1/user/hive/warehouse_ext/DL/ipsos/raw5/doss_table"  # the dir that you want to save your result
-doss_tablename = 'doss_table'
+doss_tablename = 'doss_check'
 start_date = '2000-01-01'
 end_date = '2018-01-01'
 
 dh_dm2h = 'dh_dm2h.'
+date='201004_201707'
 
 sconf = SparkConf().setAppName("doss")
 sc = SparkContext(conf=sconf)
@@ -70,7 +71,7 @@ doss_sql = spark.sql(doss)
 doss_sql.registerTempTable('dossaa')
 
 # insert into a table
-spark.sql('insert into table ' + doss_tablename + ' partition(mon=\'201705\') select * from dossaa')
+spark.sql('insert into table ' + doss_tablename + ' partition(mon='+date+') select * from dossaa')
 
 # save a file
 # doss_sql.write.save(dstPath)
