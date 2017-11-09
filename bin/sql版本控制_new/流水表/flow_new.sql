@@ -171,10 +171,6 @@ select part_num,type type2 from (select * from ${pub_db}.maintnance tb left semi
 union all
 select part_num,name_chinese type2 from (select * from ${pub_db}.enclosure tb left semi join (select max(version) as version from ${pub_db}.enclosure) ta on ta.version=tb.version) tc) b on b.part_num=a.part_number
 ;
-
-
-
-
 ----
 insert overwrite table flow_pre
 select order_number,vin,number,owner_code,birthdate,t2.id,t3.id,t4.id,asc_code,
