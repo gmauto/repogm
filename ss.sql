@@ -168,3 +168,6 @@ select part_num,type type2 from (select * from ori.maintnance tb left semi join 
 union all
 select part_num,name_chinese type2 from (select * from ori.enclosure tb left semi join (select max(version) as version from ori.enclosure) ta on ta.version=tb.version)) b on b.part_num=a.part_number
 ;
+
+
+aaa
