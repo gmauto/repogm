@@ -642,8 +642,8 @@ LOCATION
   '${tb_dim}/date_label';
 
 CREATE EXTERNAL TABLE distributor(
-  chcode string,
   asccode string,
+  chcode string,
   asc string)
 PARTITIONED BY (
   version string)
