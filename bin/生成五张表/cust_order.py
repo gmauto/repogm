@@ -11,14 +11,15 @@ from pyspark.sql import *
 warehouseLocationHDFS = "hdfs://nameservice1/user/hive/warehouse_ext/DL/ipsos/raw5/tmp"  # need to change it to a hdfs dir
 dstPath_order = "hdfs://nameservice1/user/hive/warehouse_ext/DL/ipsos/raw5/order_table"  # the dir that you want to save your result
 dstPath_cust = "hdfs://nameservice1/user/hive/warehouse_ext/DL/ipsos/raw5/cust_table"  # the dir that you want to save your result
-order_tablename = 'order_table'
-cust_tablename = 'cust_table'
-start_date = '2000-07-01'
+order_tablename = 'order_check'
+cust_tablename = 'customer_check'
+start_date = '2010-04-01'
 end_date = '2018-01-01'
 
 dh_dm2h = 'dh_dm2h.'
 siebel = 'siebel.'
 edw = 'edw.'
+date='201004_201707'
 
 sconf = SparkConf().setAppName("cust-order")
 sc = SparkContext(conf=sconf)
@@ -134,18 +135,18 @@ chev_dms_cx_info_sql.registerTempTable('chev_dms_cx_info')
 for order table
 '''
 # chev_repair_order  pass
-chev_repair_order = """select t1.asc_code,t1.balance_no,t1.balance_time,t1.brand,t1.claim_no,t1.complete_time,t1.deliverer, 
-t1.deliverer_ddd_code,t1.deliverer_gender,t1.deliverer_mobile,t1.deliverer_phone, 
-substr(t1.delivery_date,1,10) as end_dt,t1.end_time_supposed,t1.engine_no, 
-t1.finish_user,t1.is_pre_sale,t1.is_red,t1.last_balance_no,t1.license,t1.model, 
-t1.out_mileage,t1.owner_name,t1.owner_no,t1.owner_property,t1.receive_amount, 
-t1.repair_amount,t1.repair_type,t1.ro_id,t1.ro_no,t1.ro_type, 
-t1.series,t1.service_advisor,t1.sgm_vin_tag, 
-substr(t1.start_time,1,10) as start_dt,t1.test_driver,t1.total_amount, 
-t1.vin,t2.ch_code,t2.asc 
-from """ + edw + """tt_asc_repair_order t1  
-join dealer_info t2 
-on t1.asc_code=t2.asc_code and length(t1.balance_no)=11  
+chev_repair_order = """select t1.asc_code,t1.balance_no,t1.balance_time,t1.brand,t1.claim_no,t1.complete_time,t1.deliverer,
+t1.deliverer_ddd_code,t1.deliverer_gender,t1.deliverer_mobile,t1.deliverer_phone,
+substr(t1.delivery_date,1,10) as end_dt,t1.end_time_supposed,t1.engine_no,
+t1.finish_user,t1.is_pre_sale,t1.is_red,t1.last_balance_no,t1.license,t1.model,
+t1.out_mileage,t1.owner_name,t1.owner_no,t1.owner_property,t1.receive_amount,
+t1.repair_amount,t1.repair_type,t1.ro_id,t1.ro_no,t1.ro_type,
+t1.series,t1.service_advisor,t1.sgm_vin_tag,
+substr(t1.start_time,1,10) as start_dt,t1.test_driver,t1.total_amount,
+t1.vin,t2.ch_code,t2.asc
+from """ + edw + """tt_asc_repair_order t1
+join dealer_info t2
+on t1.asc_code=t2.asc_code and length(t1.balance_no)=11
 and substr(t1.start_time,1,10)>='""" + start_date + """' and substr(t1.start_time,1,10)<='""" + end_date + """"'"""
 chev_repair_order_sql = spark.sql(chev_repair_order)
 chev_repair_order_sql.registerTempTable('chev_repair_order')
@@ -214,18 +215,18 @@ repair_balance_info_sql.registerTempTable('repair_balance_info')
 # chev_repair_balance
 chev_repair_balance = """select *,
 case when is_red=1 or (case when last_balance_no='null' then false else regexp_replace(last_balance_no,' ' ,'')<>'' end) then 0 else 1 end as if_acc
-from repair_balance_info  
+from repair_balance_info
 WHERE  length(balance_no)=11  and SGM_VIN_TAG='Y'"""
 chev_repair_balance_sql = spark.sql(chev_repair_balance)
 chev_repair_balance_sql.registerTempTable('chev_repair_balance')
 
 # chev_ti_bo_balsucc
-chev_ti_bo_balsucc = """select ro_id,'',start_dt,ro_no,balance_no,service_advisor,license,brand,series, 
-model,repair_amount,finish_user,out_mileage,owner_name,deliverer,deliverer_gender, 
-deliverer_ddd_code,deliverer_phone,deliverer_mobile,end_time_supposed,complete_time, 
-end_dt,owner_no,owner_property,claim_no,test_driver,vin,asc_code,balance_time,square_date, 
+chev_ti_bo_balsucc = """select ro_id,'',start_dt,ro_no,balance_no,service_advisor,license,brand,series,
+model,repair_amount,finish_user,out_mileage,owner_name,deliverer,deliverer_gender,
+deliverer_ddd_code,deliverer_phone,deliverer_mobile,end_time_supposed,complete_time,
+end_dt,owner_no,owner_property,claim_no,test_driver,vin,asc_code,balance_time,square_date,
 total_amount,receive_amount,repair_type_desc,ro_type_desc,ro_type,repair_type,balance_no
-from (select *,Row_Number() over(partition by asc_code,vin,ro_no order by balance_time desc) as rank  
+from (select *,Row_Number() over(partition by asc_code,vin,ro_no order by balance_time desc) as rank
 from chev_repair_balance
 where if_acc=1) tt
 where tt.rank=1"""
@@ -233,7 +234,7 @@ chev_ti_bo_balsucc_sql = spark.sql(chev_ti_bo_balsucc)
 chev_ti_bo_balsucc_sql.registerTempTable('chev_ti_bo_balsucc')
 
 # insert into a table
-spark.sql('insert into table ' + order_tablename + ' partition(mon=\'20170101\') select * from chev_ti_bo_balsucc')
+spark.sql('insert into table ' + order_tablename + ' partition(mon='+date+') select * from chev_ti_bo_balsucc')
 
 # save a file
 # chev_ti_bo_balsucc_sql.write.save(dstPath_order)
@@ -269,7 +270,7 @@ customer_sql = spark.sql(customer)
 customer_sql.registerTempTable('customeraa')
 
 # insert into a table
-spark.sql('insert into table ' + cust_tablename + ' partition(mon=\'20170101\')  select * from customeraa')
+spark.sql('insert into table ' + cust_tablename + ' partition(mon='+date+')  select * from customeraa')
 
 # save a file
 # customer_sql.write.save(dstPath_cust)

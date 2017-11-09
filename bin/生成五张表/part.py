@@ -10,11 +10,11 @@ from pyspark.sql import *
 
 warehouseLocationHDFS = "hdfs://nameservice1/user/hive/warehouse_ext/DL/ipsos/raw5/tmp"  # need to change it to a hdfs dir
 dstPath = "hdfs://nameservice1/user/hive/warehouse_ext/DL/ipsos/raw5/part_table"  # the dir that you want to save your result
-part_tablename = 'part_table'
-order_tablename = 'order_table'
+part_tablename = 'part'
+order_tablename = 'order_check'
 start_date = '2000-01-01'
 end_date = '2018-08-01'
-
+date='201004_201707'
 edw = 'edw.'
 sconf = SparkConf().setAppName("part")
 
@@ -81,7 +81,7 @@ part_sql = spark.sql(part)
 part_sql.registerTempTable('partaa')
 
 # insert into a table
-spark.sql("""insert into table """ + part_tablename + """ partition(mon='201705') select * from partaa""")
+spark.sql("""insert into table """ + part_tablename + """ partition(mon='+date+') select * from partaa""")
 
 # save a file
 # part_sql.write.save(dstPath)

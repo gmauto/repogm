@@ -8,12 +8,13 @@ sys.setdefaultencoding('utf8')
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import *
 
-warehouseLocationHDFS = "hdfs://nameservice1/user/hive/warehouse_ext/DL/ipsos/raw5/tmp"  # need to change it to a hdfs dir
-dstPath = "hdfs://nameservice1/user/hive/warehouse_ext/DL/ipsos/raw5/claim_table"  # the dir that you want to save your result
-claim_tablename = 'claim_table'
-start_date = '2001-01-01'
+#warehouseLocationHDFS = "hdfs://nameservice1/user/hive/warehouse_ext/DL/ipsos/raw5/tmp"  # need to change it to a hdfs dir
+#dstPath = "hdfs://nameservice1/user/hive/warehouse_ext/DL/ipsos/raw5/claim_table"  # the dir that you want to save your result
+claim_tablename = 'claim_check'
+start_date = '2010-04-01'
 end_date = '2018-01-01'
 edw = 'edw.'
+date='201004_201707'
 
 sconf = SparkConf().setAppName("claim")
 sc = SparkContext(conf=sconf)
@@ -46,7 +47,7 @@ claim_sql = spark.sql(claim)
 claim_sql.registerTempTable('claimaa')
 
 # insert into a table
-spark.sql('insert into table ' + claim_tablename + ' partition(mon=\'201705\') select * from claimaa')
+spark.sql('insert into table ' + claim_tablename + ' partition(mon='+date+') select * from claimaa')
 
 # save a file
 # claim_sql.write.save(dstPath)
