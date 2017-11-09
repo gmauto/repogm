@@ -114,6 +114,11 @@ public class DimName {
     public static final String[] INDEX_NAME = {"0", "1"};
     public static final int[] KEY_NAME = {0};
     public static final int[] VAL_NAME = {1};
+
+    //maint_type1 flow表用到的辅助表
+    public static final String MAINT_TYPE1 = "maint_type1";
+    //type2 flow表用到的辅助表
+    public static final String TYPE2 = "type2";
     //distributor flow表用到的辅助表
     public static final String SHEET_DISTRIBUTOR = "distributor";
     public static final String[] INDEX_DISTRIBUTOR = {"0", "1","2"};
