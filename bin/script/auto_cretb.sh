@@ -805,8 +805,8 @@ LOCATION
   
   
 CREATE EXTERNAL TABLE dealer_info(
- ch_code string, 
-  asc_code string, 
+   asc_code string,
+ ch_code string,
   asc string)
 ROW FORMAT DELIMITED 
   FIELDS TERMINATED BY '\t' 

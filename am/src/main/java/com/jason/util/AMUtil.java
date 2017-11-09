@@ -20,7 +20,7 @@ public class AMUtil {
         String path = "C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\"+version+"\\"+filename+"\\";
         File file = new File(path);
         if (!file.exists()) {
-            file.mkdir();
+            file.mkdirs();
         }
         PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(path+filename), "utf-8"), true);
         for (Map.Entry<String, String> entry : map.entrySet()) {
@@ -36,7 +36,7 @@ public class AMUtil {
         String path = "C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\"+version+"\\"+filename+"\\";
         File file = new File(path);
         if (!file.exists()) {
-            file.mkdir();
+            file.mkdirs();
         }
         PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(path+filename), "utf-8"), true);
         for (Map.Entry<String, String> entry : map.entrySet()) {
@@ -52,7 +52,7 @@ public class AMUtil {
         String path = "C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\"+version+"\\"+filename+"\\";
         File file = new File(path);
         if (!file.exists()) {
-            file.mkdir();
+            file.mkdirs();
         }
         PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(path+filename), "utf-8"), true);
         for (Map.Entry<String, String> entry : map.entrySet()) {
@@ -68,7 +68,7 @@ public class AMUtil {
         String path = "C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\"+version+"\\"+filename+"\\";
         File file = new File(path);
         if (!file.exists()) {
-            file.mkdir();
+            file.mkdirs();
         }
         PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(path+filename), "utf-8"), true);
         for (Map.Entry<String, String> entry : map.entrySet()) {
@@ -83,7 +83,7 @@ public class AMUtil {
         String path = "C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\"+version+"\\"+filename+"\\";
         File file = new File(path);
         if (!file.exists()) {
-            file.mkdir();
+            file.mkdirs();
         }
         PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(path+filename), "utf-8"), true);
         for (Map.Entry<String, String> entry : map.entrySet()) {
@@ -101,7 +101,7 @@ public class AMUtil {
         String path = "C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\"+version+"\\"+filename+"\\";
         File file = new File(path);
         if (!file.exists()) {
-            file.mkdir();
+            file.mkdirs();
         }
         PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(path+filename), "utf-8"), true);
 //        for (Map.Entry<String, String> entry : map.entrySet()) {
