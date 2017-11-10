@@ -34,7 +34,7 @@ tb_flow=${path}/fx/auto/flow
 function mkdifile(){
 hdfs dfs -mkdir ${path}/fx/fact_tmp
 hdfs dfs -mkdir -R  ${path}/fx/auto/tbkpkires
-hdfs dfs -ls mkdir -R ${path}/fx/fact_tmp
+hdfs dfs -mkdir -R ${path}/fx/fact_tmp
 mkdir /home/${database}/general/data/flow
 }
 
@@ -642,7 +642,7 @@ LOCATION
   '${tb_dim}/date_label';
 
 CREATE EXTERNAL TABLE distributor(
-  asccode string,
+   asccode string,
   chcode string,
   asc string)
 PARTITIONED BY (
@@ -805,8 +805,8 @@ LOCATION
   
   
 CREATE EXTERNAL TABLE dealer_info(
-   asc_code string,
- ch_code string,
+  asc_code string, 
+ ch_code string, 
   asc string)
 ROW FORMAT DELIMITED 
   FIELDS TERMINATED BY '\t' 
@@ -1371,6 +1371,7 @@ use ${database};
   num string,
   asc_code string)
 PARTITIONED BY (
+region string,
   mon_p string,
   kpi string)
 ROW FORMAT DELIMITED
@@ -1390,6 +1391,7 @@ CREATE EXTERNAL TABLE kpi_a_bnbw_${name}(
   num string,
   asc_code string)
 PARTITIONED BY (
+region string,
   mon_p string,
   kpi string)
 ROW FORMAT DELIMITED
@@ -1408,6 +1410,7 @@ CREATE EXTERNAL TABLE kpi_a_level_${name}(
   num string,
   asc_code string)
 PARTITIONED BY (
+region string,
   mon_p string,
   kpi string)
 ROW FORMAT DELIMITED
@@ -1426,6 +1429,7 @@ CREATE EXTERNAL TABLE kpi_agetype_${name}(
   num string,
   asc_code string)
 PARTITIONED BY (
+region string,
   mon_p string,
   kpi string)
 ROW FORMAT DELIMITED
@@ -1446,6 +1450,7 @@ CREATE EXTERNAL TABLE kpi_b_agetype_${name}(
   num string,
   asc_code string)
 PARTITIONED BY (
+region string,
   mon_p string,
   kpi string)
 ROW FORMAT DELIMITED
@@ -1466,6 +1471,7 @@ CREATE EXTERNAL TABLE kpi_b_bnbw_${name}(
   num string,
   asc_code string)
 PARTITIONED BY (
+region string,
   mon_p string,
   kpi string)
 ROW FORMAT DELIMITED
@@ -1485,6 +1491,7 @@ CREATE EXTERNAL TABLE kpi_b_level_${name}(
   num string,
   asc_code string)
 PARTITIONED BY (
+region string,
   mon_p string,
   kpi string)
 ROW FORMAT DELIMITED
@@ -1503,6 +1510,7 @@ CREATE EXTERNAL TABLE kpi_bnbw_${name}(
   num string,
   asc_code string)
 PARTITIONED BY (
+region string,
   mon_p string,
   kpi string)
 ROW FORMAT DELIMITED
@@ -1520,6 +1528,7 @@ CREATE EXTERNAL TABLE kpi_total_${name}(
   num string,
   asc_code string)
 PARTITIONED BY (
+  region string,
   mon_p string,
   kpi string)
 ROW FORMAT DELIMITED
@@ -1634,7 +1643,8 @@ bwjk  string,
 mileage  string,
 maint_type  string,
 primary_classification  string,
-second_level_classification  string
+second_level_classification  string,
+type2 string
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\001'
@@ -1666,7 +1676,9 @@ bnjk  string,
 bwjk  string,
 mileage  string,
 primary_classification  string,
-second_level_classification  string
+second_level_classification  string,
+maint_type1 string,              	                    
+type2 string
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\001'
@@ -1698,7 +1710,9 @@ bnjk  string,
 bwjk  string,
 mileage  string,
 primary_classification  string,
-second_level_classification  string
+second_level_classification  string,
+maint_type1 string,              	                    
+type2 string
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\001'
@@ -1731,7 +1745,9 @@ bnjk  string,
 bwjk  string,
 mileage  string,
 primary_classification  string,
-second_level_classification  string
+second_level_classification  string,
+maint_type1 string,              	                    
+type2 string
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\001'

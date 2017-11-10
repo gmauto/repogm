@@ -2,8 +2,9 @@
 #本脚本要求在 ori用户下执行
 #零件编号新增查询
 database="ipsos_test4"
-conf_dir="/home/${database}/general/bin/conf"
-log_path=/home/${database}/general/log
+conf_dir=/home/${database}/general/bin/conf
+log_path=/home/${database}/general/log/check
+mkdir ${log_path}
 function part_check() {
 spark-sql --master yarn --driver-memory 6g --executor-memory 6g --num-executors 20 --executor-cores 1 -e "
 use ${database};
@@ -26,8 +27,8 @@ select part_num
 from maintnance)) t2
 on t1.part_number=t2.part_num) t3
 where pn2 is null;
-" | awk -F "\t" '{print $1"\t"$2"\t"$3}' | sort -u >> part_no_new
-cat part_no_new | awk -F "\t"  '{print $1}'|grep -v '\t'|grep -v java | sort -u > part_no_new_new
+" | awk -F "\t" '{print $1"\t"$2"\t"$3}' | sort -u >> ${log_path}/part_no_new
+cat ${log_path}/part_no_new | awk -F "\t"  '{print $1}'|grep -v '\t'|grep -v java | sort -u > ${log_path}/part_no_new_new
 }
 
 #品牌车型车型 label_order check
@@ -36,9 +37,9 @@ spark-sql --master yarn --driver-memory 6g --executor-memory 6g --num-executors 
 use ${database};
 select distinct makes,series,model
 from label_order
-" > mark_tmp
-cat ${conf_dir}/CHE | awk -F "\t" '{print $1"\t"$2"\t"$3}' | sort -u >> mark_tmp
-cat mark_tmp |grep -v '\t'|grep -v java | sort |uniq -u > mark_new
+" > ${log_path}/mark_tmp
+cat ${conf_dir}/CHE | awk -F "\t" '{print $1"\t"$2"\t"$3}' | sort -u >> ${log_path}/mark_tmp
+cat ${log_path}/mark_tmp |grep -v '\t'|grep -v java | sort |uniq -u > ${log_path}/mark_new
 }
 
 
@@ -49,8 +50,8 @@ use ${database};
 select distinct makes,series
 from label_doss
 " > mark_doss_tmp
-cat ${conf_dir}/mark_doss |awk -F "\t" '{print $1"\t"$2}' >>mark_doss_tmp
-cat mark_doss_tmp |grep -v '\t'|grep -v java | sort |uniq -u > mark_doss_new
+cat ${conf_dir}/mark_doss |awk -F "\t" '{print $1"\t"$2}' >> ${log_path}/mark_doss_tmp
+cat ${log_path}/mark_doss_tmp |grep -v '\t'|grep -v java | sort |uniq -u > ${log_path}/mark_doss_new
 }
 
 
@@ -65,7 +66,7 @@ from
 from flow_tmp) t1 left join (select distinct trim(sexual) as sexual from sexual) t2
 on t1.sexual=t2.sexual
 where t2.sexual is null;
-" | grep -v '\t' | grep -v java >sexual_new
+" | grep -v '\t' | grep -v java > ${log_path}/sexual_new
 
 #province
 spark-sql -e "
@@ -76,7 +77,7 @@ from
 from flow_tmp) t1 left join (select distinct trim(province) as province from province) t2
 on t1.province=t2.province
 where t2.province is null;
-" | grep -v '\t' | grep -v java >province_new
+" | grep -v '\t' | grep -v java > ${log_path}/province_new
 
 #city
 spark-sql -e "
@@ -87,7 +88,7 @@ from
 from flow_tmp) t1 left join (select distinct trim(city) as city from city) t2
 on t1.city=t2.city
 where t2.city is null;
-" | grep -v '\t' | grep -v java >city_new
+" | grep -v '\t' | grep -v java > ${log_path}/city_new
 
 #name
 spark-sql -e "
@@ -98,7 +99,7 @@ from
 from flow_tmp) t1 left join (select distinct trim(name) as name from name) t2
 on t1.name=t2.name
 where t2.name is null;
-" | grep -v '\t' | grep -v java >name_new
+" | grep -v '\t' | grep -v java > ${log_path}/name_new
 
 #primary_classification
 spark-sql -e "
@@ -109,7 +110,7 @@ from
 from flow_tmp) t1 left join (select distinct trim(primary_classification) as primary_classification from primary_classification) t2
 on t1.primary_classification=t2.primary_classification
 where t2.primary_classification is null;
-" | grep -v '\t' | grep -v java >primary_classification_new
+" | grep -v '\t' | grep -v java > ${log_path}/primary_classification_new
 
 #second_level_classification
 spark-sql -e "
@@ -120,7 +121,7 @@ from
 from flow_tmp) t1 left join (select distinct trim(second_level_classification) as second_level_classification from second_level_classification) t2
 on t1.second_level_classification=t2.second_level_classification
 where t2.second_level_classification is null;
-" | grep -v '\t' | grep -v java >second_level_classification_new
+" | grep -v '\t' | grep -v java > ${log_path}/second_level_classification_new
 
 #distributor
 spark-sql -e "
@@ -133,14 +134,8 @@ from
 left join (select distinct chcode,asccode,asc from distributor) t2
 on t1.asccode=t2.asccode and t1.chcode=t2.chcode and t1.asc=t2.asc
 where t2.chcode is null or t2.asccode is null or t2.asc is null;
-" | grep -v '\t' | grep -v java >distributor_new
+" | grep -v '\t' | grep -v java > ${log_path}/distributor_new
 }
 
-function fun_all(){
-part_check
-car_order_check
-car_doss_check
-flow_dim
-}
 $1
 
