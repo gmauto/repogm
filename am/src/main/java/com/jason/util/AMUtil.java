@@ -14,10 +14,11 @@ import java.util.Map;
  */
 public class AMUtil {
 
+    private static String outpath="C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\";
     //将结果写出到文件
     public static void write(Map<String, String> map, String filename, String version) throws FileNotFoundException, UnsupportedEncodingException {
         //String path="C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\";
-        String path = "C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\"+version+"\\"+filename+"\\";
+        String path = outpath+version+"\\"+filename+"\\";
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();
@@ -33,7 +34,7 @@ public class AMUtil {
     //将文件用|分割开
     public static void DIMwrite(Map<String, String> map, String filename, String version) throws FileNotFoundException, UnsupportedEncodingException {
         //String path="C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\";
-        String path = "C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\"+version+"\\"+filename+"\\";
+        String path = outpath+version+"\\"+filename+"\\";
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();
@@ -49,7 +50,7 @@ public class AMUtil {
 
     public static void CHEwrite(Map<String, String> map, String filename, String version) throws FileNotFoundException, UnsupportedEncodingException {
         //String path="C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\";
-        String path = "C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\"+version+"\\"+filename+"\\";
+        String path = outpath+version+"\\"+filename+"\\";
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();
@@ -65,7 +66,7 @@ public class AMUtil {
     //doss_asc
     public static void DOSS_ASCwrite(Map<String, String> map, String filename, String version) throws FileNotFoundException, UnsupportedEncodingException {
         //String path="C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\";
-        String path = "C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\"+version+"\\"+filename+"\\";
+        String path = outpath+version+"\\"+filename+"\\";
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();
@@ -80,7 +81,7 @@ public class AMUtil {
 
     public static void ASCMAPPING_write(Map<String, String> map, String filename, String version) throws FileNotFoundException, UnsupportedEncodingException {
         //String path="C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\";
-        String path = "C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\"+version+"\\"+filename+"\\";
+        String path = outpath+version+"\\"+filename+"\\";
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();
@@ -98,7 +99,7 @@ public class AMUtil {
     //mapping
     public static void MAPPING_write(List<List<String>> list, String filename, String version) throws FileNotFoundException, UnsupportedEncodingException {
         //String path="C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\";
-        String path = "C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\"+version+"\\"+filename+"\\";
+        String path = outpath+version+"\\"+filename+"\\";
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();
