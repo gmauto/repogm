@@ -31,11 +31,11 @@ date=201704_201707
 #给辅助表添加分区，分区为版本号
 #sh auto_cretb.sh add_par 1
 #为数据检测表添加分区
-#sh auto_cretb.sh add_par_check 201704_201707
+#sh auto_cretb.sh add_par_check ${date}
 #存放原始数据的本地路径，通用不需要
-#sh auto_mr.sh  mkdir_local 201704_201707
+#sh auto_mr.sh  mkdir_local ${date}
 #向集群上传原始数据，通用不需要
-#sh auto_mr.sh put_raw 201704_201707
+#sh auto_mr.sh put_raw ${date}
 
 #format_delimiter
 #导入辅助表数据，参数是当前的版本号
@@ -54,10 +54,10 @@ date=201704_201707
 #打标签
 #sh auto_mr.sh delete_useless ${date} >${log_path}/delete_useless_${date}.log 2>&1
 #sh auto_mr.sh label_fm ${date} >${log_path}/label_fm_${date}.log 2>&1
-#sh auto_mr.sh label_fix ${date} >${log_path}/label_fix_${date}_2017-10-25_1.log 2>&1
+#sh auto_mr.sh label_fix ${date} >${log_path}/label_fix_${date}.log 2>&1
 #sh auto_mr.sh label_other ${date} >${log_path}/label_other_${date}.log 2>&1
 #sh auto_mr.sh label_doss ${date} >${log_path}/label_doss_${date}.log 2>&1
-#sh auto_mr.sh add_partition 201704_201707
+#sh auto_mr.sh add_partition ${date}
 #用于检测新增品牌车型车系
 #sh auto_check.sh part_check 
 #计算流水表
@@ -67,11 +67,11 @@ date=201704_201707
 
 #source /etc/profile
 #startTime=`date +"%s.%N"`
-#spark-submit --master yarn --driver-memory 3g --executor-memory 5g --num-executors 30 --executor-cores 1 /home/${user_name}/general/bin/zjxj.py 2017-04 2017-07 ipsos_test4 time_record_zjxj >../log/zjxj_test 2>&1 
-#spark-submit --master yarn --driver-memory 3g --executor-memory 5g --num-executors 30 --executor-cores 1 /home/${user_name}/general/bin/zhanbi.py 2017-04 2017-07 ipsos_test4 time_record_zhanbi > ../log/zhanbi_test 2>&1 
+#spark-submit --master yarn --driver-memory 3g --executor-memory 5g --num-executors 30 --executor-cores 1 /home/${user_name}/general/bin/zjxj.py 2017-04 2017-07 ${user_name} time_record_zjxj >../log/zjxj_test 2>&1
+#spark-submit --master yarn --driver-memory 3g --executor-memory 5g --num-executors 30 --executor-cores 1 /home/${user_name}/general/bin/zhanbi.py 2017-04 2017-07 ${user_name} time_record_zhanbi > ../log/zhanbi_test 2>&1
 #全国月度
-#spark-submit --master yarn --driver-memory 3g --executor-memory 5g --num-executors 30 --executor-cores 1 /home/${user_name}/general/bin/fjp.py 2010-04 2017-07 ipsos_test4 whole_country everymonth >../log/fjp_test 2>&1 
-#spark-submit --master yarn --driver-memory 3g --executor-memory 5g --num-executors 30 --executor-cores 1 /home/${user_name}/general/bin/jpl.py 2010-04 2017-07 ipsos_test4 whole_country everymonth >../log/jpl_test 2>&1 
+#spark-submit --master yarn --driver-memory 3g --executor-memory 5g --num-executors 30 --executor-cores 1 /home/${user_name}/general/bin/fjp.py 2010-04 2017-07 ${user_name} whole_country everymonth >../log/fjp_test 2>&1
+#spark-submit --master yarn --driver-memory 3g --executor-memory 5g --num-executors 30 --executor-cores 1 /home/${user_name}/general/bin/jpl.py 2010-04 2017-07 ${user_name} whole_country everymonth >../log/jpl_test 2>&1
 #单店月度
 
 #endTime=`date +"%s.%N"`

@@ -20,7 +20,8 @@ mapping=${path}/fx/mapping
 
 #ori fx目录 公共访问路径 存放kpi计算需要的表
 #TB_FACT=hdfs://ns1/user/ori/fx/auto/tb4kpi/fact
-TB_FACT=${path}/fx
+secondpath=fx
+TB_FACT=${path}/${secondpath}
 #TB_FACT=hdfs://ns1/user/ori/${TB_FACT}/fact_tmp
 TB_FACT_ORDER=${TB_FACT}/order_uniq
 TB_FACT_PART=${TB_FACT}/part

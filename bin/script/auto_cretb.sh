@@ -5,8 +5,9 @@ date=201704_201707
 database=ipsos_test4
 path=hdfs://ns1/user/${database}
 #public目录下要求目录深度为1
+secondpath=fx
 #存放源数据更换分隔符之后的路径
-TB_FACT=${path}/fx
+TB_FACT=${path}/${secondpath}
 PATH_CLAIM=${TB_FACT}/auto/raw/claim
 PATH_CUSTOMER=${TB_FACT}/auto/raw/customer
 PATH_DOSS=${TB_FACT}/auto/raw/doss
@@ -14,13 +15,13 @@ PATH_ORDER=${TB_FACT}/auto/raw/order
 PATH_PART=${TB_FACT_PART}
 #存放事实表的路径
 #tb_fact=${path}/public/auto/tb4kpi/fact
-tb_fact=${path}/fx
-tb_fact_tmp=${path}/fx/fact_tmp
+tb_fact=${TB_FACT}
+tb_fact_tmp=${TB_FACT}/fact_tmp
 #存放维度表的路径
 #tb_dim=hdfs://ns1/user/ori/public/auto/tb4kpi/dim
-tb_dim=${path}/fx
+tb_dim=${TB_FACT}
 #存放kpi计算结果的路径 计划传参进来 比如 kpi  badaqukpi
-tb_kpi=${path}/fx/auto/tbkpkires
+tb_kpi=${TB_FACT}/auto/tbkpkires
 #存放flow相关的表的路径
 tb_flow_dim=${path}/fx
 #存放flow表所需要的文件
@@ -28,7 +29,7 @@ tb_flow_dim=${path}/fx
 local_dim_files=/home/${database}/general/data/dim
 #flow结果表存放目录
 #hdfs dfs -ls mkdir -R ${path}/fx/fact_tmp
-tb_flow=${path}/fx/auto/flow
+tb_flow=${TB_FACT}/auto/flow
 #fact 表
 
 function mkdifile(){
