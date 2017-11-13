@@ -116,6 +116,10 @@ public class AMUtil {
     }
 
     //附件
+    /**
+     * @param xlsName outName
+     * @return AMUtil
+     * */
     public static void mkEncl(String xlsName, String outName, String version) throws IOException, BiffException {
         DimAbs da = new DimAbs(xlsName, DimName.SHEET_ENCLOSURE, DimName.INDEX_ENCLOSURE, DimName.KEY_ENCLOSURE, DimName.VAL_ENCLOSURE);
         Map<String, String> map = new HashMap<>();

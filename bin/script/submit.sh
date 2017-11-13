@@ -45,7 +45,8 @@ version=1
 #分隔符转换
 #sh auto_mr.sh format_delimiter ${date} >${log_path}/format_delimiter_part_${date}.log 2>&1
 #用于检测新增零件
-#sh auto_check.sh part_check 
+#sh auto_check.sh car_order_check
+#sh auto_check.sh car_doss_check
 #数据去重
 #sh auto_mr.sh uniq_cus ${date} >${log_path}/format_delimiter_cus_${date}.log 2>&1
 #sh auto_mr.sh uniq_doss  ${date} >${log_path}/format_delimiter_dosses_${date}.log 2>&1
