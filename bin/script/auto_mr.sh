@@ -2,8 +2,8 @@
 #source /etc/profile
 
 #用户名
-user_name=ipsos_test4
-data_base=ipsos_test4
+user_name=ipsos_test3
+data_base=ipsos_test3
 #设置reduce的个数
 reduce_num=10
 path=hdfs://ns1/user/${user_name}
@@ -14,13 +14,15 @@ log_path=/home/${user_name}/general/log
 PORMAT_JAR=/home/${user_name}/general/bin/format.jar
 FORMAT_MAINCLASS=com.gm.main.AutoRun
 
+
+secondpath=fx_path
 #mapping表路径
 #mapping=/user/ori/fx/auto/tb4kpi/dim/mapping
-mapping=${path}/fx/mapping
+mapping=${path}/${secondpath}/mapping
 
 #ori fx目录 公共访问路径 存放kpi计算需要的表
 #TB_FACT=hdfs://ns1/user/ori/fx/auto/tb4kpi/fact
-secondpath=fx
+
 TB_FACT=${path}/${secondpath}
 #TB_FACT=hdfs://ns1/user/ori/${TB_FACT}/fact_tmp
 TB_FACT_ORDER=${TB_FACT}/order_uniq
@@ -104,11 +106,11 @@ function mkdir_local(){
   exit -1
  fi
  date=$1
- mkdir ${LOCAL_PATH_PART}/${date}
- mkdir ${LOCAL_PATH_CLAIM}/${date}
- mkdir ${LOCAL_PATH_CUSTOMER}/${date}
- mkdir ${LOCAL_PATH_DOSS}/${date}
- mkdir ${LOCAL_PATH_ORDER}/${date}
+ mkdir -p ${LOCAL_PATH_PART}/${date}
+ mkdir -p ${LOCAL_PATH_CLAIM}/${date}
+ mkdir -p ${LOCAL_PATH_CUSTOMER}/${date}
+ mkdir -p ${LOCAL_PATH_DOSS}/${date}
+ mkdir -p ${LOCAL_PATH_ORDER}/${date}
 }
 
 #向集群上传源数据

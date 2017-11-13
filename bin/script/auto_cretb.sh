@@ -23,7 +23,7 @@ tb_dim=${TB_FACT}
 #存放kpi计算结果的路径 计划传参进来 比如 kpi  badaqukpi
 tb_kpi=${TB_FACT}/auto/tbkpkires
 #存放flow相关的表的路径
-tb_flow_dim=${path}/fx
+tb_flow_dim=${path}/${secondpath}
 #存放flow表所需要的文件
 #mkdir /home/${database}/general/data/flow
 local_dim_files=/home/${database}/general/data/dim
@@ -33,10 +33,10 @@ tb_flow=${TB_FACT}/auto/flow
 #fact 表
 
 function mkdifile(){
-hdfs dfs -mkdir ${path}/fx/fact_tmp
-hdfs dfs -mkdir -R  ${path}/fx/auto/tbkpkires
-hdfs dfs -mkdir -R ${path}/fx/fact_tmp
-mkdir /home/${database}/general/data/flow
+hdfs dfs -mkdir -p ${path}/${secondpath}/fact_tmp
+hdfs dfs -mkdir -p  ${path}/${secondpath}/auto/tbkpkires
+hdfs dfs -mkdir -p ${path}/${secondpath}/fact_tmp
+mkdir /home/${database}/general/data/dim
 }
 
 
@@ -814,6 +814,33 @@ ROW FORMAT DELIMITED
   LINES TERMINATED BY '\n' 
 LOCATION
   '${tb_dim}/dealer_info';
+
+  CREATE EXTERNAL TABLE type2(
+  type2 string,
+  id string)
+ROW FORMAT DELIMITED
+  FIELDS TERMINATED BY '\t'
+  LINES TERMINATED BY '\n'
+STORED AS INPUTFORMAT
+  'org.apache.hadoop.mapred.TextInputFormat'
+OUTPUTFORMAT
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  '${tb_dim}/type2';
+
+
+  CREATE EXTERNAL TABLE maint_type1(
+  maint_type1 string,
+  id string)
+ROW FORMAT DELIMITED
+  FIELDS TERMINATED BY '\t'
+  LINES TERMINATED BY '\n'
+STORED AS INPUTFORMAT
+  'org.apache.hadoop.mapred.TextInputFormat'
+OUTPUTFORMAT
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  '${tb_dim}/maint_type1';
   
 "
 }

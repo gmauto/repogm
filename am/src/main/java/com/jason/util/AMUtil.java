@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class AMUtil {
 
-    private static String outpath="C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\";
+    private static final String outpath="C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\";
     //将结果写出到文件
     public static void write(Map<String, String> map, String filename, String version) throws FileNotFoundException, UnsupportedEncodingException {
         //String path="C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\";

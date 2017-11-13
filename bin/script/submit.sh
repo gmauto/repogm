@@ -7,7 +7,7 @@ user_name=ipsos_test4
 log_path=/home/${user_name}/general/log
 
 date=201704_201707
-
+version=1
 #创建集群文件路径和本地文件路径
 #sh auto_cretb.sh mkdifile
 #创建kpi计算之前的五张数据存储表
@@ -25,11 +25,11 @@ date=201704_201707
 #创建数据检查表，在通用的即为生成原始数据的五张表
 #sh auto_cretb.sh cre_check_table 
 #导入辅助表数据，参数是当前的版本号
-#sh load_data.sh load_data_ff 3
+#sh load_data.sh load_data_ff ${version}
 #更新或者加载本地conf目录下的文件
-#sh load_data.sh load_localfile 3
+#sh load_data.sh load_localfile ${version}
 #给辅助表添加分区，分区为版本号
-#sh auto_cretb.sh add_par 1
+#sh auto_cretb.sh add_par ${version}
 #为数据检测表添加分区
 #sh auto_cretb.sh add_par_check ${date}
 #存放原始数据的本地路径，通用不需要
@@ -39,9 +39,9 @@ date=201704_201707
 
 #format_delimiter
 #导入辅助表数据，参数是当前的版本号
-#sh load_data.sh load_data_ff 3
+#sh load_data.sh load_data_ff ${version}
 #更新或者加载本地conf目录下的文件
-#sh load_data.sh load_localfile 3
+#sh load_data.sh load_localfile ${version}
 #分隔符转换
 #sh auto_mr.sh format_delimiter ${date} >${log_path}/format_delimiter_part_${date}.log 2>&1
 #用于检测新增零件
