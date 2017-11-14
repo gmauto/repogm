@@ -3,10 +3,12 @@
 date=201704_201707
 #主要用来给kpi建表
 database=ipsos_test4
-path=hdfs://ns1/user/${database}
+username=ipsos_test4
+path=hdfs://ns1/user/${username}
 #public目录下要求目录深度为1
+secondpath=fx
 #存放源数据更换分隔符之后的路径
-TB_FACT=${path}/fx
+TB_FACT=${path}/${secondpath}
 PATH_CLAIM=${TB_FACT}/auto/raw/claim
 PATH_CUSTOMER=${TB_FACT}/auto/raw/customer
 PATH_DOSS=${TB_FACT}/auto/raw/doss
@@ -14,28 +16,28 @@ PATH_ORDER=${TB_FACT}/auto/raw/order
 PATH_PART=${TB_FACT_PART}
 #存放事实表的路径
 #tb_fact=${path}/public/auto/tb4kpi/fact
-tb_fact=${path}/fx
-tb_fact_tmp=${path}/fx/fact_tmp
+tb_fact=${TB_FACT}
+tb_fact_tmp=${TB_FACT}/fact_tmp
 #存放维度表的路径
 #tb_dim=hdfs://ns1/user/ori/public/auto/tb4kpi/dim
-tb_dim=${path}/fx
+tb_dim=${TB_FACT}
 #存放kpi计算结果的路径 计划传参进来 比如 kpi  badaqukpi
-tb_kpi=${path}/fx/auto/tbkpkires
+tb_kpi=${TB_FACT}/auto/tbkpkires
 #存放flow相关的表的路径
-tb_flow_dim=${path}/fx
+tb_flow_dim=${path}/${secondpath}
 #存放flow表所需要的文件
 #mkdir /home/${database}/general/data/flow
-local_dim_files=/home/${database}/general/data/dim
+local_dim_files=/home/${username}/general/data/dim
 #flow结果表存放目录
 #hdfs dfs -ls mkdir -R ${path}/fx/fact_tmp
-tb_flow=${path}/fx/auto/flow
+tb_flow=${TB_FACT}/auto/flow
 #fact 表
 
 function mkdifile(){
-hdfs dfs -mkdir ${path}/fx/fact_tmp
-hdfs dfs -mkdir -R  ${path}/fx/auto/tbkpkires
-hdfs dfs -ls mkdir -R ${path}/fx/fact_tmp
-mkdir /home/${database}/general/data/flow
+hdfs dfs -mkdir -p ${path}/${secondpath}/fact_tmp
+hdfs dfs -mkdir -p  ${path}/${secondpath}/auto/tbkpkires
+hdfs dfs -mkdir -p ${path}/${secondpath}/fact_tmp
+mkdir /home/${username}/general/data/dim
 }
 
 
@@ -642,7 +644,7 @@ LOCATION
   '${tb_dim}/date_label';
 
 CREATE EXTERNAL TABLE distributor(
-  asccode string,
+   asccode string,
   chcode string,
   asc string)
 PARTITIONED BY (
@@ -805,14 +807,41 @@ LOCATION
   
   
 CREATE EXTERNAL TABLE dealer_info(
- ch_code string, 
   asc_code string, 
+ ch_code string, 
   asc string)
 ROW FORMAT DELIMITED 
   FIELDS TERMINATED BY '\t' 
   LINES TERMINATED BY '\n' 
 LOCATION
   '${tb_dim}/dealer_info';
+
+  CREATE EXTERNAL TABLE type2(
+  type2 string,
+  id string)
+ROW FORMAT DELIMITED
+  FIELDS TERMINATED BY '\t'
+  LINES TERMINATED BY '\n'
+STORED AS INPUTFORMAT
+  'org.apache.hadoop.mapred.TextInputFormat'
+OUTPUTFORMAT
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  '${tb_dim}/type2';
+
+
+  CREATE EXTERNAL TABLE maint_type1(
+  maint_type1 string,
+  id string)
+ROW FORMAT DELIMITED
+  FIELDS TERMINATED BY '\t'
+  LINES TERMINATED BY '\n'
+STORED AS INPUTFORMAT
+  'org.apache.hadoop.mapred.TextInputFormat'
+OUTPUTFORMAT
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  '${tb_dim}/maint_type1';
   
 "
 }
@@ -1371,6 +1400,7 @@ use ${database};
   num string,
   asc_code string)
 PARTITIONED BY (
+region string,
   mon_p string,
   kpi string)
 ROW FORMAT DELIMITED
@@ -1390,6 +1420,7 @@ CREATE EXTERNAL TABLE kpi_a_bnbw_${name}(
   num string,
   asc_code string)
 PARTITIONED BY (
+region string,
   mon_p string,
   kpi string)
 ROW FORMAT DELIMITED
@@ -1408,6 +1439,7 @@ CREATE EXTERNAL TABLE kpi_a_level_${name}(
   num string,
   asc_code string)
 PARTITIONED BY (
+region string,
   mon_p string,
   kpi string)
 ROW FORMAT DELIMITED
@@ -1426,6 +1458,7 @@ CREATE EXTERNAL TABLE kpi_agetype_${name}(
   num string,
   asc_code string)
 PARTITIONED BY (
+region string,
   mon_p string,
   kpi string)
 ROW FORMAT DELIMITED
@@ -1446,6 +1479,7 @@ CREATE EXTERNAL TABLE kpi_b_agetype_${name}(
   num string,
   asc_code string)
 PARTITIONED BY (
+region string,
   mon_p string,
   kpi string)
 ROW FORMAT DELIMITED
@@ -1466,6 +1500,7 @@ CREATE EXTERNAL TABLE kpi_b_bnbw_${name}(
   num string,
   asc_code string)
 PARTITIONED BY (
+region string,
   mon_p string,
   kpi string)
 ROW FORMAT DELIMITED
@@ -1485,6 +1520,7 @@ CREATE EXTERNAL TABLE kpi_b_level_${name}(
   num string,
   asc_code string)
 PARTITIONED BY (
+region string,
   mon_p string,
   kpi string)
 ROW FORMAT DELIMITED
@@ -1503,6 +1539,7 @@ CREATE EXTERNAL TABLE kpi_bnbw_${name}(
   num string,
   asc_code string)
 PARTITIONED BY (
+region string,
   mon_p string,
   kpi string)
 ROW FORMAT DELIMITED
@@ -1520,6 +1557,7 @@ CREATE EXTERNAL TABLE kpi_total_${name}(
   num string,
   asc_code string)
 PARTITIONED BY (
+  region string,
   mon_p string,
   kpi string)
 ROW FORMAT DELIMITED
@@ -1634,7 +1672,8 @@ bwjk  string,
 mileage  string,
 maint_type  string,
 primary_classification  string,
-second_level_classification  string
+second_level_classification  string,
+type2 string
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\001'
@@ -1666,7 +1705,9 @@ bnjk  string,
 bwjk  string,
 mileage  string,
 primary_classification  string,
-second_level_classification  string
+second_level_classification  string,
+maint_type1 string,              	                    
+type2 string
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\001'
@@ -1698,7 +1739,9 @@ bnjk  string,
 bwjk  string,
 mileage  string,
 primary_classification  string,
-second_level_classification  string
+second_level_classification  string,
+maint_type1 string,              	                    
+type2 string
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\001'
@@ -1731,7 +1774,9 @@ bnjk  string,
 bwjk  string,
 mileage  string,
 primary_classification  string,
-second_level_classification  string
+second_level_classification  string,
+maint_type1 string,              	                    
+type2 string
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\001'
