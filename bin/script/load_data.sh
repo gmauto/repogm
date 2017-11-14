@@ -1,8 +1,9 @@
 #!/bin/bash
 
 database=ipsos_test4
-local_dim_files=/home/${database}/general/data/dim
-local_file=/home/${database}/general/bin/conf
+username=ipsos_test4
+local_dim_files=/home/${username}/general/data/dim
+local_file=/home/${username}/general/bin/conf
 function load_data_ff(){
 if [ $# -lt 1 ]
 then

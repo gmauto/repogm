@@ -3,7 +3,8 @@
 date=201704_201707
 #主要用来给kpi建表
 database=ipsos_test4
-path=hdfs://ns1/user/${database}
+username=ipsos_test4
+path=hdfs://ns1/user/${username}
 #public目录下要求目录深度为1
 secondpath=fx
 #存放源数据更换分隔符之后的路径
@@ -26,7 +27,7 @@ tb_kpi=${TB_FACT}/auto/tbkpkires
 tb_flow_dim=${path}/${secondpath}
 #存放flow表所需要的文件
 #mkdir /home/${database}/general/data/flow
-local_dim_files=/home/${database}/general/data/dim
+local_dim_files=/home/${username}/general/data/dim
 #flow结果表存放目录
 #hdfs dfs -ls mkdir -R ${path}/fx/fact_tmp
 tb_flow=${TB_FACT}/auto/flow
@@ -36,7 +37,7 @@ function mkdifile(){
 hdfs dfs -mkdir -p ${path}/${secondpath}/fact_tmp
 hdfs dfs -mkdir -p  ${path}/${secondpath}/auto/tbkpkires
 hdfs dfs -mkdir -p ${path}/${secondpath}/fact_tmp
-mkdir /home/${database}/general/data/dim
+mkdir /home/${username}/general/data/dim
 }
 
 

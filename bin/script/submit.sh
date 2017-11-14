@@ -2,6 +2,7 @@
 
 #用户名
 user_name=ipsos_test4
+database=ipsos_test4
 
 #日志路径
 log_path=/home/${user_name}/general/log
@@ -68,11 +69,11 @@ version=1
 
 #source /etc/profile
 #startTime=`date +"%s.%N"`
-#spark-submit --master yarn --driver-memory 3g --executor-memory 5g --num-executors 30 --executor-cores 1 /home/${user_name}/general/bin/zjxj.py 2017-04 2017-07 ${user_name} time_record_zjxj >../log/zjxj_test 2>&1
-#spark-submit --master yarn --driver-memory 3g --executor-memory 5g --num-executors 30 --executor-cores 1 /home/${user_name}/general/bin/zhanbi.py 2017-04 2017-07 ${user_name} time_record_zhanbi > ../log/zhanbi_test 2>&1
+#spark-submit --master yarn --driver-memory 3g --executor-memory 5g --num-executors 30 --executor-cores 1 /home/${user_name}/general/bin/zjxj.py 2017-04 2017-07 ${database} time_record_zjxj >../log/zjxj_test 2>&1
+#spark-submit --master yarn --driver-memory 3g --executor-memory 5g --num-executors 30 --executor-cores 1 /home/${user_name}/general/bin/zhanbi.py 2017-04 2017-07 ${database} time_record_zhanbi > ../log/zhanbi_test 2>&1
 #全国月度
-#spark-submit --master yarn --driver-memory 3g --executor-memory 5g --num-executors 30 --executor-cores 1 /home/${user_name}/general/bin/fjp.py 2010-04 2017-07 ${user_name} whole_country everymonth >../log/fjp_test 2>&1
-#spark-submit --master yarn --driver-memory 3g --executor-memory 5g --num-executors 30 --executor-cores 1 /home/${user_name}/general/bin/jpl.py 2010-04 2017-07 ${user_name} whole_country everymonth >../log/jpl_test 2>&1
+#spark-submit --master yarn --driver-memory 3g --executor-memory 5g --num-executors 30 --executor-cores 1 /home/${user_name}/general/bin/fjp.py 2010-04 2017-07 ${database} whole_country everymonth >../log/fjp_test 2>&1
+#spark-submit --master yarn --driver-memory 3g --executor-memory 5g --num-executors 30 --executor-cores 1 /home/${user_name}/general/bin/jpl.py 2010-04 2017-07 ${database} whole_country everymonth >../log/jpl_test 2>&1
 #单店月度
 
 #endTime=`date +"%s.%N"`

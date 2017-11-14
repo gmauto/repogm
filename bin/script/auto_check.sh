@@ -2,8 +2,9 @@
 #本脚本要求在 ori用户下执行
 #零件编号新增查询
 database="ipsos_test4"
-conf_dir=/home/${database}/general/bin/conf
-log_path=/home/${database}/general/log/check
+username=ipsos_test4
+conf_dir=/home/${username}/general/bin/conf
+log_path=/home/${username}/general/log/check
 mkdir ${log_path}
 function part_check() {
 spark-sql --master yarn --driver-memory 6g --executor-memory 6g --num-executors 20 --executor-cores 1 -e "
