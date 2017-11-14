@@ -16,8 +16,8 @@ public class AMUtil {
 
     //将结果写出到文件
     public static void write(Map<String, String> map, String filename, String version) throws FileNotFoundException, UnsupportedEncodingException {
-        //String path="C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\";
-        String path = "C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\"+version+"\\"+filename+"\\";
+        String path="C:\\Users\\Administrator\\Desktop\\aa\\";
+        //String path = "C:\\Users\\ww\\Desktop\\utf-8\\simlafile\\"+version+"\\"+filename+"\\";
         File file = new File(path);
         if (!file.exists()) {
             file.mkdir();

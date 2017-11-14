@@ -1,0 +1,151 @@
+Index: am/src/main/java/com/jason/main/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- am/src/main/java/com/jason/main/Main.java	(date 1510109802000)
++++ am/src/main/java/com/jason/main/Main.java	(revision )
+@@ -12,23 +12,27 @@
+     public static void main(String[] args) throws IOException, BiffException {
+         String filename = "DDS数据计算辅助表_1104.xls";
+         String version = "3";
+-        AMUtil.mkEncl(filename,"enclosure",version);
+-        AMUtil.mkEgO(filename,"engine_oil",version);
+-        AMUtil.mkHFP(filename,"high_flow_parts",version);
+-        AMUtil.mkMtc(filename,"maintnance",version);
+-        AMUtil.mkFilter(filename,"filter",version);
+-        AMUtil.mkMarkOrder(filename,"mark",version);
+-        AMUtil.mkMarkDoss(filename,"mark_doss",version);
+-        AMUtil.mkCity(filename,"city",version);
+-        AMUtil.mkProvince(filename,"province",version);
+-        AMUtil.mkPrimaryClassification(filename,"primary_classification",version);
+-        AMUtil.mkName(filename,"name",version);
+-        AMUtil.mkDistributor(filename,"distributor",version);
+-        AMUtil.mkSexual(filename,"sexual",version);
+-        AMUtil.mkSecondLevelClassification(filename,"second_level_classification",version);
+-        AMUtil.mkCHE(filename,"CHE",version);
+-        AMUtil.mkASC_MAPPING(filename,"asc_mapping",version);
+-        AMUtil.mkMAPPING(filename,"mapping",version);
+-        AMUtil.mk_doss_asc(filename,"doss_asc",version);
++//        AMUtil.mkEncl(filename,"enclosure",version);
++//        AMUtil.mkEgO(filename,"engine_oil",version);
++//        AMUtil.mkHFP(filename,"high_flow_parts",version);
++//        AMUtil.mkMtc(filename,"maintnance",version);
++//        AMUtil.mkFilter(filename,"filter",version);
++//        AMUtil.mkMarkOrder(filename,"mark",version);
++//        AMUtil.mkMarkDoss(filename,"mark_doss",version);
++//        AMUtil.mkCity(filename,"city",version);
++//        AMUtil.mkProvince(filename,"province",version);
++//        AMUtil.mkPrimaryClassification(filename,"primary_classification",version);
++//        AMUtil.mkName(filename,"name",version);
++//        AMUtil.mkDistributor(filename,"distributor",version);
++//        AMUtil.mkSexual(filename,"sexual",version);
++//        AMUtil.mkSecondLevelClassification(filename,"second_level_classification",version);
++//        AMUtil.mkCHE(filename,"CHE",version);
++//        AMUtil.mkASC_MAPPING(filename,"asc_mapping",version);
++//        AMUtil.mkMAPPING(filename,"mapping",version);
++//        AMUtil.mk_doss_asc(filename,"doss_asc",version);
++//        AMUtil.mk_LocalFilter(filename,"local_filter",version);
++//        AMUtil.mk_LocalEngineoil(filename,"local_engineoil",version);
++//        AMUtil.mkLocalMark(filename,"local_mark",version);
++        AMUtil.mkLocal_MarkDoss(filename,"local_mark_doss",version);
+     }
+ }
+Index: am/src/main/java/com/jason/util/DimName.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- am/src/main/java/com/jason/util/DimName.java	(date 1510109802000)
++++ am/src/main/java/com/jason/util/DimName.java	(revision )
+@@ -46,6 +46,12 @@
+     public static final int[] KEY_MARK_CHE = {0, 1, 2};
+     public static final int[] VAL_MARK_CHE = {0, 1, 2};
+ 
++    //Local Mark文件
++    public static final String LocalMark = "车型对照-order表";
++    public static final String[] INDEX_LocalMark = {"0", "1", "2", "3", "4"};
++    public static final int[] KEY_LocalMark = {0, 1, 2, 3, 4};
++    public static final int[] VAL_LocalMark = {0, 1, 2, 3, 4};
++
+     //asc_mapping文件
+     public static final String MARK_ASCMAPPING = "asc_info";
+     public static final String[] INDEX_ASCMAPPING = {"1", "7"};
+@@ -58,6 +64,18 @@
+     public static final int[] KEY_DOSS_ASC = {0};
+     public static final int[] VAL_DOSS_ASC = {1};
+ 
++    //LOCAL ENGINEOIL文件
++    public static final String LOCAL_ENGINEOIL = "机油清单";
++    public static final String[] INDEX_LOCAL_ENGINEOIL = {"0"};
++    public static final int[] KEY_LOCAL_ENGINEOIL = {0};
++    public static final int[] VAL_LOCAL_ENGINEOIL = {0};
++
++    //LOCAL FILTER文件
++    public static final String LOCAL_FILTER = "机滤清单";
++    public static final String[] INDEX_LOCAL_FILTER = {"0"};
++    public static final int[] KEY_LOCAL_FILTER = {0};
++    public static final int[] VAL_LOCAL_FILTER = {0};
++
+     //mapping文件
+     public static final String MARK_MAPPING = "mapping";
+     public static final String[] INDEX_MAPPING = {"0", "1","2","3"};
+Index: am/src/main/java/com/jason/util/AMUtil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- am/src/main/java/com/jason/util/AMUtil.java	(date 1510109802000)
++++ am/src/main/java/com/jason/util/AMUtil.java	(revision )
+@@ -184,6 +184,14 @@
+         AMUtil.write(map, outName ,version);
+     }
+ 
++    //local mark
++    public static void mkLocalMark(String xlsName, String outName, String version) throws IOException, BiffException {
++        DimAbs da = new DimAbs(xlsName, DimName.LocalMark, DimName.INDEX_LocalMark, DimName.KEY_LocalMark, DimName.VAL_LocalMark);
++        Map<String, String> map = new HashMap<>();
++        da.makeDim(map);
++        AMUtil.CHEwrite(map, outName ,version);
++    }
++
+     //CHE
+     public static void mkCHE(String xlsName, String outName, String version) throws IOException, BiffException {
+         DimAbs da = new DimAbs(xlsName, DimName.MARK_ORDER, DimName.INDEX_MARK_CHE, DimName.KEY_MARK_CHE, DimName.VAL_MARK_CHE);
+@@ -221,6 +229,14 @@
+         AMUtil.write(map, outName,version);
+     }
+ 
++    //local mark_doss
++    public static void mkLocal_MarkDoss(String xlsName, String outName, String version) throws IOException, BiffException {
++        DimAbs da = new DimAbs(xlsName, DimName.MARK_DOSS, DimName.INDEX_MARK_DOSS, DimName.KEY_MARK_DOSS, DimName.VAL_MARK_DOSS);
++        Map<String, String> map = new HashMap<>();
++        da.makeDim(map);
++        AMUtil.DOSS_ASCwrite(map, outName,version);
++    }
++
+     //doss_asc
+     public static void mk_doss_asc(String xlsName, String outName, String version) throws IOException, BiffException {
+         DimAbs da = new DimAbs(xlsName, DimName.MARK_DOSS_ASC, DimName.INDEX_DOSS_ASC, DimName.KEY_DOSS_ASC, DimName.VAL_DOSS_ASC);
+@@ -229,6 +245,21 @@
+         AMUtil.DOSS_ASCwrite(map, outName,version);
+     }
+ 
++    //local filter
++    public static void mk_LocalFilter(String xlsName, String outName, String version) throws IOException, BiffException {
++        DimAbs da = new DimAbs(xlsName, DimName.LOCAL_FILTER, DimName.INDEX_LOCAL_FILTER, DimName.KEY_LOCAL_FILTER, DimName.VAL_LOCAL_FILTER);
++        Map<String, String> map = new HashMap<>();
++        da.makeDim(map);
++        AMUtil.CHEwrite(map, outName,version);
++    }
++    //local filter
++    public static void mk_LocalEngineoil(String xlsName, String outName, String version) throws IOException, BiffException {
++        DimAbs da = new DimAbs(xlsName, DimName.LOCAL_FILTER, DimName.INDEX_LOCAL_FILTER, DimName.KEY_LOCAL_FILTER, DimName.VAL_LOCAL_FILTER);
++        Map<String, String> map = new HashMap<>();
++        da.makeDim(map);
++        AMUtil.CHEwrite(map, outName,version);
++    }
++
+     //city flow辅助表
+     public static void mkCity(String xlsName, String outName, String version) throws IOException, BiffException {
+         DimAbs da = new DimAbs(xlsName, DimName.SHEET_CITY, DimName.INDEX_CITY, DimName.KEY_CITY, DimName.VAL_CITY);
