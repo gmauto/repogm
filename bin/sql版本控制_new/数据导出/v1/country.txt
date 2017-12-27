@@ -3,14 +3,11 @@
 nohup hive -e "
 use ipsos_test1;
 set spark.sql.crossJoin.enabled=true;
-insert overwrite table hebingbiao partition(region)
 
 select h1.a_level,h1.b_level,h1.age_type,h1.kpi,h1.kpi_name,h1.mon,
 h1.own_num,
 h2.quar_own_num,
-h3.year_own_num,
-h4.base_num,h5.quar_base_own_num,h6.year_base_num
-,h1.asc_code,h1.tier,h1.region
+h3.year_own_num,h1.asc_code,h1.tier,h1.region
 from
 (
 select m.a_level,m.b_level,m.age_type,m.kpi,n.kpi_name,m.mon,m.asc_code,
@@ -389,8 +386,7 @@ and h1.age_type=h3.age_type
 and h1.mon=h3.mon
 and h1.asc_code=h3.asc_code
 and h1.region=h3.region
-and h1.tier=h3.tier
-
+and h1.tier=h3.tier;
 " >country 2>log1 &
 
 
