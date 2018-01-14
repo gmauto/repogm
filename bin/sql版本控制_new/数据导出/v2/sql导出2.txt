@@ -1,0 +1,1478 @@
+﻿nohup hive -e "
+use ipsos_test1;
+select null,h1.a_level,h1.b_level,h1.age_type,h1.kpi_kpi,h1.d_time,h1.time_level,
+h1.own_num,h1.country_base_num,h1.areas_base_num,h4.city_base_num,'0' as level_base_num,h1.asc_code,h1.asc_code_level,h1.tier
+from
+(
+select null,h1.a_level,h1.b_level,h1.age_type,h1.kpi_kpi,h1.d_time,h1.time_level,
+h1.own_num,h1.country_base_num,h3.areas_base_num,'0' as level_base_num,h1.asc_code,h1.asc_code_level,h1.tier
+from
+(
+select null,h1.a_level,h1.b_level,h1.age_type,h1.kpi_kpi,h1.d_time,h1.time_level,
+h1.own_num,h2.country_base_num,'0' as level_base_num,h1.asc_code,h1.asc_code_level,h1.tier
+from
+(select m.a_level,m.b_level,m.age_type,n.kpi_kpi,m.d_time,'1' as time_level,
+m.own_num2 as own_num,m.asc_code,'1' as asc_code_level,'1' as tier
+from
+(
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_b_agetype_8areas
+where region='year_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+bnbw as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_b_bnbw_8areas
+where region='year_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_a_agetype_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='year_asc'  and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+bnbw as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_a_bnbw_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='year_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' AS a_level,
+'ALL' as b_level,
+'ALL' as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_total_8areas
+where region='year_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+'ALL' as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_b_level_8areas
+where region='year_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level ,
+concat('ALL-',a_level) as b_level,
+'ALL' as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_a_level_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='year_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_agetype_8areas
+where region='year_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+bnbw as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_bnbw_8areas
+where region='year_asc' and mon >= '2011-01' and mon <= '2011-06') m 
+join base_kpi n on m.kpi=n.kpi_kpi
+join ori.mon_mapping s on s.time=m.d_time and version='year'
+union all
+select m.a_level,m.b_level,m.age_type,n.kpi_kpi,m.d_time,'2' as time_level,
+m.own_num2 as own_num,m.asc_code,'1' as asc_code_level,'1' as tier
+from
+(
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_agetype_8areas
+where region='quarter_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_bnbw_8areas
+where region='quarter_asc'  and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_agetype_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='quarter_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_bnbw_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='quarter_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' AS a_level,
+'ALL' as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_total_8areas
+where region='quarter_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_level_8areas
+where region='quarter_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level ,
+concat('ALL-',a_level) as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_level_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='quarter_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_agetype_8areas
+where region='quarter_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_bnbw_8areas
+where region='quarter_asc' and mon >= '2011-01' and mon <= '2011-06') m 
+join base_kpi n on m.kpi=n.kpi_kpi
+join ori.mon_mapping s on s.time=m.d_time and version='quarter'
+union all
+select m.a_level,m.b_level,m.age_type,n.kpi_kpi,m.d_time,'3' as time_level,
+m.own_num2 as own_num,m.asc_code,'1' as asc_code_level,'1' as tier
+from
+(
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_agetype_8areas
+where region='everymonth_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_bnbw_8areas
+where region='everymonth_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_agetype_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='everymonth_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_bnbw_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='everymonth_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' AS a_level,
+'ALL' as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_total_8areas
+where region='everymonth_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_level_8areas
+where region='everymonth_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level ,
+concat('ALL-',a_level) as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_level_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='everymonth_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_agetype_8areas
+where region='everymonth_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_bnbw_8areas
+where region='everymonth_asc' and mon >= '2011-01' and mon <= '2011-06') m 
+join base_kpi n on m.kpi=n.kpi_kpi
+join ori.mon_mapping s on s.time=m.d_time and version='everymonth') h1
+left join (select h1.a_level,h1.b_level,h1.age_type,h1.kpi_kpi,h1.d_time,h1.time_level,
+h1.country_base_num,t.asc_code,h1.asc_code_level,h1.tier
+from (
+select m.a_level,m.b_level,m.age_type,n.kpi_kpi,m.d_time,'1' as time_level,
+avg(m.own_num2) as country_base_num,m.asc_code,'1' as asc_code_level,'1' as tier
+from
+(
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_b_agetype_8areas
+where region='year_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+bnbw as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_b_bnbw_8areas
+where region='year_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_a_agetype_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='year_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+bnbw as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_a_bnbw_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='year_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' AS a_level,
+'ALL' as b_level,
+'ALL' as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_total_8areas
+where region='year_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+'ALL' as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_b_level_8areas
+where region='year_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level ,
+concat('ALL-',a_level) as b_level,
+'ALL' as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_a_level_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='year_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_agetype_8areas
+where region='year_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+bnbw as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_bnbw_8areas
+where region='year_whole_country' and mon >= '2011-01' and mon <= '2011-06') m 
+join base_kpi n on m.kpi=n.kpi_kpi
+join ori.mon_mapping s on s.time=m.d_time and version='year'
+group by m.kpi,m.a_level,m.b_level,m.age_type,m.d_time,n.kpi_kpi,m.asc_code
+union all
+select m.a_level,m.b_level,m.age_type,n.kpi_kpi,m.d_time,'2' as time_level,
+avg(m.own_num2) as country_base_num,m.asc_code,'1' as asc_code_level,'1' as tier
+from
+(
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_agetype_8areas
+where region='quarter_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_bnbw_8areas
+where region='quarter_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_agetype_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='quarter_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_bnbw_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='quarter_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' AS a_level,
+'ALL' as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_total_8areas
+where region='quarter_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_level_8areas
+where region='quarter_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level ,
+concat('ALL-',a_level) as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_level_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='quarter_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_agetype_8areas
+where region='quarter_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_bnbw_8areas
+where region='quarter_whole_country' and mon >= '2011-01' and mon <= '2011-06') m 
+join base_kpi n on m.kpi=n.kpi_kpi
+join ori.mon_mapping s on s.time=m.d_time and version='quarter'
+group by m.kpi,m.a_level,m.b_level,m.age_type,m.d_time,n.kpi_kpi,m.asc_code
+union all
+select m.a_level,m.b_level,m.age_type,n.kpi_kpi,m.d_time,'3' as time_level,
+avg(m.own_num2) as country_base_num,m.asc_code,'1' as asc_code_level,'1' as tier
+from
+(
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_agetype_8areas
+where region='everymonth_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_bnbw_8areas
+where region='everymonth_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_agetype_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='everymonth_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_bnbw_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='everymonth_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' AS a_level,
+'ALL' as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_total_8areas
+where region='everymonth_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_level_8areas
+where region='everymonth_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level ,
+concat('ALL-',a_level) as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_level_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='everymonth_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_agetype_8areas
+where region='everymonth_whole_country' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_bnbw_8areas
+where region='everymonth_whole_country' and mon >= '2011-01' and mon <= '2011-06') m 
+join base_kpi n on m.kpi=n.kpi_kpi
+join ori.mon_mapping s on s.time=m.d_time and version='everymonth'
+group by m.a_level,m.b_level,m.age_type,m.d_time,n.kpi_kpi,m.asc_code
+) h1
+join ori.asc_mapping t on t.group_name=h1.asc_code ) h2
+on h1.kpi_kpi=h2.kpi_kpi
+and h1.a_level=h2.a_level
+and h1.b_level=h2.b_level
+and h1.age_type=h2.age_type
+and h1.d_time=h2.d_time
+and h1.asc_code=h2.asc_code
+)h1
+left join
+(
+
+select h1.a_level,h1.b_level,h1.age_type,h1.kpi_kpi,h1.d_time,h1.time_level,
+h1.areas_base_num,t.asc_code,h1.asc_code_level,h1.tier
+from (
+select m.a_level,m.b_level,m.age_type,n.kpi_kpi,m.d_time,'1' as time_level,
+avg(m.own_num2) as areas_base_num,m.asc_code,'2' as asc_code_level,'1' as tier
+from
+(
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_b_agetype_8areas
+where region='year_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+bnbw as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_b_bnbw_8areas
+where region='year_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_a_agetype_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='year_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+bnbw as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_a_bnbw_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='year_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' AS a_level,
+'ALL' as b_level,
+'ALL' as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_total_8areas
+where region='year_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+'ALL' as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_b_level_8areas
+where region='year_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level ,
+concat('ALL-',a_level) as b_level,
+'ALL' as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_a_level_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='year_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_agetype_8areas
+where region='year_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+bnbw as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_bnbw_8areas
+where region='year_8areas' and mon >= '2011-01' and mon <= '2011-06') m 
+join base_kpi n on m.kpi=n.kpi_kpi
+join ori.mon_mapping s on s.time=m.d_time and version='year'
+group by m.kpi,m.a_level,m.b_level,m.age_type,m.d_time,n.kpi_kpi,m.asc_code
+union all
+select m.a_level,m.b_level,m.age_type,n.kpi_kpi,m.d_time,'2' as time_level,
+avg(m.own_num2) as areas_base_num,m.asc_code,'2' as asc_code_level,'1' as tier
+from
+(
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_agetype_8areas
+where region='quarter_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_bnbw_8areas
+where region='quarter_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_agetype_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='quarter_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_bnbw_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='quarter_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' AS a_level,
+'ALL' as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_total_8areas
+where region='quarter_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_level_8areas
+where region='quarter_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level ,
+concat('ALL-',a_level) as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_level_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='quarter_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_agetype_8areas
+where region='quarter_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_bnbw_8areas
+where region='quarter_8areas' and mon >= '2011-01' and mon <= '2011-06') m 
+join base_kpi n on m.kpi=n.kpi_kpi
+join ori.mon_mapping s on s.time=m.d_time and version='quarter'
+group by m.kpi,m.a_level,m.b_level,m.age_type,m.d_time,n.kpi_kpi,m.asc_code
+union all
+select m.a_level,m.b_level,m.age_type,n.kpi_kpi,m.d_time,'3' as time_level,
+avg(m.own_num2) as areas_base_num,m.asc_code,'2' as asc_code_level,'1' as tier
+from
+(
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_agetype_8areas
+where region='everymonth_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_bnbw_8areas
+where region='everymonth_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_agetype_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='everymonth_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_bnbw_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='everymonth_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' AS a_level,
+'ALL' as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_total_8areas
+where region='everymonth_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_level_8areas
+where region='everymonth_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level ,
+concat('ALL-',a_level) as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_level_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='everymonth_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_agetype_8areas
+where region='everymonth_8areas' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_bnbw_8areas
+where region='everymonth_8areas' and mon >= '2011-01' and mon <= '2011-06') m 
+join base_kpi n on m.kpi=n.kpi_kpi
+join ori.mon_mapping s on s.time=m.d_time and version='everymonth'
+group by m.kpi,m.a_level,m.b_level,m.age_type,m.d_time,n.kpi_kpi,m.asc_code
+) h1
+join ori.asc_mapping t on t.group_name=h1.asc_code
+)h3 on h1.kpi_kpi=h3.kpi_kpi
+and h1.a_level=h3.a_level
+and h1.b_level=h3.b_level
+and h1.age_type=h3.age_type
+and h1.d_time=h3.d_time
+and h1.asc_code=h3.asc_code
+) h1
+left join
+(select h1.a_level,h1.b_level,h1.age_type,h1.kpi_kpi,h1.d_time,h1.time_level,
+h1.city_base_num,t.asc_code,h1.asc_code_level,h1.tier
+from
+(select m.a_level,m.b_level,m.age_type,n.kpi_kpi,m.d_time,'1' as time_level,
+avg(m.own_num2) as city_base_num,p.city,'1' as asc_code_level,'1' as tier
+from
+(
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_b_agetype_8areas
+where region='year_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+bnbw as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_b_bnbw_8areas
+where region='year_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_a_agetype_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='year_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+bnbw as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_a_bnbw_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='year_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' AS a_level,
+'ALL' as b_level,
+'ALL' as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_total_8areas
+where region='year_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+'ALL' as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_b_level_8areas
+where region='year_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level ,
+concat('ALL-',a_level) as b_level,
+'ALL' as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_a_level_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='year_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_agetype_8areas
+where region='year_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+bnbw as age_type,
+substr(mon,1,4) as d_time,
+num as own_num2,
+asc_code
+from kpi_bnbw_8areas
+where region='year_asc' and mon >= '2011-01' and mon <= '2011-06') m 
+join base_kpi n on m.kpi=n.kpi_kpi
+join ori.mon_mapping s on s.time=m.d_time and version='year'
+join ori.asc_city p on m.asc_code=p.asc_code
+group by m.kpi,m.a_level,m.b_level,m.age_type,m.d_time,n.kpi_kpi,p.city
+union all
+select m.a_level,m.b_level,m.age_type,n.kpi_kpi,m.d_time,'2' as time_level,
+avg(m.own_num2) as city_base_num,p.city,'1' as asc_code_level,'1' as tier
+from
+(
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_agetype_8areas
+where region='quarter_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_bnbw_8areas
+where region='quarter_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_agetype_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='quarter_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_bnbw_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='quarter_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' AS a_level,
+'ALL' as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_total_8areas
+where region='quarter_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_level_8areas
+where region='quarter_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level ,
+concat('ALL-',a_level) as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_level_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='quarter_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_agetype_8areas
+where region='quarter_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_bnbw_8areas
+where region='quarter_asc' and mon >= '2011-01' and mon <= '2011-06') m 
+join base_kpi n on m.kpi=n.kpi_kpi
+join ori.mon_mapping s on s.time=m.d_time and version='quarter'
+join ori.asc_city p on m.asc_code=p.asc_code
+group by m.kpi,m.a_level,m.b_level,m.age_type,m.d_time,n.kpi_kpi,p.city
+union all
+select m.a_level,m.b_level,m.age_type,n.kpi_kpi,m.d_time,'3' as time_level,
+avg(m.own_num2) as city_base_num,p.city,'1' as asc_code_level,'1' as tier
+from
+(
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_agetype_8areas
+where region='everymonth_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_bnbw_8areas
+where region='everymonth_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_agetype_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='everymonth_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all
+select kpi,
+a_level,
+concat('ALL-',a_level) as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_bnbw_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='everymonth_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' AS a_level,
+'ALL' as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_total_8areas
+where region='everymonth_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level,
+case 
+when a_level=b_level then concat('ALL-',a_level) 
+when b_level='全新科鲁兹' then '科鲁兹新款'
+when b_level='老款科鲁兹' then '科鲁兹老款'
+when b_level='经典科鲁兹' then '科鲁兹经典'
+when b_level='新赛欧' then '赛欧新款'
+when b_level='老款赛欧' then '赛欧老款'
+else b_level end as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_b_level_8areas
+where region='everymonth_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+a_level ,
+concat('ALL-',a_level) as b_level,
+'ALL' as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_a_level_8areas  
+where a_level in('科鲁兹','赛欧','迈锐宝','科帕奇')
+and region='everymonth_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_agetype_8areas
+where region='everymonth_asc' and mon >= '2011-01' and mon <= '2011-06'
+union all 
+select kpi,
+'ALL' as a_level,
+'ALL' as b_level,
+bnbw as age_type,
+mon as d_time,
+num as own_num2,
+asc_code
+from kpi_bnbw_8areas
+where region='everymonth_asc' and mon >= '2011-01' and mon <= '2011-06') m 
+join base_kpi n on m.kpi=n.kpi_kpi
+join ori.mon_mapping s on s.time=m.d_time and version='everymonth'
+join ori.asc_city p on m.asc_code=p.asc_code
+group by m.kpi,m.a_level,m.b_level,m.age_type,m.d_time,n.kpi_kpi,p.city
+) h1
+join ori.asc_city t on t.city=h1.city) h4
+on h1.kpi_kpi=h4.kpi_kpi
+and h1.a_level=h4.a_level
+and h1.b_level=h4.b_level
+and h1.age_type=h4.age_type
+and h1.d_time=h4.d_time
+and h1.asc_code=h4.asc_code
+;
+" > data_201101_201106 2>logs1 &
